@@ -26,3 +26,37 @@ With this app users will be able to:
 6. (BONUS) Endorse other users
 7. (BONUS) Follow other users.
 8. (BONUS) Utilize D3 for user and zone statistics
+
+## Group Members and Work Breakdown
+Day 0 (sunday):
+decide: RAILS? switch out to node.js later. 9pm this evening.
+
+DAY 1: models, associations, api, User Auth
+Tyler: models / associations 
+Harsh: Api Needs , Locations
+Clay: Api User, Requests
+Thai: user auth / Cloudinary widget setup
+
+DAY 2: Finalize API. component set up / websockets
+Tyler: Api
+Harsh: user auth
+Clay: websocket / ActionCable
+Thai: models finalize
+
+DAY 3: component setup. Part 2
+Tyler: User, Dashboard/profile, show
+Harsh: Location show
+Clay: Messages, index and show
+Thai: Needs show, feed / index
+
+DAY 4: Styling, Seed Data
+Tyler: Production README
+Harsh: Final component styles(USERS)
+Clay: Final component Styling (NEEDS)
+Thai: Final component Styling (LOCATION)
+
+DAY 5: Set Up Demo Page.Emulator set up. Splash Page, create Demo (gif)
+Tyler: Index.html
+Harsh: gif creation
+Clay: Emulator set up
+Thai: styling - links to app store with nice styling
