@@ -16,6 +16,36 @@ The focus of the app will rely heavily on a users own vetting process to decide 
 they will want to accept the help, and we will provide location based tools to help.
 We feel that by creating an easy user experience to organically explore how to help or get someone some help, the world can be a little better than when we started.
 
+
+
+## Technologies & Technical Challenges
+
+- Backend:
+  - Node JS
+  - Express
+  - MongoDB or PostgresSQL
+  - GraphQL
+  - JSON Web Tokens (JWT)
+
+- Frontend:
+  - React Native
+  - Redux
+  - JavaScript
+  - Apollo
+
+#### API
+- Setup the models using MongoDB or PostgresSQL.
+- User GraphQl to setup the Schema, and request types Mutation and query as an entry point into the database, so that we can send the data that we need to the front end
+- Use JWT for user authentication(login, logout, signup, and giving session token) and secure the API.
+
+#### FrontEnd
+- Use React native to build our mobile App.
+- Use Redux to keep our state for rendering
+- User GraphQL to query to the API and get what we need.
+- Use Apollo to get the response which has the data we need from the API
+- Secure the front end by keeping identify the current user from the Redux store
+
+
 ## Functionality & MVPS
 With this app users will be able to:
 1. View an index of NEEDS
@@ -34,7 +64,7 @@ decide: RAILS? switch out to node.js later. 9pm this evening.
 
 #### DAY 1: models, associations, api, User Auth
 
-Tyler: models / associations 
+Tyler: models / associations
 Harsh: Api Needs , Locations
 Clay: Api User, Requests
 Thai: user auth / Cloudinary widget setup
