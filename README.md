@@ -72,10 +72,10 @@ the back end file structure and continue to work through understanding mongo and
 Thai: Responsible for setting up the back end for `Locations` and `Tags` and pair program with Tyler to set up the
 back end file structure.
 
-Harsh: Will pair program with Clay setting up the base front end file structure and begin the views for `Needs`. 
+Harsh: Will pair program with Clay setting up the base front end file structure and begin the views for `Needs`.
 Feed and profile needs index.
 
-Clay: Will work with Harsh setting up the base front end file structure and begin the views for `Messages` index 
+Clay: Will work with Harsh setting up the base front end file structure and begin the views for `Messages` index
 and show and research websockets.
 
 
@@ -87,7 +87,7 @@ Thai: Finalize `Location` and `Tags` models and begin setting up views including
 
 Harsh: Round out general views for `Needs` Index and will pair program with Clay to set up the models
 
-Clay: Round out the views for `Messages` and have good placeholders, finalize websocket research and try to 
+Clay: Round out the views for `Messages` and have good placeholders, finalize websocket research and try to
 implement a sample and pair program with Harsh to start the corresponding models and begin the apis.
 
 
@@ -127,3 +127,19 @@ Thai: Emulator set up - CSS
 ## Plan for Getting Users and Reviews
 - Each team member will reach out to at least 20 friends and family to download and try the app
 - Each team member will post to linkedIn and other social media outlets for more traction.
+
+## Wireframes
+
+### Splash Page
+![Splash_Page](./docs/Splash_Page.png)
+![Sign_up](./docs/Sign_up.png)
+![Log_in](./docs/Log_in.png)
+![Needs_Feed](./docs/Needs_Feed.png)
+![Needs_Map](./docs/Needs_Map.png)
+![Needs_Form](./docs/Needs_Form.png)
+![Needs_Main_View](./docs/Needs_Main_View.png)
+![User_Profile](./docs/User_Profile.png)
+![Dashboard_Posted](./docs/Dashboard_Posted.png)
+![Dashboard_Requested](./docs/Dashboard_Requested.png)
+![Messages](./docs/Messages.png)
+![Messages_View](./docs/Messages_View.png)
