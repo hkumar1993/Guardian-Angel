@@ -45,7 +45,6 @@ We feel that by creating an easy user experience to organically explore how to h
 - Use Apollo to get the response which has the data we need from the API
 - Secure the front end by keeping identify the current user from the Redux store
 
-
 ## Functionality & MVPS
 With this app users will be able to:
 1. View an index of NEEDS
@@ -60,41 +59,67 @@ With this app users will be able to:
 ## Group Members and Work Breakdown
 
 #### Day 0 (sunday):
-decide: RAILS? switch out to node.js later. 9pm this evening.
+We all completed a tutorial on React Native to become familiar with it, along with started tutorials
+on spinning up and application with React Native and Node with Mongo.
 
 #### DAY 1: models, associations, api, User Auth
 
-Tyler: models / associations
-Harsh: Api Needs , Locations
-Clay: Api User, Requests
-Thai: user auth / Cloudinary widget setup
+Tyler: Responsible for setting up the back end for `Users` and auth. Alongside, pair-program with Thai to set up
+the back end file structure and continue to work through understanding mongo and graphql.
+
+Thai: Responsible for setting up the back end for `Locations` and `Tags` and pair program with Tyler to set up the
+back end file structure.
+
+Harsh: Will pair program with Clay setting up the base front end file structure and begin the views for `Needs`. 
+Feed and profile needs index.
+
+Clay: Will work with Harsh setting up the base front end file structure and begin the views for `Messages` index 
+and show and research websockets.
+
 
 #### DAY 2: Finalize API. component set up / websockets
 
-Tyler: Api
-Harsh: user auth
-Clay: websocket / ActionCable
-Thai: models finalize
+Tyler: Finalize models and API for `Users` and auth and set up cloudinary and begin Dashboard views if enough time.
 
-#### DAY 3: component setup. Part 2
+Thai: Finalize `Location` and `Tags` models and begin setting up views including maps api research
 
-Tyler: User, Dashboard/profile, show
-Harsh: Location show
-Clay: Messages, index and show
-Thai: Needs show, feed / index
+Harsh: Round out general views for `Needs` Index and will pair program with Clay to set up the models
+
+Clay: Round out the views for `Messages` and have good placeholders, finalize websocket research and try to 
+implement a sample and pair program with Harsh to start the corresponding models and begin the apis.
+
+
+#### DAY 3: Putting together the pieces
+
+Tyler: User, Dashboard/profile, show pages have functioning calls the back end and data is curated correctly.
+and should have the ability to hook up corresponding `Needs`
+
+Thai: Have an up and running map and should be able to have access to the `Needs` for his views.
+
+Harsh: Be able to hook up his needs and have the corresponding data views available for consumption along with
+a working Feeds page.
+
+Clay: Have the messages be able to update to the index and show pages and possibly set up notifications.
 
 #### DAY 4: Styling, Seed Data
+This day should also act as a catch up in case we fall behind and hit some nasty bugs
 
-Tyler: Production README
-Harsh: Final component styles(USERS)
-Clay: Final component Styling (NEEDS)
-Thai: Final component Styling (LOCATION)
+Tyler: Final component styles `User` Dashboard(index) and show pages
+
+Thai: Final component styles `Location` show pages
+
+Harsh: Final component styles `Needs` feed and user feed(?)
+
+Clay: Final component styles `Messages` messages show and index
 
 #### DAY 5: Set Up Demo Page. Emulator set up. Splash Page, create Demo (gif)
-Tyler: Index.html
-Harsh: gif creation
-Clay: Emulator set up
-Thai: styling - links to app store with nice styling
+Tyler: Index.html - CSS
+
+Harsh: gif creation - CSS
+
+Clay: set up background and other graphics needed for the splash page and CSS
+
+Thai: Emulator set up - CSS
 
 ## Plan for Getting Users and Reviews
 - Each team member will reach out to at least 20 friends and family to download and try the app
