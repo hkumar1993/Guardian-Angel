@@ -61,8 +61,10 @@ With this app users will be able to:
 #### Day 0 (sunday):
 We all completed a tutorial on React Native to become familiar with it, along with started tutorials
 on spinning up and application with React Native and Node with Mongo.
+Alongside we will meet up to decide upon how we will divide the workload to maximize our learning and decide upon
+what kind of back end we will want to use and if we will do all new technologies.
 
-#### DAY 1: models, associations, api, User Auth
+#### DAY 1: Basic File Structure set up and begin back-end and front-end - Pair Programming
 
 Tyler: Responsible for setting up the back end for `Users` and auth. Alongside, pair-program with Thai to set up
 the back end file structure and continue to work through understanding mongo and graphql.
@@ -77,7 +79,7 @@ Clay: Will work with Harsh setting up the base front end file structure and begi
 and show and research websockets.
 
 
-#### DAY 2: Finalize API. component set up / websockets
+#### DAY 2: Finish Pairs back/front end work, Start on other side - Pair Programming
 
 Tyler: Finalize models and API for `Users` and auth and set up cloudinary and begin Dashboard views if enough time.
 
@@ -89,7 +91,7 @@ Clay: Round out the views for `Messages` and have good placeholders, finalize we
 implement a sample and pair program with Harsh to start the corresponding models and begin the apis.
 
 
-#### DAY 3: Putting together the pieces
+#### DAY 3: Putting together the pieces - Hooking up the back end to the front for each feature
 
 Tyler: User, Dashboard/profile, show pages have functioning calls the back end and data is curated correctly.
 and should have the ability to hook up corresponding `Needs`
@@ -101,7 +103,7 @@ a working Feeds page.
 
 Clay: Have the messages be able to update to the index and show pages and possibly set up notifications.
 
-#### DAY 4: Styling, Seed Data
+#### DAY 4: Catch Up & Styling
 This day should also act as a catch up in case we fall behind and hit some nasty bugs
 
 Tyler: Final component styles `User` Dashboard(index) and show pages
@@ -112,7 +114,8 @@ Harsh: Final component styles `Needs` feed and user feed(?)
 
 Clay: Final component styles `Messages` messages show and index
 
-#### DAY 5: Set Up Demo Page. Emulator set up. Splash Page, create Demo (gif)
+#### DAY 5: Clean up Lingering Style or bugs & Set Up Demos, Emulator, Splash Page
+
 Tyler: Index.html - CSS
 
 Harsh: gif creation - CSS
