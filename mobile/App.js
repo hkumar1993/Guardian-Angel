@@ -1,46 +1,25 @@
 import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import NeedsIndex from './components/needs/index';
-import AuthenticationScreen from './src/screens/session/AuthenticationScreen';
+import { UIManager } from 'react-native';
+import { ApolloProvider } from 'react-apollo';
+import { ThemeProvider } from 'styled-components';
 
+import { store, client } from './src/store';
+import { colors } from './src/utils/constants';
+
+import Welcome from './src/components/Welcome';
+
+if (UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export default class App extends React.Component {
-  state = {
-    appIsReady: false,
-  }
-
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Suh
-        </Text>
-        <NeedsIndex/>
-      </View>
+      <ApolloProvider store={store} client={client}>
+        <ThemeProvider theme={colors}>
+          <Welcome />
+        </ThemeProvider>
+      </ApolloProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
