@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { graphql } from 'react-apollo';
+import { ActivityIndicator, FlatList } from 'react-native';
 
 import NeedCard from '../components/NeedCard/NeedCard';
+
+import GET_NEEDS_QUERY from '../graphql/queries/getNeeds';
 
 const Root = styled.View`
   flex: 1;
@@ -10,27 +14,32 @@ const Root = styled.View`
   backgroundColor: purple;
  `;
 
-const List = styled.ScrollView`
 
-`;
+class HomeScreen extends React.Component {
+  _renderItem = ({ item }) => <NeedCard {...item}/>
 
-
-export default class HomeScreen extends React.Component {
-  state = {  }
   render() {
+
+    const { data } = this.props;
+    if(data.loading) {
+      return (
+        <Root>
+          <ActivityIndicator size="large" />
+        </Root>
+      )
+    }
+
     return (
       <Root>
-        <List>
-          <NeedCard />
-          <NeedCard />
-          <NeedCard />
-          <NeedCard />
-          <NeedCard />
-          <NeedCard />
-          <NeedCard />
-          <NeedCard />
-        </List>
+        <FlatList
+          contentContainerStyle={{ alignSelf: 'stretch' }}
+          data={data.getNeeds}
+          keyExtractor={item => item._id}
+          renderItem={this._renderItem}
+          />
       </Root>
     )
   }
 }
+
+export default graphql(GET_NEEDS_QUERY)(HomeScreen);
