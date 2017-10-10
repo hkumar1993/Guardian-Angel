@@ -12,8 +12,8 @@ export default `
 
   type UserTag {
     _id: ID!
-    userID: ID!
-    tagID: ID!
+    user: ID!
+    tag: ID!
   }
 
   type Tag {

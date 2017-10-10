@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const UserTagSchema = new Schema({
-  user_id: {
+  user: {
     type: Schema.Types.ObjectId
   },
-  tag_id: {
+  tag: {
     type: Schema.Types.ObjectId
   }
 });

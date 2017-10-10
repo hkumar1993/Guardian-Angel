@@ -14,9 +14,7 @@ export default {
   getUserTags: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      return UserTag.find({})
-        .select({ userID: _id })
-        .sort({ createdAt: -1 }); // should be something like findAllWhere
+      return UserTag.find({ user: _id }).sort({ createdAt: -1 });
     } catch (error) {
       throw error;
     }

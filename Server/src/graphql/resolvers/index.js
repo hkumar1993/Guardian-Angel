@@ -8,6 +8,7 @@ export default {
   Query: {
     getNeeds: NeedResolvers.getNeeds,
     getNeed: NeedResolvers.getNeed,
+    getUserTags: UserTagResolvers.getUserTags,
     me: UserResolvers.me
   },
 

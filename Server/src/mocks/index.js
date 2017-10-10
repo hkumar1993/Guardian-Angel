@@ -15,6 +15,7 @@ export default async () => {
     await Need.remove();
     await User.remove();
     await Tag.remove();
+    await UserTag.remove();
 
     await Array.from({ length: USERS_TOTAL }).forEach(async (_, i) => {
       const user = await User.create({
@@ -38,12 +39,12 @@ export default async () => {
         const tag = await Tag.create({
           title: faker.lorem.word()
         });
-      });
 
-      await Array.from({ length: USER_TAGS_TOTAL }).forEach(async () => {
-        await UserTag.create({
-          userID: user._id,
-          tagID: tag._id
+        await Array.from({ length: USER_TAGS_TOTAL }).forEach(async () => {
+          await UserTag.create({
+            user: user._id,
+            tag: tag._id
+          });
         });
       });
     });
