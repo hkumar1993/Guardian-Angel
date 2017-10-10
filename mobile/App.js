@@ -10,6 +10,7 @@ import { colors } from './src/utils/constants';
 import Welcome from './src/components/Welcome';
 import NeedsIndex from './src/screens/needs/index';
 import HomeScreen from './src/screens/HomeScreen';
+import AppNavigation from './src/navigations';
 
 // automatically animate ui
 if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -21,7 +22,7 @@ export default class App extends React.Component {
     return (
       <ApolloProvider store={store} client={client}>
         <ThemeProvider theme={colors}>
-          <HomeScreen />
+          <AppNavigation />
         </ThemeProvider>
       </ApolloProvider>
     );
