@@ -12,8 +12,8 @@ export default `
 
   type UserTag {
     _id: ID!
-    user: ID!
-    tag: ID!
+    user: User!
+    tag: Tag!
   }
 
   type Tag {
@@ -48,6 +48,7 @@ export default `
     title: String
     description: String
     completed: Boolean
+    user: User!
     createdAt: Date!
     updatedAt: Date!
   }
@@ -57,6 +58,7 @@ export default `
     getNeeds: [Need]
     getNeed(_id: ID!): Need
     getUserTags(_id: ID!): [UserTag]
+    getUserNeeds(_id: ID!): [Need]
     me: Me
   }
 

@@ -3,12 +3,19 @@ import NeedResolvers from "./need-resolver";
 import UserResolvers from "./user-resolvers";
 import UserTagResolvers from "./userTag-resolvers.js";
 
+import User from "../../models/User";
+
 export default {
   Date: GraphQLDate,
+  Need: {
+    user: ({ user }) => User.findById(user)
+  },
+
   Query: {
     getNeeds: NeedResolvers.getNeeds,
     getNeed: NeedResolvers.getNeed,
     getUserTags: UserTagResolvers.getUserTags,
+    getUserNeeds: NeedResolvers.getUserNeeds,
     me: UserResolvers.me
   },
 
