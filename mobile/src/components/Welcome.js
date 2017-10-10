@@ -5,13 +5,13 @@ const Root = styled.View`
   alignItems: center;
   justifyContent: center;
   flex: 1;
-  backgroundColor: ${props => props.theme.WHITE};
+  backgroundColor: ${props => props.theme.LIGHT_GREY};
   width: 90%;
   alignSelf: center;
 `;
 
 const Text = styled.Text`
-  color: ${props => props.theme.PRIMARY};
+  color: ${props => props.theme.TAG_BLUE};
   fontSize: 18;
   textAlign: center;
 `;
