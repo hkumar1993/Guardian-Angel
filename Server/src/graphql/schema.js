@@ -10,6 +10,17 @@ export default `
     token: String!
   }
 
+  type UserTag {
+    _id: ID!
+    userID: ID!
+    tagID: ID!
+  }
+
+  type Tag {
+    _id: ID!
+    title: String!
+  }
+
   type User {
     _id: ID!
     username: String
@@ -45,6 +56,7 @@ export default `
   type Query {
     getNeeds: [Need]
     getNeed(_id: ID!): Need
+    getUserTags(_id: ID!): [UserTag]
     me: Me
   }
 
@@ -52,6 +64,7 @@ export default `
     createNeed(title: String!, description: String!): Need
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
+    createUserTag(userID: ID!, tagID: ID!): UserTag
     signup(email: String!, fullName: String!, password: String!, avatar: String, username: String): Auth
     login(email: String!, password: String!): Auth
   }

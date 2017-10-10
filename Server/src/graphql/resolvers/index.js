@@ -1,6 +1,7 @@
 import GraphQLDate from "graphql-date";
 import NeedResolvers from "./need-resolver";
 import UserResolvers from "./user-resolvers";
+import UserTagResolvers from "./userTag-resolvers.js";
 
 export default {
   Date: GraphQLDate,
@@ -12,6 +13,7 @@ export default {
 
   Mutation: {
     createNeed: NeedResolvers.createNeed,
+    createUserTag: UserTagResolvers.createUserTag,
     updateNeed: NeedResolvers.updateNeed,
     deleteNeed: NeedResolvers.deleteNeed,
     signup: UserResolvers.signup,
