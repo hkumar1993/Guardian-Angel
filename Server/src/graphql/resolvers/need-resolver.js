@@ -1,16 +1,56 @@
-import Need from '../../models/Need';
+import Need from "../../models/Need";
+import { requireAuth } from "../../services/auth";
 
 export default {
-  getNeeds: () => Need.find({}).sort({ createdAt: -1 }),
-  getNeed: (_, { _id }) => Need.findById(_id),
-  createNeed: (_, args) => Need.create(args),
-  updateNeed: (_, { _id, ...rest }) =>
-    Need.findByIdAndUpdate(_id, rest, { new: true }),
-  deleteNeed: async (_, { _id }) => {
+  getNeed: async (_, { _id }, { user }) => {
     try {
-      await Need.findByIdAndRemove(_id);
+      await requireAuth(user);
+      return Need.findById(_id);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getNeeds: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+      return Need.find({}).sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  createNeed: async (_, args, { user }) => {
+    try {
+      await requireAuth(user);
+      return Need.create(args);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  updateNeed: async (_, { _id, ...rest }, { user }) => {
+    try {
+      await requireAuth(user);
+      return Need.findByIdAndUpdate(_id, rest, { new: true });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  deleteNeed: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+
+      const need = await Need.findOne({ _id, user: user._id });
+      // const need = await Need.findOne({ _id });
+      if (!need) {
+        throw new Error("Not Found!");
+      }
+      await need.remove();
+
       return {
-        message: 'Delete Success!'
+        message: "Delete Success!"
       };
     } catch (error) {
       throw error;

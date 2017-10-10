@@ -1,9 +1,16 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const NeedSchema = new Schema(
   {
+    title: {
+      type: String
+    },
     description: {
       type: String
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
     },
     completed: {
       type: Boolean,
@@ -13,4 +20,4 @@ const NeedSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Need', NeedSchema);
+export default mongoose.model("Need", NeedSchema);
