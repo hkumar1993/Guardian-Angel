@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 
 import { fakeAvatar } from '../../utils/constants';
 
@@ -64,17 +65,17 @@ const MetaFullName = styled.Text`
 `;
 
 // will come from back end later
-const username = 'itsClay';
-const firstName = 'Clay';
-const lastName = 'Shaw';
-const createdAt = '1 day ago';
-const avatar = fakeAvatar;
+// const username = 'itsClay';
+// const firstName = 'Clay';
+// const lastName = 'Shaw';
+// const createdAt = '1 day ago';
+// const avatar = fakeAvatar;
 
-function NeedCardHeader() {
+function NeedCardHeader({ username, firstName, lastName, avatar, createdAt }) {
   return (
     <Root>
      <AvatarContainer>
-       <Avatar source={{ uri: avatar }} />
+       <Avatar source={{ uri: avatar || fakeAvatar }} />
      </AvatarContainer>
      <MetaContainer>
        <MetaTopContainer>
@@ -87,7 +88,7 @@ function NeedCardHeader() {
        </MetaTopContainer>
        <MetaBottomContainer>
          <MetaText>
-           { createdAt }
+           { distanceInWordsToNow(createdAt) } ago
          </MetaText>
        </MetaBottomContainer>
      </MetaContainer>

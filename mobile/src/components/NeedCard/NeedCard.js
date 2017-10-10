@@ -28,15 +28,15 @@ const CardContentText = styled.Text`
   color: ${ props => props.theme.TAG_BLUE}
 `;
 
-const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
+// const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
 
-function NeedCard() {
+function NeedCard({ description, user, createdAt }) {
     return (
       <Root>
-        <NeedCardHeader />
+        <NeedCardHeader {...user} createdAt={createdAt} />
         <CardContentContainer >
           <CardContentText>
-            {text}
+            {description}
           </CardContentText>
         </CardContentContainer>
         <NeedCardBottom />
