@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
 import { addNavigationHelpers, StackNavigator, TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';

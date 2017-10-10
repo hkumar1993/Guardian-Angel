@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 
+import MessageIndex from '../components/MessageIndex/MessageIndex'
+
 const Root = styled.View`
 
 `;
 
-const T = styled.Text`
-
-`;
+// const T = styled.Text`
+//
+// `;
 
 class MessagesScreen extends Component {
   state = {};
@@ -15,7 +17,7 @@ class MessagesScreen extends Component {
   render() {
     return (
       <Root>
-        <T>Messages</T>
+        <MessageIndex />
       </Root>
     )
   }
