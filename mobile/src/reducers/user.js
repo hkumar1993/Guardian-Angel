@@ -1,5 +1,5 @@
 const initialState = {
-  token: null,
+  // token: null,
   isAuthenticated: false,
   info: null
 };
@@ -11,6 +11,15 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: true
       }
+
+    case 'GET_USER_INFO':
+      return {
+        ...state,
+        info: action.info
+      }
+
+    case 'LOG_OUT':
+      return initialState;
     default:
       return state;
   }

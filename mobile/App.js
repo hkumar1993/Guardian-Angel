@@ -5,6 +5,7 @@ import { AppLoading } from 'expo';
 
 // css styled themes we can use
 import { ThemeProvider } from 'styled-components';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 import { store, client } from './src/store';
 import { colors } from './src/utils/constants';
@@ -54,9 +55,11 @@ export default class App extends React.Component {
 
     return (
       <ApolloProvider store={store} client={client}>
-        <ThemeProvider theme={colors}>
-          <AppNavigation />
-        </ThemeProvider>
+        <ActionSheetProvider>
+          <ThemeProvider theme={colors}>
+            <AppNavigation />
+          </ThemeProvider>
+        </ActionSheetProvider>
       </ApolloProvider>
     );
   }

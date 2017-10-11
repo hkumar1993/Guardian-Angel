@@ -15,6 +15,8 @@ import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
 
+import HeaderAvatar from './components/HeaderAvatar';
+
 const TAB_ICON_SIZE = 20;
 
 const Tabs = TabNavigator(
@@ -98,12 +100,16 @@ const Tabs = TabNavigator(
 const AppMainNav = StackNavigator(
   {
     Home: {
-      screen: Tabs
+      screen: Tabs,
+      navigationOptions: () => ({
+        headerLeft: <HeaderAvatar />
+      })
     },
     Profile: {
       screen: ProfileScreen
     }
   },
+  
   {
     cardStyle: {},
     navigationOptions: () => ({

@@ -1,11 +1,20 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { graphql } from 'react-apollo';
+
+// use compose to call query or mutation
+// use withApollo to use access to the Apollo client --> this.props.client
+import { graphql, compose, withApollo } from 'react-apollo';
+import { connect } from 'react-redux';
+
 import { ActivityIndicator, FlatList } from 'react-native';
 
 import NeedCard from '../components/NeedCard/NeedCard';
 
+import { getUserInfo } from '../actions/user';
+
+// graphql queries
 import GET_NEEDS_QUERY from '../graphql/queries/getNeeds';
+import ME_QUERY from '../graphql/queries/me';
 
 const Root = styled.View`
   flex: 1;
@@ -15,6 +24,17 @@ const Root = styled.View`
 
 
 class HomeScreen extends React.Component {
+
+  componentDidMount() {
+    this._getUserInfo();
+  }
+
+  _getUserInfo = async () => {
+    const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
+    
+    this.props.getUserInfo(me);
+  }
+
   _renderItem = (props) => <NeedCard {...props}/>
 
   render() {
@@ -42,4 +62,11 @@ class HomeScreen extends React.Component {
   }
 }
 
-export default graphql(GET_NEEDS_QUERY)(HomeScreen);
+// use compose to call query or mutation
+// use withApollo to use access to the Apollo client --> this.props.client
+export default withApollo(
+  compose(
+    connect(null, { getUserInfo }),
+    graphql(GET_NEEDS_QUERY)
+  )(HomeScreen)
+);
