@@ -1,5 +1,5 @@
-import Need from "../../models/Need";
-import { requireAuth } from "../../services/auth";
+import Need from '../../models/Need';
+import { requireAuth } from '../../services/auth';
 
 export default {
   getNeed: async (_, { _id }, { user }) => {
@@ -44,7 +44,7 @@ export default {
       const need = await Need.findOne({ _id, user: user._id });
 
       if (!tweet) {
-        throw new Error("Not Found!");
+        throw new Error('Not Found!');
       }
 
       Object.entries(rest).forEach(([key, value]) => {
@@ -64,12 +64,12 @@ export default {
       const need = await Need.findOne({ _id, user: user._id });
       // const need = await Need.findOne({ _id });
       if (!need) {
-        throw new Error("Not Found!");
+        throw new Error('Not Found!');
       }
       await need.remove();
 
       return {
-        message: "Delete Success!"
+        message: 'Delete Success!'
       };
     } catch (error) {
       throw error;

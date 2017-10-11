@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
+import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
 
+import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Touchable from '@appandflow/touchable';
 
-import { colors } from '../utils/constants';
+import { colors, fakeAvatar } from '../utils/constants';
 
-import { Platform, Keyboard } from 'react-native';
+import { Platform, Keyboard, AsyncStorage } from 'react-native';
+
+// graphql
+import SIGNUP_MUTATION from '../graphql/mutations/signup'
+
+// Loading state
+import Loading from './Loading';
+
+// actions
+import { login } from '../actions/user';
 
 const Root = styled.View`
   flex: 1;
@@ -94,15 +105,47 @@ class SignupForm extends Component {
   _keyBoardDismiss = () => Keyboard.dismiss();
 
   _disabledButton() {
-    const { fullName, email, password, username } = this.props;
+    const { fullName, email, password, username } = this.state;
 
-    if(!fullName || !email || !password || !username)
+    if(!fullName || !email || !password || !username) {
       return true;
+    }
 
     return false;
   }
 
+  _onSignupPress = async () => {
+    this.setState({ loading: true });
+
+    const { fullName, email, password, username } = this.state;
+    const avatar = fakeAvatar;
+
+
+    try {
+      const {data} = await this.props.mutate({
+        variables: {
+          fullName,
+          email,
+          password,
+          username,
+          avatar
+        }
+      });
+      
+      await AsyncStorage.setItem('@guardianangle', data.signup.token);
+      this.setState({ loading: false });
+
+      return this.props.login();
+    } catch (e) {
+      throw e;
+    }
+  }
+
   render() {
+    if(this.state.loading) {
+      return <Loading />;
+    }
+
     return (
       <Root onPress={this._keyBoardDismiss}>
         <BackButton onPress={this.props.onBackPress}>
@@ -147,7 +190,10 @@ class SignupForm extends Component {
 
         </Wrapper>
 
-        <ButtonConfirm disabled={this._disabledButton()}>
+        <ButtonConfirm
+          onPress={this._onSignupPress}
+          disabled={this._disabledButton()}
+          >
           <ButtonConfirmText>
             Sign Up
           </ButtonConfirmText>
@@ -157,4 +203,7 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default compose(
+  graphql(SIGNUP_MUTATION),
+  connect(null, { login })
+)(SignupForm);
