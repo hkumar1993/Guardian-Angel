@@ -218,6 +218,7 @@ export default class NeedsIndex extends React.Component {
   render() {
     return (
       <View style={ styles.container }>
+        <Text>Needs Index</Text>
         <FlatList
           data= { Object.values(defaultNeeds) }
           renderItem = { ({ item }) => <NeedsIndexItem need={item} key={item.id}/> }
