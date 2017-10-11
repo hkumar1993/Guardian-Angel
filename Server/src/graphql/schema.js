@@ -10,6 +10,30 @@ export default `
     token: String!
   }
 
+  type LocationFollow {
+    _id: ID!
+    user: ID!
+    location: ID!
+  }
+
+  type Location {
+    _id: ID!
+    zipcode: Int!
+    name: String
+  }
+
+  type NeedRequest {
+    _id: ID!
+    need: Need!
+    user: User!
+  }
+
+  type NeedTag {
+    _id: ID!
+    need: Need!
+    tag: Tag!
+  }
+
   type UserTag {
     _id: ID!
     user: User!
@@ -57,7 +81,9 @@ export default `
   type Query {
     getNeeds: [Need]
     getNeed(_id: ID!): Need
+    getNeedRequest(_id: ID!): [NeedRequest]
     getUserTags(_id: ID!): [UserTag]
+    getNeedTags(_id: ID!): [NeedTag]
     getUserNeeds(_id: ID!): [Need]
     me: Me
   }
