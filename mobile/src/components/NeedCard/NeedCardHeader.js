@@ -73,7 +73,7 @@ function NeedCardHeader(props) {
   return (
     <Root>
      <MetaTopContainer>
-       <Button onPress={() => navigate('Profile', {name: 'Brent'})}>
+       <Button onPress={() => navigate('Need', {need: props.need})}>
          <ButtonText>
            {title}
          </ButtonText>
