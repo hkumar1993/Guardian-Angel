@@ -31,7 +31,7 @@ class HomeScreen extends React.Component {
 
   _getUserInfo = async () => {
     const { data: { me } } = await this.props.client.query({ query: ME_QUERY });
-    
+
     this.props.getUserInfo(me);
   }
 

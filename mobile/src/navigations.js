@@ -15,114 +15,105 @@ import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
 
-import HeaderAvatar from './components/HeaderAvatar';
+import NeedScreen from './screens/NeedScreen';
 
 const TAB_ICON_SIZE = 20;
 
-const Tabs = TabNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: () => ({
-        headerTitle: 'Home',
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="th-list" />
-        )
-      })
-    },
-
-    Profile: {
-      screen: ProfileScreen,
-      navigationOptions: () => ({
-        headerTitle: 'Profile',
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="user" />
-        )
-      })
-    },
-
-    Messages: {
-      screen: MessagesScreen,
-      navigationOptions: () => ({
-        headerTitle: 'Messages',
-        tabBarIcon: ({ tintColor }) => (
-          <SimpleLineIcons
-            size={TAB_ICON_SIZE}
-            color={tintColor}
-            name="bubble"
-          />
-        )
-      })
-    },
-
-    Dashboard: {
-      screen: DashboardScreen,
-      navigationOptions: () => ({
-        headerTitle: 'Dashboard',
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome
-            size={TAB_ICON_SIZE}
-            color={tintColor}
-            name="dashboard"
-          />
-        )
-      })
-    },
-
-    Map: {
-      screen: MapScreen,
-      navigationOptions: () => ({
-        headerTitle: 'Location',
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="map" />
-        )
-      })
-    }
-  },
-  {
-    lazy: true,
-    tabBarPosition: 'bottom',
-    swipeEnabled: true,
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: false,
-      activeTintColor: 'blue',
-      inactiveTintColor: colors.LIGHT_GREY,
-      style: {
-        backgroundColor: colors.TAG_BLUE,
-        height: 50,
-        paddingVertical: 5
-      }
-    }
-  }
-);
-
-const AppMainNav = StackNavigator(
-  {
-    Home: {
-      screen: Tabs,
-      navigationOptions: () => ({
-        headerLeft: <HeaderAvatar />
-      })
-    },
-    Profile: {
-      screen: ProfileScreen
-    }
-  },
-  
-  {
-    cardStyle: {},
+const Tabs = TabNavigator({
+  Home: {
+    screen: HomeScreen,
     navigationOptions: () => ({
-      headerStyle: {
-        backgroundColor: 'white'
-      },
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        color: colors.DARK_GREY
-      }
+      headerTitle: 'Home',
+      tabBarIcon: ({ tintColor }) => (
+        <FontAwesome size={ TAB_ICON_SIZE } color={ tintColor } name="th-list"/>
+      )
     })
+  },
+
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions: () => ({
+      headerTitle: 'Profile',
+      tabBarIcon: ({ tintColor }) => (
+        <FontAwesome size={ TAB_ICON_SIZE } color={ tintColor } name="user"/>
+      )
+    })
+  },
+
+  Messages: {
+    screen: MessagesScreen,
+    navigationOptions: () => ({
+      headerTitle: 'Messages',
+      tabBarIcon: ({ tintColor }) => (
+        <SimpleLineIcons size={ TAB_ICON_SIZE } color={ tintColor } name="bubble"/>
+      )
+    })
+  },
+
+  Dashboard: {
+    screen: DashboardScreen,
+    navigationOptions: () => ({
+      headerTitle: 'Dashboard',
+      tabBarIcon: ({ tintColor }) => (
+        <FontAwesome size={ TAB_ICON_SIZE } color={ tintColor } name="dashboard"/>
+      )
+    })
+  },
+
+  Map: {
+    screen: MapScreen,
+    navigationOptions: () => ({
+      headerTitle: 'Location',
+      tabBarIcon: ({ tintColor }) => (
+        <FontAwesome size={ TAB_ICON_SIZE } color={ tintColor } name="map"/>
+      )
+    })
+  },
+
+
+}, {
+  lazy: true,
+  tabBarPosition: 'bottom',
+  swipeEnabled: true,
+  tabBarOptions: {
+    showIcon: true,
+    showLabel: false,
+    activeTintColor: 'white',
+    activeBackgroundColor: colors.DARK_BLUE,
+    inactiveTintColor: 'white',
+    style: {
+      backgroundColor: colors.LIGHT_BLUE,
+      height: 50,
+    }
   }
-);
+})
+
+const AppMainNav = StackNavigator({
+  Home: {
+    screen: Tabs,
+    navigationOptions: () => ({
+      headerLeft: <HeaderAvatar />
+    })
+  },
+  Need: {
+    screen: NeedScreen,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.need.title}`,
+    }),
+  }
+}, {
+  cardStyle: {
+  },
+  navigationOptions: () => ({
+    headerStyle: {
+      backgroundColor: 'white'
+    },
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      color: colors.DARK_GREY
+    }
+  })
+});
 
 class AppNavigator extends Component {
   render() {

@@ -5,9 +5,6 @@ export default {
   signup: async (_, { fullName, ...rest }) => {
     const [firstName, ...lastName] = fullName.split(" ");
 
-    console.log("RESTTTTTT========", rest);
-    console.log("fullName========", fullName);
-
     try {
       const user = await User.create({ firstName, lastName, ...rest });
       return {

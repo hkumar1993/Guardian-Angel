@@ -43,7 +43,7 @@ export default {
       await requireAuth(user);
       const need = await Need.findOne({ _id, user: user._id });
 
-      if (!tweet) {
+      if (!need) {
         throw new Error('Not Found!');
       }
 
