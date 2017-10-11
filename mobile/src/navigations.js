@@ -8,6 +8,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
+import NeedScreen from './screens/NeedScreen';
 import { colors } from './utils/constants'
 
 const TAB_ICON_SIZE = 20;
@@ -64,7 +65,6 @@ const Tabs = TabNavigator({
   },
 
 
-
 }, {
   lazy: true,
   tabBarPosition: 'bottom',
@@ -72,12 +72,12 @@ const Tabs = TabNavigator({
   tabBarOptions: {
     showIcon: true,
     showLabel: false,
-    activeTintColor: 'blue',
-    inactiveTintColor: colors.LIGHT_GREY,
+    activeTintColor: 'white',
+    activeBackgroundColor: colors.DARK_BLUE,
+    inactiveTintColor: 'white',
     style: {
-      backgroundColor: colors.TAG_BLUE,
+      backgroundColor: colors.LIGHT_BLUE,
       height: 50,
-      paddingVertical: 5
     }
   }
 })
@@ -86,8 +86,11 @@ const AppMainNav = StackNavigator({
   Home: {
     screen: Tabs
   },
-  Profile: {
-    screen: ProfileScreen
+  Need: {
+    screen: NeedScreen,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.need.title}`,
+    }),
   }
 }, {
   cardStyle: {
