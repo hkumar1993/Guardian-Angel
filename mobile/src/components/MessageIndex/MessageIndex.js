@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { withNavigation } from 'react-navigation';
+import Touchable from '@appandflow/touchable';
 
-import Message from '../Message/Message';
-import MessageIndexLeft from './MessageIndexLeft'
-import MessageIndexContent from './MessageIndexContent'
+import MessageIndexLeft from './MessageIndexLeft';
+import MessageIndexContent from './MessageIndexContent';
+import MessageIndexHeader from './MessageIndexHeader';
 
-const Root = styled.View`
+const Root = styled(Touchable).attrs({
+  feedback: 'opacity'
+})`
   minHeight: 100;
   padding: 7px;
   backgroundColor: ${ props => props.theme.LIGHT_GREY };
@@ -22,18 +26,32 @@ const MessageContentContainer = styled.View`
   flexDirection: row;
 `;
 
+const AvatarContainer = styled.View`
+  width: 50;
+`;
+
+const MessageTextContainer = styled.View`
+
+`;
+
 const username = 'itsClay';
 const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
 
-function MessageIndex() {
-    return (
-      <Root>
-        <MessageContentContainer>
+function MessageIndex(props) {
+  const { navigate } = props.navigation
+  return (
+    <Root onPress={() => navigate('Conversation')} >
+      <MessageContentContainer>
+        <AvatarContainer >
           <MessageIndexLeft />
+        </AvatarContainer>
+        <MessageTextContainer >
+          <MessageIndexHeader style={{ width: 20 }}/>
           <MessageIndexContent />
-        </MessageContentContainer>
-      </Root>
-    );
+        </MessageTextContainer>
+      </MessageContentContainer>
+    </Root>
+  );
 };
 
-export default MessageIndex;
+export default withNavigation(MessageIndex);

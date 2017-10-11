@@ -7,7 +7,7 @@ const Root = styled.View`
 `;
 
 const T = styled.Text`
-
+  fontSize: 12px;
 `;
 
 const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'

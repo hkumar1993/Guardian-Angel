@@ -6,6 +6,7 @@ import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
+import ConversationScreen from './screens/ConversationScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import { colors } from './utils/constants'
@@ -88,7 +89,13 @@ const AppMainNav = StackNavigator({
   },
   Profile: {
     screen: ProfileScreen
-  }
+  },
+  Conversation: {
+    screen: ConversationScreen,
+    navigationOptions: () => ({
+      headerTitle: 'UserNameHere'
+    })
+  },
 }, {
   cardStyle: {
   },
@@ -109,7 +116,6 @@ class AppNavigator extends Component {
       dispatch: this.props.dispatch,
       state: this.props.nav,
     });
-
     return <AppMainNav navigation={nav} />;
   }
 }
