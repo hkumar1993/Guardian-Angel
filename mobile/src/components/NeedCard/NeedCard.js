@@ -8,7 +8,7 @@ import { withNavigation } from 'react-navigation';
 
 const Root = styled.View`
   minHeight: 180;
-  padding: 7px;
+  padding: 10px;
   backgroundColor: white;
   width: 95%;
   alignSelf: center;
@@ -17,6 +17,7 @@ const Root = styled.View`
   shadowRadius: 2;
   shadowOpacity: 0.5;
   marginVertical: 5;
+  borderRadius: 8px;
 `;
 
 const CardContentContainer = styled.View`
@@ -28,7 +29,7 @@ const CardContentText = styled.Text`
   fontSize: 14;
   textAlign: left;
   fontWeight: 500;
-  color: ${ props => props.theme.TAG_BLUE}
+  color: ${ props => props.theme.DARK_GREY}
 `;
 
 // const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
