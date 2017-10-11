@@ -85,10 +85,12 @@ const Tabs = TabNavigator({
 const AppMainNav = StackNavigator({
   Home: {
     screen: Tabs
+  },
+  Profile: {
+    screen: ProfileScreen
   }
 }, {
   cardStyle: {
-    backgroundColor: 'pink'
   },
   navigationOptions: () => ({
     headerStyle: {
@@ -96,7 +98,7 @@ const AppMainNav = StackNavigator({
     },
     headerTitleStyle: {
       fontWeight: 'bold',
-      color: colors.LIGHT_GREY
+      color: colors.DARK_GREY
     }
   })
 });
@@ -105,7 +107,7 @@ class AppNavigator extends Component {
   render() {
     const nav = addNavigationHelpers({
       dispatch: this.props.dispatch,
-      state: this.props.nav
+      state: this.props.nav,
     });
 
     return <AppMainNav navigation={nav} />;

@@ -4,15 +4,18 @@ import styled from 'styled-components/native';
 import NeedCardHeader from './NeedCardHeader';
 import NeedCardBottom from './NeedCardBottom';
 
+import { withNavigation } from 'react-navigation';
+
 const Root = styled.View`
   minHeight: 180;
   padding: 7px;
-  backgroundColor: ${ props => props.theme.LIGHT_GREY };
-  width: 100%;
-  shadowColor: ${ props => props.theme.LIGHT_BLUE };
+  backgroundColor: white;
+  width: 95%;
+  alignSelf: center;
+  shadowColor: black;
   shadowOffset: 0px 5px;
   shadowRadius: 2;
-  shadowOpacity: 0.1;
+  shadowOpacity: 0.5;
   marginVertical: 5;
 `;
 
@@ -30,10 +33,15 @@ const CardContentText = styled.Text`
 
 // const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
 
-function NeedCard({ description, user, createdAt }) {
+function NeedCard({item: { title, description, user, createdAt }, navigation}) {
+    const headInfo = {
+      title,
+      avatar: user.avatar,
+      navigation
+    }
     return (
       <Root>
-        <NeedCardHeader {...user} createdAt={createdAt} />
+        <NeedCardHeader {...headInfo} createdAt={createdAt} />
         <CardContentContainer >
           <CardContentText>
             {description}
@@ -44,4 +52,4 @@ function NeedCard({ description, user, createdAt }) {
     );
 };
 
-export default NeedCard;
+export default withNavigation(NeedCard);
