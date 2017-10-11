@@ -1,14 +1,14 @@
-import GraphQLDate from "graphql-date";
-import NeedResolvers from "./need-resolver";
-import UserResolvers from "./user-resolvers";
-import UserTagResolvers from "./userTag-resolvers.js";
-import NeedTagResolvers from "./needTag-resolvers.js";
-import NeedRequestResolvers from "./needRequest-resolvers.js";
+import GraphQLDate from 'graphql-date';
+import NeedResolvers from './need-resolver';
+import UserResolvers from './user-resolvers';
+import UserTagResolvers from './userTag-resolvers.js';
+import NeedTagResolvers from './needTag-resolvers.js';
+import NeedRequestResolvers from './needRequest-resolvers.js';
 
-import User from "../../models/User";
-import Need from "../../models/Need";
-import Tag from "../../models/Tag";
-import Location from "../../models/Location";
+import User from '../../models/User';
+import Need from '../../models/Need';
+import Tag from '../../models/Tag';
+import Location from '../../models/Location';
 
 export default {
   Date: GraphQLDate,

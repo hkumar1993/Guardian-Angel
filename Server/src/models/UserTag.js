@@ -9,6 +9,4 @@ const UserTagSchema = new Schema({
   }
 });
 
-UserTagSchema.index({ user: 1, tag: 1 }, { unique: true });
-
 export default mongoose.model("UserTag", UserTagSchema);

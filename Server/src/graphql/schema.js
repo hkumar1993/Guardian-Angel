@@ -47,7 +47,7 @@ export default `
 
   type User {
     _id: ID!
-    username: String
+    username: String!
     email: String!
     firstName: String
     lastName: String
