@@ -1,14 +1,14 @@
-import GraphQLDate from 'graphql-date';
-import NeedResolvers from './need-resolver';
-import UserResolvers from './user-resolvers';
-import UserTagResolvers from './userTag-resolvers.js';
-import NeedTagResolvers from './needTag-resolvers.js';
-import NeedRequestResolvers from './needRequest-resolvers.js';
+import GraphQLDate from "graphql-date";
+import NeedResolvers from "./need-resolver";
+import UserResolvers from "./user-resolvers";
+import UserTagResolvers from "./userTag-resolvers.js";
+import NeedTagResolvers from "./needTag-resolvers.js";
+import NeedRequestResolvers from "./needRequest-resolvers.js";
 
-import User from '../../models/User';
-import Need from '../../models/Need';
-import Tag from '../../models/Tag';
-import Location from '../../models/Location';
+import User from "../../models/User";
+import Need from "../../models/Need";
+import Tag from "../../models/Tag";
+import Area from "../../models/Area";
 
 export default {
   Date: GraphQLDate,
@@ -27,9 +27,13 @@ export default {
     need: ({ need }) => Need.findById(need),
     user: ({ user }) => User.findById(user)
   },
-  LocationFollow: {
+  AreaFollow: {
     user: ({ user }) => User.findById(user),
-    location: ({ location }) => Location.findById(location)
+    area: ({ area }) => Area.findById(area)
+  },
+  Conversation: {
+    recipient: ({ recipient }) => User.findById(recipient),
+    author: ({ author }) => User.findById(author)
   },
 
   Query: {
@@ -45,6 +49,7 @@ export default {
   Mutation: {
     createNeed: NeedResolvers.createNeed,
     createUserTag: UserTagResolvers.createUserTag,
+    deleteUserTag: UserTagResolvers.deleteUserTag,
     updateNeed: NeedResolvers.updateNeed,
     deleteNeed: NeedResolvers.deleteNeed,
     signup: UserResolvers.signup,
