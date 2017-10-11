@@ -10,13 +10,19 @@ export default `
     token: String!
   }
 
-  type LocationFollow {
+  type Conversation {
     _id: ID!
-    user: ID!
-    location: ID!
+    author: User!
+    recipient: User!
   }
 
-  type Location {
+  type AreaFollow {
+    _id: ID!
+    user: ID!
+    area: ID!
+  }
+
+  type Area {
     _id: ID!
     zipcode: Int!
     name: String
@@ -92,7 +98,8 @@ export default `
     createNeed(title: String!, description: String!): Need
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
-    createUserTag(userID: ID!, tagID: ID!): UserTag
+    createUserTag(user: ID!, tag: ID!): UserTag
+    deleteUserTag(_id: ID!): Status
     signup(email: String!, fullName: String!, password: String!, avatar: String, username: String): Auth
     login(email: String!, password: String!): Auth
   }
