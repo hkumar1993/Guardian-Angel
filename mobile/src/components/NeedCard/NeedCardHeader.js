@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import Touchable from '@appandflow/touchable';
 
 import { fakeAvatar } from '../../utils/constants';
+import { withNavigation } from 'react-navigation';
 
-const AVATAR_SIZE = 40;
+const AVATAR_SIZE = 20;
 const AVATAR_RADIUS = AVATAR_SIZE / 2;
 
 const Root = styled.View`
   height: 50;
   flexDirection: row;
   alignItems: center;
-  backgroundColor: yellow;
 `;
 
 const AvatarContainer = styled.View`
@@ -31,13 +32,11 @@ const AvatarContainer = styled.View`
 //
 const MetaContainer = styled.View`
   flex: 1;
-  backgroundColor: blue;
   alignSelf: stretch;
 `;
 
 const MetaTopContainer = styled.View`
   flex: 1;
-  backgroundColor; pink;
   alignSelf: stretch;
   flexDirection: row;
   alignItems: center;
@@ -52,18 +51,23 @@ const MetaBottomContainer = styled.View`
   justifyContent: center;
 `;
 
-const MetaText = styled.Text`
+const Button = styled(Touchable).attrs({
+  feedback: 'opacity'
+})`
+  flex: 1;
+  backgroundColor: green;
+  flexDirection: row;
+  alignItems: center;
+  justifyContent: space-around;
+  paddingHorizontal: 32px;
+  marginLeft: 5px;
+`;
+
+const ButtonText = styled.Text`
   fontSize: 14;
-  fontWeight: 600;
-  color: ${ props => props.theme.TAG_BLUE  }
+  fontWeight: 500;
+  color: ${ props => props.theme.LIGHT_GREY }
 `;
-
-const MetaFullName = styled.Text`
-  fontSize: 16px;
-  fontWeight: bold;
-  color = ${ props => props.theme.TAG_BLUE }
-`;
-
 // will come from back end later
 // const username = 'itsClay';
 // const firstName = 'Clay';
@@ -71,29 +75,33 @@ const MetaFullName = styled.Text`
 // const createdAt = '1 day ago';
 // const avatar = fakeAvatar;
 
-function NeedCardHeader({ username, firstName, lastName, avatar, createdAt }) {
+function NeedCardHeader(props) {
+  title = props.title
+  avatar = props.avatar
+  navigate = props.navigation.navigate
   return (
     <Root>
+     <MetaContainer>
+       <MetaTopContainer>
+         <Button onPress={() => navigate('Profile', {name: 'Brent'})}>
+           <ButtonText>
+             {title}
+           </ButtonText>
+         </Button>
+       </MetaTopContainer>
+     </MetaContainer>
      <AvatarContainer>
        <Avatar source={{ uri: avatar || fakeAvatar }} />
      </AvatarContainer>
-     <MetaContainer>
-       <MetaTopContainer>
-         <MetaFullName>
-           { firstName } { lastName }
-         </MetaFullName>
-         <MetaText style={{ marginLeft: 5 }} >
-           @{username}
-         </MetaText>
-       </MetaTopContainer>
-       <MetaBottomContainer>
-         <MetaText>
-           { distanceInWordsToNow(createdAt) } ago
-         </MetaText>
-       </MetaBottomContainer>
-     </MetaContainer>
     </Root>
   )
 }
-
-export default NeedCardHeader;
+//  <MetaText style={{ marginLeft: 5 }} >
+//    @{username}
+//  </MetaText>
+// <MetaBottomContainer>
+//   <MetaText>
+//     { distanceInWordsToNow(createdAt) } ago
+//   </MetaText>
+// </MetaBottomContainer>
+export default withNavigation(NeedCardHeader);

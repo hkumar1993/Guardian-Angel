@@ -11,15 +11,13 @@ const Root = styled.View`
   flex: 1;
   justifyContent: center;
   paddingTop: 5;
-  backgroundColor: purple;
  `;
 
 
 class HomeScreen extends React.Component {
-  _renderItem = ({ item }) => <NeedCard {...item}/>
+  _renderItem = (props) => <NeedCard {...props}/>
 
   render() {
-
     const { data } = this.props;
     if(data.loading) {
       return (
@@ -32,7 +30,9 @@ class HomeScreen extends React.Component {
     return (
       <Root>
         <FlatList
-          contentContainerStyle={{ alignSelf: 'stretch' }}
+          contentContainerStyle={{
+            alignSelf: 'stretch'
+          }}
           data={data.getNeeds}
           keyExtractor={item => item._id}
           renderItem={this._renderItem}
