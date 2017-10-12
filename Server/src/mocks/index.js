@@ -1,10 +1,10 @@
-import faker from "faker";
+import faker from 'faker';
 
-import Need from "../models/Need";
-import User from "../models/User";
-import Tag from "../models/Tag";
-import UserTag from "../models/UserTag";
-import NeedTag from "../models/NeedTag";
+import Need from '../models/Need';
+import User from '../models/User';
+import Tag from '../models/Tag';
+import UserTag from '../models/UserTag';
+import NeedTag from '../models/NeedTag';
 
 const NEEDS_TOTAL = 3;
 const USERS_TOTAL = 3;
@@ -26,7 +26,7 @@ export default async () => {
         lastName: faker.name.lastName(),
         email: faker.internet.email(),
         avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
-        password: "123456"
+        password: '123456'
       });
 
       await Array.from({ length: NEEDS_TOTAL }).forEach(async () => {

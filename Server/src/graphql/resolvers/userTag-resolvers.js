@@ -1,5 +1,6 @@
-import UserTag from "../../models/UserTag";
-import { requireAuth } from "../../services/auth";
+import UserTag from '../../models/UserTag';
+import User from '../../models/User';
+import { requireAuth } from '../../services/auth';
 
 export default {
   getUserTag: async (_, { _id }, { user }) => {
@@ -20,10 +21,19 @@ export default {
     }
   },
 
-  createUserTag: async (_, args, { user }) => {
+  createUserTag: async (_, { userID, tagID }, { user }) => {
+    // console.log('ARGs=======', args);
+    console.log('userID ======= ', userID);
+    console.log('tagID ======= ', tagID);
+    console.log('user ======= ', user);
+
     try {
+      // const user = await User.findOne({ _id: userID });
+      console.log('user-=========', user);
       await requireAuth(user);
-      return UserTag.create(args);
+      // return UserTag.create(args);
+
+      return UserTag.create({ user: userID, tag: tagID });
     } catch (error) {
       throw error;
     }
@@ -33,13 +43,13 @@ export default {
     try {
       await requireAuth(user);
       const userTag = await UserTag.findOne({ _id, user: user._id });
-      if (!need) {
-        throw new Error("Not Found!");
+      if (!userTag) {
+        throw new Error('Not Found!');
       }
       await userTag.remove();
 
       return {
-        message: "Delete successful!"
+        message: 'Delete successful!'
       };
     } catch (error) {
       throw error;
