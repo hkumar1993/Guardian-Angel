@@ -8,8 +8,12 @@ import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
+import AuthenticationScreen from './screens/AuthenticationScreen';
+import HeaderAvatar from './components/HeaderAvatar';
+import AddNeedButton from './components/AddNeedButton';
+
 import NeedScreen from './screens/NeedScreen';
-import { colors } from './utils/constants'
+import NeedFormScreen from './screens/NeedFormScreen';
 
 const TAB_ICON_SIZE = 20;
 
@@ -80,11 +84,36 @@ const Tabs = TabNavigator({
       height: 50,
     }
   }
-})
+);
+import styled from 'styled-components/native';
+import Touchable from '@appandflow/touchable';
 
-const AppMainNav = StackNavigator({
-  Home: {
-    screen: Tabs
+const InfoText = styled.Text`
+  justifyContent: center;
+  alignItems: center;
+`;
+
+const AppMainNav = StackNavigator(
+  {
+    Home: {
+      screen: Tabs,
+      navigationOptions: ( { navigation }) => ({
+        headerLeft: <HeaderAvatar />,
+        headerRight: <AddNeedButton navigation={navigation} />
+      })
+    },
+    Need: {
+      screen: NeedScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `${navigation.state.params.need.title}`
+      })
+    },
+    NeedForm: {
+      screen: NeedFormScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Add Need'
+      })
+    }
   },
   Need: {
     screen: NeedScreen,
@@ -105,6 +134,8 @@ const AppMainNav = StackNavigator({
     }
   })
 });
+
+
 
 class AppNavigator extends Component {
   render() {

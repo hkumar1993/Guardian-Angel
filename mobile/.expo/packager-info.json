@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 59033,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPid": 91786,
+  "expoServerNgrokUrl": "https://ec-r6g.hkumar1993.mobile.exp.direct",
+  "packagerNgrokUrl": "https://packager.ec-r6g.hkumar1993.mobile.exp.direct",
+  "ngrokPid": 91815
 }
