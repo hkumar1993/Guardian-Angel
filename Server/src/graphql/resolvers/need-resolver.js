@@ -13,7 +13,7 @@ export default {
 
   getNeeds: async (_, { _id }, { user }) => {
     try {
-      // await requireAuth(user);
+      await requireAuth(user);
       return Need.find({}).sort({ createdAt: -1 });
     } catch (error) {
       throw error;
@@ -31,8 +31,11 @@ export default {
 
   createNeed: async (_, args, { user }) => {
     try {
+      console.log("ARGS=========", args);
+      console.log("user=========", user);
+
       await requireAuth(user);
-      return Need.create(...args, { user: user._id });
+      return Need.create({ ...args, user: user._id });
     } catch (error) {
       throw error;
     }
