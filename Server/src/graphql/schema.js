@@ -109,7 +109,7 @@ export default `
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
     createConversation(author: ID!, recipient: ID!): Conversation
-    createMessage(conversation: ID!, author: ID!): Message
+    createMessage(conversation: ID!, author: ID!, content: String!): Message
     createUserTag(user: ID!, tag: ID!): UserTag
     createNeedTag(need: ID!, tag: ID!): NeedTag
     deleteNeedTag(_id: ID!): Status

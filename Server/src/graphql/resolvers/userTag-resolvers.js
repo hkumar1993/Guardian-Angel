@@ -22,6 +22,9 @@ export default {
 
   createUserTag: async (_, args, { user }) => {
     try {
+      console.log("ARGS=========", args);
+      console.log("user=========", user);
+
       await requireAuth(user);
       return UserTag.create(args);
     } catch (error) {

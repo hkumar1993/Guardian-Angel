@@ -11,6 +11,15 @@ export default {
     }
   },
 
+  getConversationMessages: async (_, args, { user}) => {
+    try {
+      await requireAuth(user);
+      return Message.find({conversation: _id}).sort({createdAt: -1})
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // getMessages: async (_, { _id }, { user }) => {
   //   try {
   //     await requireAuth(user);
