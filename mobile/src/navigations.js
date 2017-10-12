@@ -14,6 +14,7 @@ import HomeScreen from './screens/HomeScreen';
 import NeedScreen from './screens/NeedScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
+import ConversationScreen from './screens/ConversationScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
@@ -135,9 +136,16 @@ const AppMainNav = StackNavigator(
   {
     Home: {
       screen: Tabs,
-      navigationOptions: ( { navigation }) => ({
+      navigationOptions: ({ navigation }) => ({
         headerLeft: <HeaderAvatar />,
         headerRight: <AddNeedButton navigation={navigation} />
+      })
+    },
+
+    Conversation: {
+      screen: ConversationScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'UserNameHere'
       })
     },
 
@@ -186,7 +194,6 @@ class AppNavigator extends Component {
     if (!this.props.user.isAuthenticated) {
       return <AuthenticationScreen />;
     }
-
     return <AppMainNav navigation={nav} />;
   }
 }
