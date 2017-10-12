@@ -7,4 +7,4 @@ export const colors = {
   DARK_GREY: '#505050'
 };
 
-export const fakeAvatar = 'https://robohash.org/my-own-slug.jpg?size=50x50'
+export const fakeAvatar = 'https://robohash.org/my-own-slug.jpg?size=200x200'
