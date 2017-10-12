@@ -14,7 +14,8 @@ const UserSchema = new Schema(
     lastName: String,
     avatar: String,
     password: String,
-    email: String
+    email: String,
+    conversations: [{ type: Schema.Types.ObjectId, ref: "Conversation" }]
   },
   { timestamps: true }
 );
