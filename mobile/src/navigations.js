@@ -19,8 +19,11 @@ import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
 import NewNeedScreen from './screens/NewNeedScreen';
 
+import AddNeedButton from './components/AddNeedButton';
 import HeaderAvatar from './components/HeaderAvatar';
 import ButtonHeader from './components/ButtonHeader';
+
+import NeedFormScreen from './screens/NeedFormScreen';
 
 const TAB_ICON_SIZE = 20;
 
@@ -84,23 +87,29 @@ const Tabs = TabNavigator(
       })
     }
   },
-  {
-    lazy: true,
-    tabBarPosition: 'bottom',
-    swipeEnabled: true,
-    tabBarOptions: {
-      showIcon: true,
-      showLabel: false,
-      activeTintColor: 'white',
-      activeBackgroundColor: colors.DARK_BLUE,
-      inactiveTintColor: 'white',
-      style: {
-        backgroundColor: colors.LIGHT_BLUE,
-        height: 50
-      }
+ {
+  lazy: true,
+  tabBarPosition: 'bottom',
+  swipeEnabled: true,
+  tabBarOptions: {
+    showIcon: true,
+    showLabel: false,
+    activeTintColor: 'white',
+    activeBackgroundColor: colors.DARK_BLUE,
+    inactiveTintColor: 'white',
+    style: {
+      backgroundColor: colors.LIGHT_BLUE,
+      height: 50,
     }
   }
-);
+});
+import styled from 'styled-components/native';
+import Touchable from '@appandflow/touchable';
+
+const InfoText = styled.Text`
+  justifyContent: center;
+  alignItems: center;
+`;
 
 
 const NewNeedModal = StackNavigator(
@@ -126,24 +135,17 @@ const AppMainNav = StackNavigator(
   {
     Home: {
       screen: Tabs,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: ( { navigation }) => ({
         headerLeft: <HeaderAvatar />,
-        headerRight: (
-          <ButtonHeader
-            side="right"
-            onPress={() => {
-              Keyboard.dismiss();
-              navigation.navigate('NewNeed');
-            }}
-          >
-            <SimpleLineIcons color={colors.TAG_BLUE} size={20} name="pencil" />
-          </ButtonHeader>
-        )
+        headerRight: <AddNeedButton navigation={navigation} />
       })
     },
 
     NewNeed: {
-      screen: NewNeedModal
+      screen: NewNeedScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Add Need'
+      })
     },
 
     Need: {
@@ -151,21 +153,28 @@ const AppMainNav = StackNavigator(
       navigationOptions: ({ navigation }) => ({
         title: `${navigation.state.params.need.title}`
       })
+    },
+    NeedForm: {
+      screen: NeedFormScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Add Need'
+      })
     }
+  },{
+  cardStyle: {
   },
-  {
-    cardStyle: {},
-    navigationOptions: () => ({
-      headerStyle: {
-        backgroundColor: 'white'
-      },
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        color: colors.DARK_GREY
-      }
-    })
-  }
-);
+  navigationOptions: () => ({
+    headerStyle: {
+      backgroundColor: 'white'
+    },
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      color: colors.DARK_GREY
+    }
+  })
+});
+
+
 
 class AppNavigator extends Component {
   render() {

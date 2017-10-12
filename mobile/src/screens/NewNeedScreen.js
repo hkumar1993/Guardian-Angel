@@ -137,13 +137,13 @@ class NewNeedScreen extends Component {
       },
 
       // update after submitted the need
-      update: (store, { data: { createNeed } }) => {
-        const data = store.readQuery({ query: GET_NEEDS_QUERY });
-
-        if(!data.getNeeds.find(need => need._id === createNeed._id)) {
-          store.writeQuery({ query: GET_NEEDS_QUERY, data: { getNeeds: [{ ...createNeed }, ...data.getNeeds] } });
-        }
-      }
+      // update: (store, { data: { createNeed } }) => {
+      //   const data = store.readQuery({ query: GET_NEEDS_QUERY });
+      //
+      //   if(!data.getNeeds.find(need => need._id === createNeed._id)) {
+      //     store.writeQuery({ query: GET_NEEDS_QUERY, data: { getNeeds: [{ ...createNeed }, ...data.getNeeds] } });
+      //   }
+      // }
 
     });
 
