@@ -11,7 +11,7 @@ import { colors, fakeAvatar } from '../utils/constants';
 import { Platform, Keyboard, AsyncStorage } from 'react-native';
 
 // graphql
-import SIGNUP_MUTATION from '../graphql/mutations/signup'
+import LOGIN_MUTATION from '../graphql/mutations/login'
 
 // Loading state
 import Loading from './Loading';
@@ -92,7 +92,7 @@ const Input = styled.TextInput.attrs({
   color: ${props => props.theme.LIGHT_PINK}
 `;
 
-class SignupForm extends Component {
+class LoginForm extends Component {
   state = {
     fullName: '',
     email: '',
@@ -105,34 +105,29 @@ class SignupForm extends Component {
   _keyBoardDismiss = () => Keyboard.dismiss();
 
   _disabledButton() {
-    const { fullName, email, password, username } = this.state;
+    const {  email, password } = this.state;
 
-    if(!fullName || !email || !password || !username) {
+    if(!email || !password ) {
       return true;
     }
 
     return false;
   }
 
-  _onSignupPress = async () => {
+  _onLoginPress = async () => {
     this.setState({ loading: true });
 
-    const { fullName, email, password, username } = this.state;
-    const avatar = fakeAvatar;
-
+    const { email, password } = this.state;
 
     try {
       const {data} = await this.props.mutate({
         variables: {
-          fullName,
           email,
           password,
-          username,
-          avatar
         }
       });
 
-      await AsyncStorage.setItem('@guardianangle', data.signup.token);
+      await AsyncStorage.setItem('@guardianangle', data.login.token);
       this.setState({ loading: false });
 
       return this.props.login();
@@ -156,14 +151,6 @@ class SignupForm extends Component {
 
           <InputWrapper>
             <Input
-              placeholder="Full Name"
-              autoCapitalize="words"
-              onChangeText={value => this._onChangeForm(value, 'fullName')}
-              />
-          </InputWrapper>
-
-          <InputWrapper>
-            <Input
               placeholder="Email"
               autoCapitalize="none"
               keyboardType="email-address"
@@ -179,23 +166,14 @@ class SignupForm extends Component {
               />
           </InputWrapper>
 
-          <InputWrapper>
-            <Input
-              placeholder="Username"
-              autoCapitalize="none"
-              onChangeText={value => this._onChangeForm(value, 'username')}
-              />
-          </InputWrapper>
-
-
         </Wrapper>
 
         <ButtonConfirm
-          onPress={this._onSignupPress}
+          onPress={this._onLoginPress}
           disabled={this._disabledButton()}
           >
           <ButtonConfirmText>
-            Sign Up
+            Sign In
           </ButtonConfirmText>
         </ButtonConfirm>
       </Root>
@@ -204,6 +182,6 @@ class SignupForm extends Component {
 }
 
 export default compose(
-  graphql(SIGNUP_MUTATION),
+  graphql(LOGIN_MUTATION),
   connect(null, { login })
-)(SignupForm);
+)(LoginForm);
