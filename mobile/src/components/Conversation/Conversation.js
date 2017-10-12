@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import {
   View,
-  Text,
-  StyleSheet,
   AsyncStorage,
-  TouchableOpacity,
-  Image
+  StyleSheet
 } from 'react-native';
 import Dimensions from 'Dimensions';
 import { GiftedChat } from 'react-native-gifted-chat';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 
 import ConversationMessage from './ConversationMessage';
+const API_URL = 'http://localhost:3000';
+
 
 class Conversation extends Component {
   constructor(props) {
@@ -24,6 +23,9 @@ class Conversation extends Component {
 
   componentWillMount() {
     console.log('hi');
+
+
+
     this.setState({
       messages: [
         {
@@ -82,7 +84,6 @@ const styles = StyleSheet.create({
   giftedChat: {
     top: Dimensions.get('window').height*.1,
     height: Dimensions.get('window').height*.8,
-    zIndex: 2
   },
   container: {
     flex: 1

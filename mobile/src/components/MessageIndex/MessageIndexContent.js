@@ -7,6 +7,7 @@ const Root = styled.View`
 
 const T = styled.Text`
   fontSize: 12px;
+  marginRight: 5;
 `;
 
 const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'

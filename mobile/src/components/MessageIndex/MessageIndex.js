@@ -33,9 +33,6 @@ const MessageTextContainer = styled.View`
   marginLeft: 5;
 `;
 
-const username = 'itsClay';
-const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
-
 function MessageIndex(props) {
   const { navigate } = props.navigation
   return (

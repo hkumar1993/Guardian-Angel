@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable';
 
 import SignupForm from '../components/SignupForm';
+import LoginForm from '../components/LoginForm';
 
 const Root = styled.View`
   flex: 1;
@@ -75,6 +76,7 @@ class AuthenticationScreen extends Component {
   state = initialState;
 
   _onShowSignupPress = () => this.setState({ showSignup: true });
+  _onShowLoginPress = () => this.setState({ showLogin: true });
 
   _onBackPress = () => this.setState({ ...initialState });
 
@@ -83,6 +85,12 @@ class AuthenticationScreen extends Component {
       return (
         <Root>
           <SignupForm  onBackPress={this._onBackPress}/>
+        </Root>
+      );
+    }else if (this.state.showLogin) {
+      return (
+        <Root>
+          <LoginForm onBackPress={this._onBackPress}/>
         </Root>
       );
     }
@@ -94,7 +102,7 @@ class AuthenticationScreen extends Component {
         </ButtonSignup>
 
         <BottomTextContainer>
-          <ButtonLogin>
+          <ButtonLogin onPress={this._onShowLoginPress} >
             <ButtonLoginText>
               Already have an account?
             </ButtonLoginText>
