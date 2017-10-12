@@ -23,10 +23,8 @@ const OtherUserText = styled.Text`
   borderRadius: 5;
 `;
 
-
-
+// hook up to back end later and put in our conversationMessage
 const currentUser = 'Brent';
-
 const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
 
 function ConversationMessage() {
