@@ -5,11 +5,14 @@ import User from "../models/User";
 import Tag from "../models/Tag";
 import UserTag from "../models/UserTag";
 import NeedTag from "../models/NeedTag";
+import Area from "../models/Area";
+import Conversation from "../models/Conversation";
 
 const NEEDS_TOTAL = 3;
 const USERS_TOTAL = 3;
 const TAGS_TOTAL = 3;
 const USER_TAGS_TOTAL = 3;
+const AREAS_TOTAL = 5;
 
 export default async () => {
   try {
@@ -18,6 +21,30 @@ export default async () => {
     await Tag.remove();
     await UserTag.remove();
     await NeedTag.remove();
+    await Area.remove();
+    await Conversation.remove();
+
+    await Array.from({ length: 1 }).forEach(async (_, i) => {
+      await User.create({
+        username: "test1",
+        firstName: "test1",
+        lastName: "test1",
+        email: "test1@test.com",
+        avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
+        password: "123456"
+      });
+    });
+
+    await Array.from({ length: 1 }).forEach(async (_, i) => {
+      await User.create({
+        username: "test2",
+        firstName: "test2",
+        lastName: "test2",
+        email: "test2@test.com",
+        avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
+        password: "123456"
+      });
+    });
 
     await Array.from({ length: USERS_TOTAL }).forEach(async (_, i) => {
       const user = await User.create({
@@ -47,6 +74,13 @@ export default async () => {
             user: user._id,
             tag: tag._id
           });
+        });
+      });
+
+      await Array.from({ length: AREAS_TOTAL }).forEach(async () => {
+        await Area.create({
+          zipcode: 12345,
+          name: faker.lorem.word()
         });
       });
     });

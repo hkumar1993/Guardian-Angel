@@ -32,8 +32,8 @@ export default {
   deleteNeedTag: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      const needTag = await NeedTag.findOne({ _id, user: user._id });
-      if (!need) {
+      const needTag = await NeedTag.findById(_id);
+      if (!needTag) {
         throw new Error("Not Found!");
       }
       await needTag.remove();

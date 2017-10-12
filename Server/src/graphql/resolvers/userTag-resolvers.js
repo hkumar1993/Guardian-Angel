@@ -22,6 +22,9 @@ export default {
 
   createUserTag: async (_, args, { user }) => {
     try {
+      console.log("ARGS=========", args);
+      console.log("user=========", user);
+
       await requireAuth(user);
       return UserTag.create(args);
     } catch (error) {
@@ -33,7 +36,7 @@ export default {
     try {
       await requireAuth(user);
       const userTag = await UserTag.findOne({ _id, user: user._id });
-      if (!need) {
+      if (!userTag) {
         throw new Error("Not Found!");
       }
       await userTag.remove();
