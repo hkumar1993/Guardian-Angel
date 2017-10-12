@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Root = styled.View`
-  flex: 1
-  backgroundColor: purple;
+  flex: 0.6;
 `;
 
 const T = styled.Text`

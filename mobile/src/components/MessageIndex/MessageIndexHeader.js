@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Root = styled.View`
-  flex: 1
-  backgroundColor: pink;
+  marginTop: 5;
+  marginRight: 5;
+  flex: 0.3;
 `;
 
 const T = styled.Text`
   fontSize: 14px;
-  fontWeight: 500;
+  fontWeight: 700;
+  color: ${props => props.theme.LIGHT_BLUE}
 `;
 
 const user = 'User123'

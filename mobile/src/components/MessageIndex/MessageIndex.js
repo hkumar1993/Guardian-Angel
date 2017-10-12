@@ -10,15 +10,14 @@ import MessageIndexHeader from './MessageIndexHeader';
 const Root = styled(Touchable).attrs({
   feedback: 'opacity'
 })`
-  minHeight: 100;
-  padding: 7px;
-  backgroundColor: ${ props => props.theme.LIGHT_GREY };
+  minHeight: 80;
+  padding: 5px;
+  backgroundColor: white;
   width: 100%;
   shadowColor: ${ props => props.theme.LIGHT_BLUE };
   shadowOffset: 0px 5px;
   shadowRadius: 2;
   shadowOpacity: 0.1;
-  marginVertical: 5;
 `;
 
 const MessageContentContainer = styled.View`
@@ -31,7 +30,7 @@ const AvatarContainer = styled.View`
 `;
 
 const MessageTextContainer = styled.View`
-
+  marginLeft: 5;
 `;
 
 const username = 'itsClay';
