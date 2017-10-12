@@ -2,10 +2,10 @@ import mongoose, { Schema } from "mongoose";
 
 const ConversationSchema = new Schema({
   author: {
-    type: Schema.Type.ObjectId
+    type: Schema.Types.ObjectId
   },
   recipient: {
-    type: Schema.Type.ObjectID
+    type: Schema.Types.ObjectId
   }
 });
 
