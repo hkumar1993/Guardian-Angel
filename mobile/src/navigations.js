@@ -67,8 +67,6 @@ const Tabs = TabNavigator({
       )
     })
   },
-
-
 }, {
   lazy: true,
   tabBarPosition: 'bottom',
@@ -84,7 +82,7 @@ const Tabs = TabNavigator({
       height: 50,
     }
   }
-);
+});
 import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable';
 
@@ -114,14 +112,7 @@ const AppMainNav = StackNavigator(
         title: 'Add Need'
       })
     }
-  },
-  Need: {
-    screen: NeedScreen,
-    navigationOptions: ({navigation}) => ({
-      title: `${navigation.state.params.need.title}`,
-    }),
-  }
-}, {
+  },{
   cardStyle: {
   },
   navigationOptions: () => ({
