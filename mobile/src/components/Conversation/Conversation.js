@@ -1,25 +1,92 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components/native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  AsyncStorage,
+  TouchableOpacity,
+  Image
+} from 'react-native';
+import Dimensions from 'Dimensions';
+import { GiftedChat } from 'react-native-gifted-chat';
+// import io from 'socket.io-client';
 
 import ConversationMessage from './ConversationMessage';
 
+class Conversation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: []
+    }
+  }
 
-const Root = styled.View`
-  backgroundColor: yellow;
-`;
+  componentWillMount() {
+    console.log('hi');
+    this.setState({
+      messages: [
+        {
+          _id: 1,
+          text: 'Hello developer',
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: 'React Native',
+            avatar: 'https://facebook.github.io/react/img/logo_og.png',
+          },
+        },
+      ],
+    });
+  }
 
-const T = styled.Text`
-  fontSize: 14;
-`;
+  componentDidMount() {
+    // load messages
+  }
 
-const text = "Conversation";
+  componentWillUnmount() {
+    // close IO connection
+  }
 
-function Conversation() {
+  onSend(messages = []) {
+  this.setState((previousState) => ({
+    messages: GiftedChat.append(previousState.messages, messages),
+  }));
+}
+
+  render() {
+    console.log(this.state);
     return (
-      <Root>
-        <T>{text}</T>
-      </Root>
+      <View style={styles.container}>
+        <View style={styles.giftedChat}>
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={ (messages) => {
+              // this needs to go to back end later
+              this.onSend(messages)
+            }}
+            user={{
+              _id: 1,
+            }}
+            />
+        </View>
+
+      </View>
+
     );
+  }
+
 };
+
+const styles = StyleSheet.create({
+  giftedChat: {
+    top: Dimensions.get('window').height*.1,
+    height: Dimensions.get('window').height*.8,
+    zIndex: 2
+  },
+  container: {
+    flex: 1
+  }
+})
 
 export default Conversation;
