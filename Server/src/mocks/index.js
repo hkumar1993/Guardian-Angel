@@ -4,6 +4,7 @@ import Need from "../models/Need";
 import User from "../models/User";
 import Tag from "../models/Tag";
 import UserTag from "../models/UserTag";
+import NeedTag from "../models/NeedTag";
 
 const NEEDS_TOTAL = 3;
 const USERS_TOTAL = 3;
@@ -16,6 +17,7 @@ export default async () => {
     await User.remove();
     await Tag.remove();
     await UserTag.remove();
+    await NeedTag.remove();
 
     await Array.from({ length: USERS_TOTAL }).forEach(async (_, i) => {
       const user = await User.create({
@@ -40,7 +42,7 @@ export default async () => {
           title: faker.lorem.word()
         });
 
-        await Array.from({ length: USER_TAGS_TOTAL }).forEach(async () => {
+        await Array.from({ length: 1 }).forEach(async () => {
           await UserTag.create({
             user: user._id,
             tag: tag._id

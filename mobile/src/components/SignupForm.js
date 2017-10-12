@@ -131,7 +131,11 @@ class SignupForm extends Component {
           avatar
         }
       });
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
       await AsyncStorage.setItem('@guardianangle', data.signup.token);
       this.setState({ loading: false });
 

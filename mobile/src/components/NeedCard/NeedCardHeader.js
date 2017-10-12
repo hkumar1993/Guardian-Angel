@@ -67,9 +67,9 @@ const ButtonText = styled.Text`
 // const avatar = fakeAvatar;
 
 function NeedCardHeader(props) {
-  title = props.title
-  avatar = props.avatar
-  navigate = props.navigation.navigate
+  const title = props.title
+  const avatar = props.avatar
+  const navigate = props.navigation.navigate
   return (
     <Root>
      <MetaTopContainer>
