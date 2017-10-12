@@ -4,19 +4,23 @@ import {
   StackNavigator,
   TabNavigator
 } from 'react-navigation';
+import { Keyboard } from 'react-native';
+
 import { connect } from 'react-redux';
-import { FontAwesome, SimpleLineIcons } from '@expo/vector-icons';
+import { FontAwesome, SimpleLineIcons, EvilIcons } from '@expo/vector-icons';
 import { colors } from './utils/constants';
 
 import HomeScreen from './screens/HomeScreen';
+import NeedScreen from './screens/NeedScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import MessagesScreen from './screens/MessagesScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
-import HeaderAvatar from './components/HeaderAvatar';
+import NewNeedScreen from './screens/NewNeedScreen';
 
-import NeedScreen from './screens/NeedScreen';
+import HeaderAvatar from './components/HeaderAvatar';
+import ButtonHeader from './components/ButtonHeader';
 
 const TAB_ICON_SIZE = 20;
 
@@ -98,14 +102,50 @@ const Tabs = TabNavigator(
   }
 );
 
+
+const NewNeedModal = StackNavigator(
+  {
+    NewNeed: {
+      screen: NewNeedScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <HeaderAvatar />,
+        headerRight: (
+          <ButtonHeader side="right" onPress={() => navigation.goBack(null)}>
+            <EvilIcons color={colors.LIGHT_BLUE} size={25} name="close" />
+          </ButtonHeader>
+        )
+      })
+    }
+  },
+  {
+    headerMode: 'none'
+  }
+);
+
 const AppMainNav = StackNavigator(
   {
     Home: {
       screen: Tabs,
-      navigationOptions: () => ({
-        headerLeft: <HeaderAvatar />
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <HeaderAvatar />,
+        headerRight: (
+          <ButtonHeader
+            side="right"
+            onPress={() => {
+              Keyboard.dismiss();
+              navigation.navigate('NewNeed');
+            }}
+          >
+            <SimpleLineIcons color={colors.TAG_BLUE} size={20} name="pencil" />
+          </ButtonHeader>
+        )
       })
     },
+
+    NewNeed: {
+      screen: NewNeedModal
+    },
+
     Need: {
       screen: NeedScreen,
       navigationOptions: ({ navigation }) => ({

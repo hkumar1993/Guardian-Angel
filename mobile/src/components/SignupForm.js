@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Platform, Keyboard, AsyncStorage } from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
@@ -8,7 +9,6 @@ import Touchable from '@appandflow/touchable';
 
 import { colors, fakeAvatar } from '../utils/constants';
 
-import { Platform, Keyboard, AsyncStorage } from 'react-native';
 
 // graphql
 import SIGNUP_MUTATION from '../graphql/mutations/signup'
@@ -131,7 +131,7 @@ class SignupForm extends Component {
           avatar
         }
       });
-      
+
       await AsyncStorage.setItem('@guardianangle', data.signup.token);
       this.setState({ loading: false });
 
