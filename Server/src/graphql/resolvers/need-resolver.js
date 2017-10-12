@@ -23,7 +23,7 @@ export default {
   getUserNeeds: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      return Need.find({ user: user._id }).sort({ createdAt: -1 });
+      return Need.find({ user: _id }).sort({ createdAt: -1 });
     } catch (error) {
       throw error;
     }
