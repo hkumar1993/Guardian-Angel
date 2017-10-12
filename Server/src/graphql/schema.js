@@ -14,6 +14,7 @@ export default `
     _id: ID!
     conversation: ID!
     author: ID!
+    content: String!
   }
 
   type Conversation {
