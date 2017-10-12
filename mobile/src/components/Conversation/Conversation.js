@@ -10,7 +10,7 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import io from 'socket.io-client';
 
 import ConversationMessage from './ConversationMessage';
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3000/graphiql';
 
 
 class Conversation extends Component {
@@ -51,10 +51,13 @@ class Conversation extends Component {
   }
 
   onSend(messages = []) {
-  this.setState((previousState) => ({
-    messages: GiftedChat.append(previousState.messages, messages),
-  }));
-}
+    this.setState((previousState) => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }));
+  }
+
+
+
 
   render() {
     console.log(this.state);
