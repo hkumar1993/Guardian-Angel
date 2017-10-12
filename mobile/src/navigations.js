@@ -12,7 +12,7 @@ import { colors } from './utils/constants';
 
 import HomeScreen from './screens/HomeScreen';
 import NeedScreen from './screens/NeedScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import ProfileScreenContainer from './screens/ProfileScreenContainer';
 import MessagesScreen from './screens/MessagesScreen';
 import ConversationScreen from './screens/ConversationScreen';
 import DashboardScreen from './screens/DashboardScreen';
@@ -32,16 +32,18 @@ const Tabs = TabNavigator(
   {
     Home: {
       screen: HomeScreen,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }) => ({
         headerTitle: 'Home',
         tabBarIcon: ({ tintColor }) => (
           <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="th-list" />
-        )
+        ),
+        headerLeft: <HeaderAvatar />,
+        headerRight: <AddNeedButton navigation={navigation} />
       })
     },
 
     Profile: {
-      screen: ProfileScreen,
+      screen: ProfileScreenContainer,
       navigationOptions: () => ({
         headerTitle: 'Profile',
         tabBarIcon: ({ tintColor }) => (
@@ -112,26 +114,6 @@ const InfoText = styled.Text`
   alignItems: center;
 `;
 
-
-const NewNeedModal = StackNavigator(
-  {
-    NewNeed: {
-      screen: NewNeedScreen,
-      navigationOptions: ({ navigation }) => ({
-        headerLeft: <HeaderAvatar />,
-        headerRight: (
-          <ButtonHeader side="right" onPress={() => navigation.goBack(null)}>
-            <EvilIcons color={colors.LIGHT_BLUE} size={25} name="close" />
-          </ButtonHeader>
-        )
-      })
-    }
-  },
-  {
-    headerMode: 'none'
-  }
-);
-
 const AppMainNav = StackNavigator(
   {
     Home: {
@@ -162,10 +144,13 @@ const AppMainNav = StackNavigator(
         title: `${navigation.state.params.need.title}`
       })
     },
-    NeedForm: {
-      screen: NeedFormScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: 'Add Need'
+    OtherProfile: {
+      screen: ProfileScreenContainer,
+      navigationOptions: () => ({
+        headerTitle: 'Profile',
+        tabBarIcon: ({ tintColor }) => (
+          <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="user" />
+        )
       })
     }
   },{
@@ -173,7 +158,11 @@ const AppMainNav = StackNavigator(
   },
   navigationOptions: () => ({
     headerStyle: {
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      shadowColor: 'black',
+      shadowOffset: { width: 0, height: 2},
+      shadowRadius: 2,
+      shadowOpacity: 0.5,
     },
     headerTitleStyle: {
       fontWeight: 'bold',

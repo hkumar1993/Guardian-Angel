@@ -38,7 +38,7 @@ function NeedCard({item, item: { title, description, user, createdAt }, navigati
     const headInfo = {
       need: item,
       title,
-      avatar: user.avatar,
+      user,
       navigation
     }
     return (
