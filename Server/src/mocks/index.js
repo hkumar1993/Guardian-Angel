@@ -7,6 +7,7 @@ import UserTag from "../models/UserTag";
 import NeedTag from "../models/NeedTag";
 import Area from "../models/Area";
 import Conversation from "../models/Conversation";
+import Message from "../models/Message";
 
 const NEEDS_TOTAL = 3;
 const USERS_TOTAL = 3;
@@ -23,9 +24,10 @@ export default async () => {
     await NeedTag.remove();
     await Area.remove();
     await Conversation.remove();
+    await Message.remove();
 
     await Array.from({ length: 1 }).forEach(async (_, i) => {
-      await User.create({
+      const user1 = await User.create({
         username: "test1",
         firstName: "test1",
         lastName: "test1",
@@ -33,16 +35,35 @@ export default async () => {
         avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
         password: "123456"
       });
-    });
-
-    await Array.from({ length: 1 }).forEach(async (_, i) => {
-      await User.create({
+      const user2 = await User.create({
         username: "test2",
         firstName: "test2",
         lastName: "test2",
         email: "test2@test.com",
         avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
         password: "123456"
+      });
+
+      await Array.from({ length: 1 }).forEach(async (_, i) => {
+        const convo = await Conversation.create({
+          author: user1._id,
+          recipient: user1._id
+        });
+
+        await Array.from({ length: 1 }).forEach(async (_, i) => {
+          await Message.create({
+            conversation: convo._id,
+            user: user1.id,
+            content: "This is a test message."
+          });
+        });
+        await Array.from({ length: 1 }).forEach(async (_, i) => {
+          await Message.create({
+            conversation: convo._id,
+            user: user2.id,
+            content: "This is a test response message."
+          });
+        });
       });
     });
 
