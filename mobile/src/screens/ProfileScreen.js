@@ -19,7 +19,7 @@ class ProfileScreen extends Component {
     const redirUser = navParams ? navParams.user : null
     const user = redirUser ? redirUser : currentUser
     return (
-      <Profile user={user} />
+      <Profile user={user} _id={user._id}/>
     )
   }
 }

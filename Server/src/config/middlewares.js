@@ -21,7 +21,7 @@ async function auth(req, res, next) {
     } else {
       req.user = null;
     }
-    next();
+    return next();
   } catch (error) {
     throw error;
   }
