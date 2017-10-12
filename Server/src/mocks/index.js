@@ -6,6 +6,7 @@ import Tag from "../models/Tag";
 import UserTag from "../models/UserTag";
 import NeedTag from "../models/NeedTag";
 import Area from "../models/Area";
+import Conversation from "../models/Conversation";
 
 const NEEDS_TOTAL = 3;
 const USERS_TOTAL = 3;
@@ -21,6 +22,29 @@ export default async () => {
     await UserTag.remove();
     await NeedTag.remove();
     await Area.remove();
+    await Conversation.remove();
+
+    await Array.from({ length: 1 }).forEach(async (_, i) => {
+      await User.create({
+        username: "test1",
+        firstName: "test1",
+        lastName: "test1",
+        email: "test1@test.com",
+        avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
+        password: "123456"
+      });
+    });
+
+    await Array.from({ length: 1 }).forEach(async (_, i) => {
+      await User.create({
+        username: "test2",
+        firstName: "test2",
+        lastName: "test2",
+        email: "test2@test.com",
+        avatar: `https://randomuser.me/api/portraits/women/${i}.jpg`,
+        password: "123456"
+      });
+    });
 
     await Array.from({ length: USERS_TOTAL }).forEach(async (_, i) => {
       const user = await User.create({

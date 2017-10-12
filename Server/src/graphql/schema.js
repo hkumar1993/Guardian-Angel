@@ -64,6 +64,7 @@ export default `
     firstName: String
     lastName: String
     avatar: String
+    conversations: [Conversation]
     createdAt: Date!
     updatedAt: Date!
   }

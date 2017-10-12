@@ -1,5 +1,8 @@
 import Conversation from "../../models/Conversation";
 import { requireAuth } from "../../services/auth";
+import ConversationResolvers from "./conversation-resolvers";
+
+import User from "../../models/User";
 
 export default {
   getConversation: async (_, { _id }, { user }) => {
@@ -22,8 +25,24 @@ export default {
 
   createConversation: async (_, args, { user }) => {
     try {
+      console.log(args);
       await requireAuth(user);
-      return Conversation.create(args);
+      const conversation = await Conversation.create(args);
+
+      const author = await User.findOne({ _id: args["author"] });
+      const recipient = await User.findOne({ _id: args["recipient"] });
+
+      console.log("author is ", author);
+      console.log("recipient is ", recipient);
+      console.log("conversation is ", conversation._id);
+
+      author["conversations"].push(conversation._id);
+      recipient["conversations"].push(conversation._id);
+
+      author.save();
+      recipient.save();
+
+      return conversation;
     } catch (error) {
       throw error;
     }
