@@ -1,14 +1,17 @@
 import GraphQLDate from "graphql-date";
 import NeedResolvers from "./need-resolver";
 import UserResolvers from "./user-resolvers";
+import ConversationResolvers from "./conversation-resolvers.js";
 import UserTagResolvers from "./userTag-resolvers.js";
 import NeedTagResolvers from "./needTag-resolvers.js";
 import NeedRequestResolvers from "./needRequest-resolvers.js";
+import MessageResolvers from "./message-resolvers.js";
 
 import User from "../../models/User";
 import Need from "../../models/Need";
 import Tag from "../../models/Tag";
 import Area from "../../models/Area";
+import Conversation from "../../models/Conversation";
 
 export default {
   Date: GraphQLDate,
@@ -35,10 +38,18 @@ export default {
     recipient: ({ recipient }) => User.findById(recipient),
     author: ({ author }) => User.findById(author)
   },
+  Message: {
+    conversation: ({ conversation }) => Conversation.findById(conversation),
+    author: ({ author }) => User.findById(author)
+  },
 
   Query: {
     getNeeds: NeedResolvers.getNeeds,
     getNeed: NeedResolvers.getNeed,
+    getConversation: ConversationResolvers.getConversation,
+    getMessage: MessageResolvers.getMessage,
+    getUserTag: UserTagResolvers.getUserTag,
+    getNeedTag: NeedTagResolvers.getNeedTag,
     getUserTags: UserTagResolvers.getUserTags,
     getNeedTags: NeedTagResolvers.getNeedTags,
     getUserNeeds: NeedResolvers.getUserNeeds,
@@ -48,8 +59,12 @@ export default {
 
   Mutation: {
     createNeed: NeedResolvers.createNeed,
+    createNeedTag: NeedTagResolvers.createNeedTag,
+    createConversation: ConversationResolvers.createConversation,
+    createMessage: MessageResolvers.createMessage,
     createUserTag: UserTagResolvers.createUserTag,
     deleteUserTag: UserTagResolvers.deleteUserTag,
+    deleteNeedTag: NeedTagResolvers.deleteNeedTag,
     updateNeed: NeedResolvers.updateNeed,
     deleteNeed: NeedResolvers.deleteNeed,
     signup: UserResolvers.signup,

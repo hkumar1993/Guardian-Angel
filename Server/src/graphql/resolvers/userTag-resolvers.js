@@ -33,7 +33,7 @@ export default {
     try {
       await requireAuth(user);
       const userTag = await UserTag.findOne({ _id, user: user._id });
-      if (!need) {
+      if (!userTag) {
         throw new Error("Not Found!");
       }
       await userTag.remove();
