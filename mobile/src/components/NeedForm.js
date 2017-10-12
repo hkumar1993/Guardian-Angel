@@ -61,50 +61,29 @@ class NeedForm extends Component {
     this.setState({ loading: true });
 
     const { title, description, location, tags } = this.state;
-
-    // try {
-    //   const {data} = await this.props.mutate({
-    //     variables: {
-    //       title,
-    //       description,
-    //       location,
-    //       tags,
-    //     }
-    //   });
-    //
-    //   await AsyncStorage.setItem('@guardianangle', data.signup.token);
-    //   this.setState({ loading: false });
-    //
-    //   return this.props.login();
-    // } catch (e) {
-    //   throw e;
-    // }
   }
 
   render() {
     <Root>
-      <Input
-        placeholder="Title"
-        onChangeText={value => this._onChangeForm(value,'title')}
-        />
-      <Input
-        placeholder="Description"
-        onChangeText={value => this._onChangeForm(value,'description')}
-        />
-      <Input
-        placeholder="Location"
-        onChangeText={value => this._onChangeForm(value,'location')}
-        />
-      <Input
-        placeholder="Tags"
-        onChangeText={value => this._onChangeForm(value,'tags')}
-        />
+
     </Root>
   }
 
 }
-
-export default compose(
-  graphql(SIGNUP_MUTATION),
-  connect(null, { login })
-)(SignupForm);
+// <Input
+//   placeholder="Title"
+//   onChangeText={value => this._onChangeForm(value,'title')}
+//   />
+// <Input
+//   placeholder="Description"
+//   onChangeText={value => this._onChangeForm(value,'description')}
+//   />
+// <Input
+//   placeholder="Location"
+//   onChangeText={value => this._onChangeForm(value,'location')}
+//   />
+// <Input
+//   placeholder="Tags"
+//   onChangeText={value => this._onChangeForm(value,'tags')}
+//   />
+export default NeedForm

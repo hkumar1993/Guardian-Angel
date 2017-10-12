@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 
-import NeedForm from '../components/NeedForm'
+import NeedShow from '../components/NeedShow/NeedShow'
 
 const Root = styled.View`
 
@@ -16,7 +16,7 @@ class NeedScreen extends Component {
   render() {
     return (
       <Root>
-        <NeedShow />
+        <TestText>Hello</TestText>
       </Root>
     )
   }

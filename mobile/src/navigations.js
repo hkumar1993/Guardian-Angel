@@ -15,15 +15,11 @@ import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
 import HeaderAvatar from './components/HeaderAvatar';
-<<<<<<< HEAD
+
 import AddNeedButton from './components/AddNeedButton';
 
 import NeedScreen from './screens/NeedScreen';
 import NeedFormScreen from './screens/NeedFormScreen';
-=======
-
-import NeedScreen from './screens/NeedScreen';
->>>>>>> master
 
 const TAB_ICON_SIZE = 20;
 
@@ -139,26 +135,12 @@ const AppMainNav = StackNavigator(
     headerStyle: {
       backgroundColor: 'white'
     },
-    Need: {
-      screen: NeedScreen,
-      navigationOptions: ({ navigation }) => ({
-        title: `${navigation.state.params.need.title}`
-      })
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      color: colors.DARK_GREY
     }
-  },
-  {
-    cardStyle: {},
-    navigationOptions: () => ({
-      headerStyle: {
-        backgroundColor: 'white'
-      },
-      headerTitleStyle: {
-        fontWeight: 'bold',
-        color: colors.DARK_GREY
-      }
-    })
-  }
-);
+  })
+});
 
 
 
