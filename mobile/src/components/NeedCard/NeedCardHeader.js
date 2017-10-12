@@ -5,30 +5,33 @@ import Touchable from '@appandflow/touchable';
 
 import { fakeAvatar } from '../../utils/constants';
 import { withNavigation } from 'react-navigation';
+import Avatar from '../Avatar/Avatar'
 
-const AVATAR_SIZE = 30;
-const AVATAR_RADIUS = AVATAR_SIZE / 2;
+// const AVATAR_SIZE = 30;
+// const AVATAR_RADIUS = AVATAR_SIZE / 2;
 
 const Root = styled.View`
   height: 50;
   flexDirection: row;
   alignItems: center;
   justifyContent: space-between;
+  borderBottomWidth: 0.5px;
+  borderColor: rgba(0,0,0,0.5);
 `;
 
-const AvatarContainer = styled.View`
-  flex: 0.2;
-  alignItems: center;
-  justifyContent: center;
-`;
-
-  const Avatar = styled.Image`
-  height: ${ AVATAR_SIZE } ;
-  width: ${ AVATAR_SIZE } ;
-  borderWidth: 2px;
-  borderColor: ${props => props.theme.LIGHT_BLUE};
-  borderRadius: ${ AVATAR_RADIUS };
-`;
+// const AvatarContainer = styled.View`
+//   flex: 0.2;
+//   alignItems: center;
+//   justifyContent: center;
+// `;
+//
+//   const Avatar = styled.Image`
+//   height: ${ AVATAR_SIZE } ;
+//   width: ${ AVATAR_SIZE } ;
+//   borderWidth: 2px;
+//   borderColor: ${props => props.theme.LIGHT_BLUE};
+//   borderRadius: ${ AVATAR_RADIUS };
+// `;
 
 //
 const MetaContainer = styled.View`
@@ -68,8 +71,8 @@ const ButtonText = styled.Text`
 
 function NeedCardHeader(props) {
   const title = props.title
-  const avatar = props.avatar
   const navigate = props.navigation.navigate
+  const user = props.user
   return (
     <Root>
      <MetaTopContainer>
@@ -79,9 +82,7 @@ function NeedCardHeader(props) {
          </ButtonText>
        </Button>
      </MetaTopContainer>
-     <AvatarContainer>
-       <Avatar source={{ uri: avatar || fakeAvatar }} />
-     </AvatarContainer>
+     <Avatar user={user} size={30} touchable={true}/>
     </Root>
   )
 }
