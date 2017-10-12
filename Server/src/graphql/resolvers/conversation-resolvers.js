@@ -1,42 +1,42 @@
-import NeedTag from "../../models/NeedTag";
+import Conversation from "../../models/Conversation";
 import { requireAuth } from "../../services/auth";
 
 export default {
-  getNeedTag: async (_, { _id }, { user }) => {
+  getConversation: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      return NeedTag.findById(_id);
+      return Conversation.findById(_id);
     } catch (error) {
       throw error;
     }
   },
 
-  getNeedTags: async (_, { _id }, { user }) => {
+  getConversations: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      return NeedTag.find({ user: _id }).sort({ createdAt: -1 });
+      return Conversation.find({ user: _id }).sort({ createdAt: -1 });
     } catch (error) {
       throw error;
     }
   },
 
-  createNeedTag: async (_, args, { user }) => {
+  createConversation: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return NeedTag.create(args);
+      return Conversation.create(args);
     } catch (error) {
       throw error;
     }
   },
 
-  deleteNeedTag: async (_, { _id }, { user }) => {
+  deleteConversation: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      const needTag = await NeedTag.findById(_id);
-      if (!needTag) {
+      const conversation = await Conversation.findById(_id);
+      if (!conversation) {
         throw new Error("Not Found!");
       }
-      await needTag.remove();
+      await conversation.remove();
 
       return {
         message: "Delete successful!"

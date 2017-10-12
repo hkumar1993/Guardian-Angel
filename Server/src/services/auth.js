@@ -5,13 +5,13 @@ import constants from "../config/constants";
 
 export async function requireAuth(user) {
   if (!user || !user._id) {
-    throw new Error("Unauthorized");
+    throw new Error("Unauthorized1");
   }
 
   const me = await User.findById(user._id);
 
   if (!me) {
-    throw new Error("Unathorized");
+    throw new Error("Unathorized2");
   }
 
   return me;
