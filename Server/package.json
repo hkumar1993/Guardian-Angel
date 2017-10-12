@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "8.6.0"
+  },
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node src/index.js"
+    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node src/index.js",
+    "start": "cross-env NODE_ENV=dev nodemon --exec babel-node src/index.js"
   },
   "dependencies": {
     "apollo-server-express": "^1.1.3",
