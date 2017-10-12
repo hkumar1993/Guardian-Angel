@@ -24,7 +24,7 @@ const InfoText = styled.Text`
 
 const AddNeedButton = (props) => {
   return (
-    <InfoButton onPress={ () => props.navigation.navigate('NeedForm')}>
+    <InfoButton onPress={ () => props.navigation.navigate('NewNeed')}>
       <InfoText>Add Need</InfoText>
       </InfoButton>
   )
