@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 import { withNavigation } from 'react-navigation';
 import NeedCardBottom from '../NeedCard/NeedCardBottom';
-
+import GuardianInfo from './GuardianInfo'
 const Root = styled.View`
   height: 100%;
   padding: 7px;
@@ -11,7 +11,7 @@ const Root = styled.View`
   width: 100%;
   alignSelf: center;
   flexDirection: column;
-  justifyContent: space-between;
+  justifyContent: flex-start;
 `;
 
 
@@ -67,6 +67,7 @@ class NeedShow extends React.Component {
           </NeedDescription>
         </NeedContentContainer>
         <NeedCardBottom />
+        <GuardianInfo user={need.user} posted={need.createdAt}/>
       </Root>
     );
   }

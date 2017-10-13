@@ -6,9 +6,18 @@ export default gql`
       _id
       title
       description
-      user{
+      completed
+      createdAt
+      updatedAt
+      user {
         _id
+        username
+        email
+        firstName
+        lastName
         avatar
+        createdAt
+        updatedAt
       }
     }
   }
