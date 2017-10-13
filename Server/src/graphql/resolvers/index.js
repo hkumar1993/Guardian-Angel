@@ -47,6 +47,7 @@ export default {
     getNeeds: NeedResolvers.getNeeds,
     getNeed: NeedResolvers.getNeed,
     getConversation: ConversationResolvers.getConversation,
+    getConversationMessages: MessageResolvers.getConversationMessages,
     getMessage: MessageResolvers.getMessage,
     getUserTag: UserTagResolvers.getUserTag,
     getNeedTag: NeedTagResolvers.getNeedTag,
