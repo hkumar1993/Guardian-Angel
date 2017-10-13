@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "graphql-date": "^1.0.3"
+    "graphql-date": "^1.0.3",
+    "graphql-subscriptions": "^0.5.4"
   }
 }
