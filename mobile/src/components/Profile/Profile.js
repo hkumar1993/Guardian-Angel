@@ -4,9 +4,10 @@ import { withNavigation } from 'react-navigation'
 import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable';
 import ProfileHeader from './ProfileHeader'
-
+import NeedIndex from '../NeedIndex/NeedIndex'
 import { graphql, compose, withApollo } from 'react-apollo';
 import { connect } from 'react-redux';
+import { ActivityIndicator, FlatList } from 'react-native';
 
 import GET_USER_NEEDS_QUERY from '../../graphql/queries/getUserNeeds';
 
@@ -42,10 +43,18 @@ class Profile extends Component {
   }
 
   render() {
-    console.log("PROPS!!!",this.props);
+    const { data } = this.props;
+    if(data.loading) {
+      return (
+        <Root>
+          <ActivityIndicator size="large" />
+        </Root>
+      )
+    }
     return (
       <Root>
         <ProfileHeader user={this.props.user} />
+        <NeedIndex data={data.getUserNeeds} />
       </Root>
     )
   }
