@@ -51,16 +51,17 @@ export default async () => {
         });
 
         await Array.from({ length: 1 }).forEach(async (_, i) => {
+          console.log("-=-=-=-=-=-=-=-=-=-=-=-=", user1.id);
           await Message.create({
             conversation: convo._id,
-            user: user1.id,
+            author: user1.id,
             content: "This is a test message."
           });
         });
         await Array.from({ length: 1 }).forEach(async (_, i) => {
           await Message.create({
             conversation: convo._id,
-            user: user2.id,
+            author: user2.id,
             content: "This is a test response message."
           });
         });
