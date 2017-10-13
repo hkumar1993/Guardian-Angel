@@ -1,8 +1,10 @@
 import Conversation from "../../models/Conversation";
 import { requireAuth } from "../../services/auth";
-import ConversationResolvers from "./conversation-resolvers";
+import { pubsub }  from '../../config/pubsub';
 
 import User from "../../models/User";
+
+const CONVERSATION_JOINED = 'conversationJoined'
 
 export default {
   getConversation: async (_, { _id }, { user }) => {
@@ -14,10 +16,10 @@ export default {
     }
   },
 
-  getConversations: async (_, { _id }, { user }) => {
+  getUserConversations: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      return Conversation.find({ user: _id }).sort({ createdAt: -1 });
+      return Conversation.find({ author: _id }).sort({ createdAt: -1 });
     } catch (error) {
       throw error;
     }
@@ -28,6 +30,8 @@ export default {
       console.log(args);
       await requireAuth(user);
       const conversation = await Conversation.create(args);
+
+      pubsub.publish(CONVERSATION_JOINED, { [CONVERSATION_JOINED]: conversation })
 
       const author = await User.findOne({ _id: args["author"] });
       const recipient = await User.findOne({ _id: args["recipient"] });
@@ -63,5 +67,9 @@ export default {
     } catch (error) {
       throw error;
     }
+  },
+
+  conversationJoined: {
+    subscribe: () => pubsub.asyncIterator(CONVERSATION_JOINED)
   }
 };
