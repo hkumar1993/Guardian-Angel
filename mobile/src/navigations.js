@@ -24,7 +24,6 @@ import AddNeedButton from './components/AddNeedButton';
 import HeaderAvatar from './components/HeaderAvatar';
 import ButtonHeader from './components/ButtonHeader';
 
-import NeedFormScreen from './screens/NeedFormScreen';
 
 const TAB_ICON_SIZE = 20;
 
