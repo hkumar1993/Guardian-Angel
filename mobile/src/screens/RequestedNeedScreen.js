@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
 
-import NeedShow from '../components/NeedShow/NeedShow'
-
 const Root = styled.View`
 
 `;
 
-const TestText = styled.Text``;
+const T = styled.Text`
 
+`;
 
-class NeedScreen extends Component {
+class MapScreen extends Component {
   state = {};
 
   render() {
     return (
       <Root>
-        <TestText>Hello</TestText>
+        <T>Requested</T>
       </Root>
     )
   }
 }
 
-export default NeedScreen;
+export default MapScreen;

@@ -15,6 +15,7 @@ const Root = styled.View`
   shadowOffset: 0px 5px;
   shadowRadius: 2;
   shadowOpacity: 0.5;
+  marginBottom: 20;
 `;
 
 const UserDetails = styled.View`

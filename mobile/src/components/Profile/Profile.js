@@ -17,8 +17,9 @@ const Root = styled.View`
 
 class Profile extends Component {
 
-  componentDidMount() {
+  componentWillReceiveProps() {
     this._getUserNeeds(this.props._id);
+    console.log('GOT PROPS',this.props);
     // this._getUserNeeds(this.props.user._id);
   }
 
@@ -28,6 +29,7 @@ class Profile extends Component {
 
     try {
       const { data } = await this.props.client.query({
+        query: GET_USER_NEEDS_QUERY,
         variables: {
           _id: id
         }
@@ -40,10 +42,14 @@ class Profile extends Component {
 
   constructor(props){
     super(props)
+    this.state ={ userNeeds: null }
   }
 
   render() {
     const { data } = this.props;
+    console.log(this.props);
+    window.userNeeds = data.userNeeds
+    console.log(data);
     if(data.loading) {
       return (
         <Root>
@@ -61,7 +67,7 @@ class Profile extends Component {
 }
 
 export default withApollo(compose(
-    connect(null, null ),
+    connect(state => { return { data: state.apollo.data, index: state.nav.routes.index} }, null ),
     graphql(GET_USER_NEEDS_QUERY)
-  ) (withNavigation(Profile))
+  )(withNavigation(Profile))
 );
