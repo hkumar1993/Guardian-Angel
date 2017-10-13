@@ -1,6 +1,10 @@
 import Need from "../../models/Need";
 import { requireAuth } from "../../services/auth";
 
+import { pubsub } from '../../config/pubsub';
+
+const NEED_ADDED = 'needAdded';
+
 export default {
   getNeed: async (_, { _id }, { user }) => {
     try {
@@ -35,7 +39,11 @@ export default {
       console.log("user=========", user);
 
       await requireAuth(user);
-      return Need.create({ ...args, user: user._id });
+      const need = await Need.create({ ...args, user: user._id });
+
+      pubsub.publish(NEED_ADDED, { [NEED_ADDED]: need });
+
+      return need;
     } catch (error) {
       throw error;
     }
@@ -77,5 +85,9 @@ export default {
     } catch (error) {
       throw error;
     }
+  },
+
+  needAdded: {
+    subscribe: () => pubsub.asyncIterator(NEED_ADDED)
   }
 };

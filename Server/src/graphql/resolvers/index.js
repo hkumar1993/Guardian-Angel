@@ -70,5 +70,9 @@ export default {
     deleteNeed: NeedResolvers.deleteNeed,
     signup: UserResolvers.signup,
     login: UserResolvers.login
+  },
+
+  Subscription: {
+    needAdded: NeedResolvers.needAdded
   }
 };
