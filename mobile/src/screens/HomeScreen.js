@@ -8,8 +8,7 @@ import { connect } from 'react-redux';
 
 import { ActivityIndicator, FlatList } from 'react-native';
 
-import NeedCard from '../components/NeedCard/NeedCard';
-
+import NeedIndex from '../components/NeedIndex/NeedIndex'
 import { getUserInfo } from '../actions/user';
 
 // graphql queries
@@ -49,14 +48,7 @@ class HomeScreen extends React.Component {
 
     return (
       <Root>
-        <FlatList
-          contentContainerStyle={{
-            alignSelf: 'stretch'
-          }}
-          data={data.getNeeds}
-          keyExtractor={item => item._id}
-          renderItem={this._renderItem}
-          />
+        <NeedIndex data={data.getNeeds} />
       </Root>
     )
   }
