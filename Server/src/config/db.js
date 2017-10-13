@@ -2,22 +2,27 @@ import mongoose from 'mongoose';
 
 import constants from './constants';
 
-mongoose.Promise = global.Promise;
+require('dotenv').config();
 
-mongoose.set('debug', true); // debug mode on
+const MONGO_URI = `mongodb://${process.env.USER_NAME}:${process.env
+  .PASSWORD}@ds117605.mlab.com:17605/guardian-angel`;
+if (!MONGO_URI) {
+  throw new Error('You must provide a MongoLab URI');
+}
+
+mongoose.Promise = global.Promise;
+mongoose.connect(MONGO_URI, { useMongoClient: true });
 
 try {
-  mongoose.connect(constants.DB_URL, {
+  mongoose.connect(MONGO_URI, {
     useMongoClient: true
   });
 } catch (err) {
-  mongoose.createConnection(constants.DB_URL, {
+  mongoose.createConnection(MONGO_URI, {
     useMongoClient: true
   });
 }
 
 mongoose.connection
-  .once('open', () => console.log('MongoDB Running'))
-  .on('error', e => {
-    throw e;
-  });
+  .once('open', () => console.log('Connected to MongoLab instance.'))
+  .on('error', e => console.log('Error connecting to MongoLab:', e));
