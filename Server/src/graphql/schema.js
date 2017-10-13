@@ -90,13 +90,13 @@ export default `
     updatedAt: Date!
   }
 
-
   type Query {
     getNeeds: [Need]
     getNeed(_id: ID!): Need
     getNeedRequest(_id: ID!): [NeedRequest]
     getMessage(_id: ID!): Message
     getConversation(_id: ID!): Conversation
+    getUserConversations(_id: ID!): [Conversation]
     getUserTag(_id: ID!): UserTag
     getNeedTag(_id: ID!): NeedTag
     getUserTags(_id: ID!): [UserTag]
@@ -110,6 +110,7 @@ export default `
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
     createConversation(author: ID!, recipient: ID!): Conversation
+    deleteConversation(_id: ID!): Conversation
     createMessage(conversation: ID!, author: ID!, content: String!): Message
     createUserTag(user: ID!, tag: ID!): UserTag
     createNeedTag(need: ID!, tag: ID!): NeedTag
@@ -119,9 +120,13 @@ export default `
     login(email: String!, password: String!): Auth
   }
 
+  type Subscription {
+    conversationJoined: Conversation
+  }
+
   schema {
     query: Query
     mutation: Mutation
-
+    subscription: Subscription
   }
 `;
