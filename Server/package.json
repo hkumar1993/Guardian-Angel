@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node src/index.js",
-    "start": "cross-env NODE_ENV=dev nodemon --exec babel-node src/index.js",
+    "start":
+      "cross-env NODE_ENV=production nodemon --exec babel-node src/index.js",
     "postinstall": "bower install && grunt build"
   },
   "dependencies": {
