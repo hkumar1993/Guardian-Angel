@@ -47,6 +47,7 @@ export default {
     getNeeds: NeedResolvers.getNeeds,
     getNeed: NeedResolvers.getNeed,
     getConversation: ConversationResolvers.getConversation,
+    getUserConversations: ConversationResolvers.getUserConversations,
     getMessage: MessageResolvers.getMessage,
     getUserTag: UserTagResolvers.getUserTag,
     getNeedTag: NeedTagResolvers.getNeedTag,
@@ -61,6 +62,7 @@ export default {
     createNeed: NeedResolvers.createNeed,
     createNeedTag: NeedTagResolvers.createNeedTag,
     createConversation: ConversationResolvers.createConversation,
+    deleteConversation: ConversationResolvers.deleteConversation,
     createMessage: MessageResolvers.createMessage,
     createUserTag: UserTagResolvers.createUserTag,
     deleteUserTag: UserTagResolvers.deleteUserTag,
@@ -69,5 +71,9 @@ export default {
     deleteNeed: NeedResolvers.deleteNeed,
     signup: UserResolvers.signup,
     login: UserResolvers.login
+  },
+
+  Subscription: {
+    conversationJoined: ConversationResolvers.conversationJoined
   }
 };
