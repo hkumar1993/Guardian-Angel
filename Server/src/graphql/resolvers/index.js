@@ -73,5 +73,9 @@ export default {
     createNeedRequest: NeedRequestResolvers.createNeedRequest,
     signup: UserResolvers.signup,
     login: UserResolvers.login
+  },
+
+  Subscription: {
+    needAdded: NeedResolvers.needAdded
   }
 };
