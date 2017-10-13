@@ -5,7 +5,7 @@ const MessageSchema = new Schema({
     type: String,
     required: true
   },
-  user: {
+  author: {
     type: Schema.Types.ObjectId
   },
   conversation: {

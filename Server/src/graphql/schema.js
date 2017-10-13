@@ -82,7 +82,7 @@ export default `
   }
 
   type Need {
-    _id: String
+    _id: ID!
     title: String
     description: String
     completed: Boolean
@@ -98,6 +98,7 @@ export default `
     getNeedRequest(_id: ID!): [NeedRequest]
     getMessage(_id: ID!): Message
     getConversation(_id: ID!): Conversation
+    getConversationMessages(_id: ID!): [Message]
     getUserTag(_id: ID!): UserTag
     getNeedTag(_id: ID!): NeedTag
     getUserTags(_id: ID!): [UserTag]
