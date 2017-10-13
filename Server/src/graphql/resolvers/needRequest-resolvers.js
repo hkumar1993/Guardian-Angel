@@ -14,6 +14,15 @@ export default {
   getNeedRequests: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
+      return NeedRequest.find({ need: _id }).sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getUserRequests: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
       return NeedRequest.find({ user: _id }).sort({ createdAt: -1 });
     } catch (error) {
       throw error;
