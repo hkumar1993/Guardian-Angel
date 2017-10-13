@@ -121,9 +121,13 @@ export default `
     login(email: String!, password: String!): Auth
   }
 
+  type Subscription {
+    needAdded: Need
+  }
+
   schema {
     query: Query
     mutation: Mutation
-
+    subscription: Subscription
   }
 `;

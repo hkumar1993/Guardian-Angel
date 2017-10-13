@@ -14,6 +14,7 @@ import { getUserInfo } from '../actions/user';
 // graphql queries
 import GET_NEEDS_QUERY from '../graphql/queries/getNeeds';
 import ME_QUERY from '../graphql/queries/me';
+import NEED_ADDED_SUBSCRIPTION from '../graphql/subscriptions/needAdded';
 
 const Root = styled.View`
   flex: 1;
@@ -23,6 +24,36 @@ const Root = styled.View`
 
 
 class HomeScreen extends React.Component {
+
+  componentWillMount() {
+    console.log("This.props====== ", this.props );
+    console.log("This.props.Data====== ", this.props.data  );
+    this.props.data.subscribeToMore({
+      document: NEED_ADDED_SUBSCRIPTION,
+      updateQuery: ( prev, { subscriptionData }) => {
+        console.log("prev===", prev);
+        console.log("subscriptionData===", subscriptionData);
+        console.log("subscriptionData data===", subscriptionData.data);
+        if(!subscriptionData.data) {
+          console.log("prev inside", prev);
+          return prev;
+        }
+
+        const newNeed = subscriptionData.data.needAdded;
+        console.log("newNeed====", newNeed);
+
+        if(!prev.getNeeds.find(need => need._id === newNeed._id)) {
+
+          return {
+            ...prev,
+            getNeeds: [{ ...newNeed }, ...prev.getNeeds ]
+          }
+        }
+
+        return prev;
+      }
+    });
+  }
 
   componentDidMount() {
     this._getUserInfo();
