@@ -2,3 +2,4 @@ node_modules/
 mobile/.expo/
 .expo/
 .*/
+.DS_Store
