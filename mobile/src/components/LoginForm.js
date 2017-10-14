@@ -8,7 +8,7 @@ import Touchable from '@appandflow/touchable';
 
 import { colors, fakeAvatar } from '../utils/constants';
 
-import { Platform, Keyboard, AsyncStorage } from 'react-native';
+import { Platform, Keyboard, AsyncStorage, Alert } from 'react-native';
 
 // graphql
 import LOGIN_MUTATION from '../graphql/mutations/login'
@@ -128,11 +128,17 @@ class LoginForm extends Component {
       });
 
       await AsyncStorage.setItem('@guardianangle', data.login.token);
-      this.setState({ loading: false });
+      // this.setState({ loading: false });
 
       return this.props.login();
     } catch (e) {
-      throw e;
+      console.log("Error": e);
+      Alert.alert(
+        'Something went wrong',
+        e.message
+      )
+    } finally {
+      this.setState({ loading: false });
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Keyboard, AsyncStorage } from 'react-native';
+import { Platform, Keyboard, AsyncStorage, Alert } from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
@@ -133,11 +133,15 @@ class SignupForm extends Component {
       });
 
       await AsyncStorage.setItem('@guardianangle', data.signup.token);
-      this.setState({ loading: false });
-
       return this.props.login();
     } catch (e) {
-      throw e;
+      console.log("Error", e);
+      Alert.alert(
+        'Something went wrong',
+        e.message
+      )
+    } finally {
+      this.setState({ loading: false });
     }
   }
 
