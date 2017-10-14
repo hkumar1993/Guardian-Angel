@@ -26,7 +26,7 @@ if (UIManager.setLayoutAnimationEnabledExperimental) {
 export default class App extends React.Component {
   state = {
     appReady: false
-  };
+  }; 
 
   componentWillMount() {
     this._checkToken();

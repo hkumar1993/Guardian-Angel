@@ -14,12 +14,15 @@ export default `
     _id: ID!
     conversation: ID!
     author: ID!
+    content: String!
   }
 
   type Conversation {
     _id: ID!
     author: User!
     recipient: User!
+    updatedAt: Date!
+    createdAt: Date!
   }
 
   type AreaFollow {
@@ -81,7 +84,7 @@ export default `
   }
 
   type Need {
-    _id: String
+    _id: ID!
     title: String
     description: String
     completed: Boolean
@@ -97,6 +100,7 @@ export default `
     getMessage(_id: ID!): Message
     getConversation(_id: ID!): Conversation
     getUserConversations(_id: ID!): [Conversation]
+    getConversationMessages(_id: ID!): [Message]
     getUserTag(_id: ID!): UserTag
     getNeedTag(_id: ID!): NeedTag
     getUserTags(_id: ID!): [UserTag]
@@ -109,7 +113,7 @@ export default `
     createNeed(title: String!, description: String!): Need
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
-    createConversation(author: ID!, recipient: ID!): Conversation
+    createConversation(recipient: ID!): Conversation
     deleteConversation(_id: ID!): Conversation
     createMessage(conversation: ID!, author: ID!, content: String!): Message
     createUserTag(user: ID!, tag: ID!): UserTag

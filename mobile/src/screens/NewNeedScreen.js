@@ -123,7 +123,9 @@ class NewNeedScreen extends Component {
           title: this.state.title,
           description: this.state.description,
           _id: Math.round(Math.random() - 10000000),
+          completed: false,
           createdAt: new Date(),
+          updatedAt: new Date(),
           user: {
             __typename: 'User',
             _id: user._id,
@@ -131,19 +133,21 @@ class NewNeedScreen extends Component {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            avatar: user.avatar
+            avatar: user.avatar,
+            createdAt: new Date(),
+            updatedAt: new Date(),
           }
         },
       },
 
       // update after submitted the need
-      // update: (store, { data: { createNeed } }) => {
-      //   const data = store.readQuery({ query: GET_NEEDS_QUERY });
-      //
-      //   if(!data.getNeeds.find(need => need._id === createNeed._id)) {
-      //     store.writeQuery({ query: GET_NEEDS_QUERY, data: { getNeeds: [{ ...createNeed }, ...data.getNeeds] } });
-      //   }
-      // }
+      update: (store, { data: { createNeed } }) => {
+        const data = store.readQuery({ query: GET_NEEDS_QUERY });
+
+        if(!data.getNeeds.find(need => need._id === createNeed._id)) {
+          store.writeQuery({ query: GET_NEEDS_QUERY, data: { getNeeds: [{ ...createNeed }, ...data.getNeeds] } });
+        }
+      }
 
     });
 

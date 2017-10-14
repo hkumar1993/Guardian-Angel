@@ -19,7 +19,18 @@ export default {
   getUserConversations: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
-      return Conversation.find({ author: _id }).sort({ createdAt: -1 });
+
+      const authorConversations = await Conversation.find({ author: _id })
+      const recipientConversations = await Conversation.find({ recipient: _id })
+
+      console.log(authorConversations);
+      console.log(recipientConversations);
+      const allConversations = authorConversations.concat(
+        recipientConversations
+      ).sort( (x, y) => x.updatedAt < y.updatedAt );
+
+      // return Conversation.find({ author: _id }).sort({ createdAt: -1 });
+      return allConversations;
     } catch (error) {
       throw error;
     }
@@ -28,17 +39,25 @@ export default {
   createConversation: async (_, args, { user }) => {
     try {
       console.log(args);
-      await requireAuth(user);
-      const conversation = await Conversation.create(args);
+      console.log(args);
 
+      await requireAuth(user);
+      console.log(user);
+
+      const conversation = await Conversation.create(
+        {author: user._id, recipient: args["recipient"]}
+      )
+      console.log(conversation);
       pubsub.publish(CONVERSATION_JOINED, { [CONVERSATION_JOINED]: conversation })
 
-      const author = await User.findOne({ _id: args["author"] });
+      // const conversation = await Conversation.create(args);
+
+      const author = await User.findOne({ _id: user._id })
       const recipient = await User.findOne({ _id: args["recipient"] });
 
-      console.log("author is ", author);
-      console.log("recipient is ", recipient);
-      console.log("conversation is ", conversation._id);
+      // console.log("author is ", author);
+      // console.log("recipient is ", recipient);
+      // console.log("conversation is ", conversation._id);
 
       author["conversations"].push(conversation._id);
       recipient["conversations"].push(conversation._id);

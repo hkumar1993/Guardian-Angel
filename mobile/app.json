@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "twitter-clone-graphql",
-    "description": "An empty new project",
+    "name": "GuardianAngel",
+    "description": "Connect with Guardians and Angels in your area to help those in need",
     "slug": "mobile",
     "privacy": "public",
     "sdkVersion": "19.0.0",

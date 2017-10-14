@@ -73,8 +73,6 @@ class ConversationScreen extends Component {
     }
   }
 
-
-
   render() {
     console.log('conversation props: ', this.props);
     const { data } = this.props
