@@ -6,6 +6,7 @@ import Touchable from '@appandflow/touchable';
 import { colors, angel, shield } from '../../utils/constants';
 import { FontAwesome, SimpleLineIcons, EvilIcons } from '@expo/vector-icons';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import { View } from 'react-native'
 
 const Root = styled.View`
   alignItems: stretch;
@@ -72,6 +73,28 @@ const ButtonText = styled.Text`
   color: white;
 `;
 
+const OfferText = styled.Text`
+  fontSize: 15;
+  color: ${colors.LIGHT_BLUE};
+  alignSelf: flex-end;
+`;
+
+const ShieldImage = styled.Image`
+  alignSelf: flex-end;
+  height: 30;
+  width: 30;
+  position: relative;
+`;
+
+const ShieldText =styled.Text`
+  backgroundColor: rgba(0,0,0,0);
+  width: 100%;
+  position: absolute;
+  top: 22%;
+  left: 22%;
+  color: white;
+  fontWeight: 700;
+`;
 
 class GuardianInfo extends Component {
 
@@ -96,7 +119,18 @@ class GuardianInfo extends Component {
               Offer Service
             </ButtonText>
           </MessageButton>
-
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{marginRight: 10}}>
+              <OfferText>
+                Total Offers
+              </OfferText>
+            </View>
+            <ShieldImage source={{uri: shield}}>
+              <ShieldText>
+                12
+              </ShieldText>
+            </ShieldImage>
+          </View>
         </OfferDetails>
       </Root>
     )
