@@ -27,7 +27,7 @@ export default {
       console.log(recipientConversations);
       const allConversations = authorConversations.concat(
         recipientConversations
-      ).sort( (x, y) => x.updatedAt < y.updatedAt );
+      ).sort( (x, y) => x['updatedAt'] < y['updatedAt'] );
 
       // return Conversation.find({ author: _id }).sort({ createdAt: -1 });
       return allConversations;
