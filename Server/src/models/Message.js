@@ -1,15 +1,17 @@
 import mongoose, { Schema } from "mongoose";
 
 const MessageSchema = new Schema({
-  content: {
+  text: {
     type: String,
     required: true
   },
-  author: {
-    type: Schema.Types.ObjectId
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   },
   conversation: {
-    type: Schema.Types.ObjectId
+    type: Schema.Types.ObjectId,
+    ref: "Conversation"
   }
 }, { timestamps: true }
 );

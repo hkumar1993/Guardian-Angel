@@ -1,5 +1,8 @@
 import Message from "../../models/Message";
 import { requireAuth } from "../../services/auth";
+import { pubsub } from '../../config/pubsub';
+
+const MESSAGE_ADDED = 'messageAdded';
 
 export default {
   getMessage: async (_, { _id }, { user }) => {
@@ -32,7 +35,11 @@ export default {
   createMessage: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return Message.create(args);
+      const message = await Message.create(args);
+
+      pubsub.publish(MESSAGE_ADDED, { [MESSAGE_ADDED]: message })
+
+      return message;
     } catch (error) {
       throw error;
     }
@@ -54,4 +61,7 @@ export default {
       throw error;
     }
   },
+  messageAdded: {
+    subscribe: () => pubsub.asyncIterator(MESSAGE_ADDED)
+  }
 };

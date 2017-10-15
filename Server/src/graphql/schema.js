@@ -12,9 +12,9 @@ export default `
 
   type Message {
     _id: ID!
-    conversation: ID!
-    author: ID!
-    content: String!
+    conversation: Conversation!
+    user: User!
+    text: String!
     createdAt: Date!
   }
 
@@ -119,7 +119,7 @@ export default `
     deleteNeed(_id: ID!): Status
     createConversation(recipient: ID!): Conversation
     deleteConversation(_id: ID!): Conversation
-    createMessage(conversation: ID!, author: ID!, content: String!): Message
+    createMessage(conversation: ID!, user: ID!, text: String!): Message
     createUserTag(user: ID!, tag: ID!): UserTag
     createNeedTag(need: ID!, tag: ID!): NeedTag
     deleteNeedTag(_id: ID!): Status
@@ -131,7 +131,7 @@ export default `
 
   type Subscription {
     needAdded: Need
-    conversationJoined: Conversation
+    messageAdded: Message
   }
 
   schema {

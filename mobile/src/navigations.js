@@ -15,7 +15,7 @@ import NeedScreen from './screens/NeedScreen';
 import ProfileScreenContainer from './screens/ProfileScreenContainer';
 
 import ConversationIndexScreen from './screens/ConversationIndexScreen';
-// import ConversationScreen from './screens/ConversationScreen';
+import ConversationScreen from './screens/ConversationScreen';
 
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
@@ -125,12 +125,12 @@ const AppMainNav = StackNavigator(
       })
     },
 
-    // Conversation: {
-    //   screen: ConversationScreen,
-    //   navigationOptions: ({ navigation }) => ({
-    //     headerTitle: 'UserNameHere'
-    //   })
-    // },
+    Conversation: {
+      screen: ConversationScreen,
+      navigationOptions: ({ navigation }) => ({
+        headerTitle: 'Messages'
+      })
+    },
 
     NewNeed: {
       screen: NewNeedScreen,

@@ -40,7 +40,7 @@ export default {
   },
   Message: {
     conversation: ({ conversation }) => Conversation.findById(conversation),
-    author: ({ author }) => User.findById(author)
+    user: ({ user }) => User.findById(user)
   },
 
   Query: {
@@ -80,6 +80,6 @@ export default {
 
   Subscription: {
     needAdded: NeedResolvers.needAdded,
-    conversationJoined: ConversationResolvers.conversationJoined
+    messageAdded: MessageResolvers.messageAdded
   }
 };

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
+import { graphql, withApollo, compose } from 'react-apollo';
+import { connect } from 'react-redux';
+
 import {
   View,
   AsyncStorage,
@@ -15,26 +18,20 @@ class Conversation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: this.props.messages,
+      user: this.props.user
     }
+    this.giftUser = this.giftUser.bind(this)
   }
 
-  componentWillMount() {
-
+  componentWillReceiveProps(ownProps) {
+    console.log("Hello?", ownProps);
+    console.log("PROPS=======", this.props);
+    const { messages, user } = ownProps
     this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        },
-      ],
-    });
+      messages,
+      user
+    })
   }
 
   componentDidMount() {
@@ -51,9 +48,23 @@ class Conversation extends Component {
     }));
   }
 
+  giftUser(){
+    if (!this.props.user) {return (<View></View>)}
+    return {
+      _id: this.props.user._id,
+      name: this.props.user.firstName + ' ' + this.props.user.lastName,
+      avatar: this.props.user.avatar
+    };
+  }
+
+  _setupMessageObjects() {
+
+  }
+
 
   render() {
-    console.log(this.state);
+    console.log("PROPS Conversation: ", this.props);
+    console.log("STATE Conversation: ", this.state);
     return (
       <View style={styles.container}>
         <View style={styles.giftedChat}>
@@ -63,17 +74,12 @@ class Conversation extends Component {
               // this needs to go to back end later
               this.onSend(messages)
             }}
-            user={{
-              _id: 1,
-            }}
+            user={this.giftUser()}
             />
         </View>
-
       </View>
-
     );
   }
-
 };
 
 const styles = StyleSheet.create({
@@ -86,4 +92,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withNavigation(Conversation)
+export default withApollo(
+  compose(
+    connect(state => {
+      return {
+        user: state.user.info
+      }
+    }, null)
+  )(withNavigation(Conversation))
+);

@@ -4,15 +4,13 @@ import { graphql, withApollo, compose } from 'react-apollo';
 import { ActivityIndicator, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-// import GET_MESSAGES_QUERY from '../graphql/queries/getMessages';
-// import GET_USER_CONVERSATIONS from '../graphql/queries/getUserConversations';
-// import CONVERSATION_JOINED from '../graphql/subscriptions/conversationJoined';
-// import ME_QUERY from '../graphql/queries/me';
+import GET_MESSAGES_QUERY from '../graphql/queries/getConversationMessages';
+import MESSAGE_ADDED_SUBSCRIPTION from '../graphql/subscriptions/messageAdded';
 
-import GET_CONVERSATION_MESSAGES from '../graphql/queries/getConversationMessages';
 import { getUserInfo } from '../actions/user';
-// import Conversation from '../components/Conversation/Conversation';
+import Conversation from '../components/Conversation/Conversation';
 
 const Root = styled.View`
 
@@ -25,22 +23,49 @@ paddingTop: 5;
 `;
 
 class ConversationScreen extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  // componentWillMount() {
+  //   console.log("PROPS Conversation Screen: ", this.props);
+  //   this._getConversationMessages(this.props.conversation._id)
+  // }
+
+  // _getConversationMessages = async (id) => {
+  //   try {
+  //     const { data } = await this.props.client.query({
+  //       query: GET_MESSAGES_QUERY,
+  //       variables: {
+  //         _id: id
+  //       }
+  //     })
+  //     console.log(data);
+  //     return data;
+  //   } catch (e){
+  //     throw e
+  //   }
+  // }
 
   // componentWillMount(){
-  //   console.log(this.props);
+  //   console.log("PROPS ConversationScreen: ", this.props);
   //   this.props.data.subscribeToMore({
-  //     document: CONVERSATION_JOINED,
+  //     document: MESSAGE_ADDED_SUBSCRIPTION,
   //     updateQuery: (prev, { subscriptionData }) => {
+  //       console.log("PREV stuff: ", prev);
+  //       console.log("SUBSCRIPTIONDATA stuff: ", subscriptionData);
   //       if (!subscriptionData.data) {
+  //         console.log("PREV stuff inside check: ", prev);
   //         return prev;
   //       }
   //
-  //       const newConversation = subscriptionData.data.conversationJoined;
+  //       const newMessage = subscriptionData.data.messageAdded;
   //
-  //       if (!prev.getConversations.find(c => c._id === newConversation._id)) {
+  //       // prevent double messages
+  //       if (!prev.getConversationMessages.find(c => c._id === newMessage._id)) {
   //         return {
   //           ...prev,
-  //           getConversations: [{ ...newConversation }, ...prev.getConversations]
+  //           getConversationMessages: [{ ...newMessage }, ...prev.getConversationMessages]
   //         }
   //       }
   //
@@ -49,49 +74,30 @@ class ConversationScreen extends Component {
   //   })
   // }
 
-  componentDidMount() {
-    // this._getUserInfo();
-    // this._getUserConversations(this.props._id)
-  }
-
-  // _getUserInfo = async () => {
-  //   const { data: { me } } = await this.props.client.query({ query: ME_QUERY })
-  //
-  //   this.props.getUserInfo(me);
-  // }
-
-  _getUserConversations = async (user_id) => {
-    try {
-      const { data } = await this.props.client.query({
-        query: GET_USER_CONVERSATIONS,
-        variables: {
-          _id: user_id
-        }
-      })
-      return data
-    } catch (e) {
-      throw e
-    }
-  }
-
   render() {
-    const { data } = this.props
-    if (data.loading) {
+    console.log("PROPS: ConversationScreen", this.props);
+    const messages = this.props.data.getConversationMessages
+
+    if (this.props.data.loading) {
       <Root>
         <ActivityIndicator size="large"/>
       </Root>
     }
+
     return (
-      <Root>
-        <Text>thing is working</Text>
-      </Root>
+      <Conversation messages={messages}/>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return { data: state.apollo.data, user: state.user } ;
-  // return { user: state.user }
-}
-
-export default ConversationScreen
+export default withApollo(
+  compose(
+    connect( (state, ownProps )=> {
+      return {
+        _id: ownProps.navigation.state.params._id
+      }
+    }),
+    graphql(GET_MESSAGES_QUERY)
+  )(withNavigation(ConversationScreen))
+);
+// export default withNavigation(ConversationScreen)

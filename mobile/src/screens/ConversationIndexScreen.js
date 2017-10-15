@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import ConversationIndex from '../components/ConversationIndex/ConversationIndex'
 
 import GET_USER_CONVERSATIONS from '../graphql/queries/getUserConversations';
-// import CONVERSATION_JOINED from '../graphql/subscriptions/conversationJoined';
 
 const Root = styled.View`
 
@@ -51,7 +50,7 @@ class ConversationIndexScreen extends Component {
     }
     return (
       <Root>
-        <ConversationIndex data={data} user={user}/>
+        <ConversationIndex conversationList={data.getUserConversations} user={user}/>
       </Root>
     )
   }

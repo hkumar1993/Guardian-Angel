@@ -17,13 +17,13 @@ class ConversationIndex extends React.Component {
 
   render(){
     console.log('PROPS ConversationIndex', this.props);
-    const { data, user } = this.props;
+    const { data, user, conversationList } = this.props;
     return (
       <FlatList
         contentContainerStyle={{
           alignSelf: 'stretch'
         }}
-        data={data.getUserConversations}
+        data={conversationList}
         extraData={this.state}
         keyExtractor={item => item._id}
         renderItem={this._renderItem}
