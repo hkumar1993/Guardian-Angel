@@ -1,15 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-<<<<<<< HEAD
-  "packagerPid": 1195,
+  "packagerPid": 3201,
   "expoServerNgrokUrl": "https://me-85v.woodentyler.mobile.exp.direct",
   "packagerNgrokUrl": "https://packager.me-85v.woodentyler.mobile.exp.direct",
-  "ngrokPid": 1352
-=======
-  "packagerPid": 38559,
-  "expoServerNgrokUrl": "https://tr-c95.hkumar1993.mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.tr-c95.hkumar1993.mobile.exp.direct",
-  "ngrokPid": 38582
->>>>>>> 4cddd4bcf972faba4c66c068dbef485152088acd
+  "ngrokPid": 3230
 }

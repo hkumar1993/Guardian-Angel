@@ -4,9 +4,6 @@ const AreaSchema = new Schema({
   zipcode: {
     type: Number,
     unique: true
-  },
-  name: {
-    type: String
   }
 });
 

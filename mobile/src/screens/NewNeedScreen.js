@@ -107,7 +107,7 @@ class NewNeedScreen extends Component {
     this.state = {
       title: '',
       description: '',
-      zip: ''
+      area: ''
     }
   }
 
@@ -120,7 +120,7 @@ class NewNeedScreen extends Component {
       fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${GOOGLE_API_KEY}`)
       .then(resp => resp.json())
       .then((responseJson) => {
-        this.setState({zip:responseJson.results[0].address_components[7].short_name})
+        this.setState({area:responseJson.results[0].address_components[7].short_name})
       })
     });
   }
@@ -134,13 +134,14 @@ class NewNeedScreen extends Component {
   }
 
   _handleSubmit = async () => {
-    const { title, description } = this.state;
+    const { title, description, area } = this.state;
     const { user } = this.props;
 
     await this.props.mutate({
       variables: {
         title,
-        description
+        description,
+        area
       },
 
       optimisticResponse: {
@@ -149,6 +150,7 @@ class NewNeedScreen extends Component {
           __typename: 'Need',
           title: this.state.title,
           description: this.state.description,
+          area: this.state.area,
           _id: Math.round(Math.random() - 10000000),
           completed: false,
           createdAt: new Date(),
@@ -197,7 +199,7 @@ class NewNeedScreen extends Component {
           </InputWrapper>
 
           <InputWrapper>
-            <ZipInput value={this.state.zip} onChangeText={value => this._onChangeText(value, 'zip')}/>
+            <ZipInput value={this.state.area} onChangeText={value => this._onChangeText(value, 'area')}/>
           </InputWrapper>
 
           <InputDescription value={this.state.description} onChangeText={value => this._onChangeText(value, 'description')}/>

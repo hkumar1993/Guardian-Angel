@@ -1,4 +1,5 @@
 import Need from "../../models/Need";
+import Area from '../../models/Area';
 import { requireAuth } from "../../services/auth";
 
 import { pubsub } from '../../config/pubsub';
@@ -37,6 +38,11 @@ export default {
     try {
       console.log("ARGS=========", args);
       console.log("user=========", user);
+      let area = Area.find({zipcode: args['area']});
+      if (!area) {
+        area = Area.create({zipcode:args['area']});
+      }
+      args['area'] = area._id;
 
       await requireAuth(user);
       const need = await Need.create({ ...args, user: user._id });
