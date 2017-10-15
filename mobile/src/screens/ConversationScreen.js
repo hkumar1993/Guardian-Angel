@@ -10,6 +10,7 @@ import { Text } from 'react-native';
 // import CONVERSATION_JOINED from '../graphql/subscriptions/conversationJoined';
 // import ME_QUERY from '../graphql/queries/me';
 
+import GET_CONVERSATION_MESSAGES from '../graphql/queries/getConversationMessages';
 import { getUserInfo } from '../actions/user';
 // import Conversation from '../components/Conversation/Conversation';
 
