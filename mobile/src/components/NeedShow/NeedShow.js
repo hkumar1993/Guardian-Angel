@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 import { withNavigation } from 'react-navigation';
+import { connect } from 'react-redux'
 import NeedCardBottom from '../NeedCard/NeedCardBottom';
 import GuardianInfo from './GuardianInfo'
 const Root = styled.View`
@@ -67,10 +68,12 @@ class NeedShow extends React.Component {
           </NeedDescription>
         </NeedContentContainer>
         <NeedCardBottom />
-        <GuardianInfo user={need.user} posted={need.createdAt}/>
+        <GuardianInfo user={need.user} posted={need.createdAt} currentUser={this.props.currentUser}/>
       </Root>
     );
   }
 };
 
-export default withNavigation(NeedShow);
+export default connect( state => ({
+  currentUser: state.user
+}))(withNavigation(NeedShow));
