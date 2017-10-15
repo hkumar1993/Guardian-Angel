@@ -125,11 +125,8 @@ export default `
   }
 
   type Subscription {
-<<<<<<< HEAD
     needAdded: Need
-=======
     conversationJoined: Conversation
->>>>>>> f7224be0437e6e8e021bd943330e5864e965446c
   }
 
   schema {

@@ -75,10 +75,7 @@ export default {
   },
 
   Subscription: {
-<<<<<<< HEAD
-    needAdded: NeedResolvers.needAdded
-=======
+    needAdded: NeedResolvers.needAdded,
     conversationJoined: ConversationResolvers.conversationJoined
->>>>>>> f7224be0437e6e8e021bd943330e5864e965446c
   }
 };
