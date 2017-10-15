@@ -12,6 +12,10 @@ const NeedSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     },
+    area: {
+      type: Schema.Types.ObjectId,
+      ref: "Area"
+    },
     completed: {
       type: Boolean,
       default: false
