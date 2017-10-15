@@ -131,8 +131,9 @@ class GuardianInfo extends Component {
     this.getRequests()
   }
 
-  componentWillReceiveProps(){
-    console.log("NEW PROPS!!");
+  componentWillReceiveProps(newProps){
+    console.log("NEW PROPS!!", newProps);
+    this.getRequests()
   }
 
   getRequests() {
@@ -166,8 +167,9 @@ class GuardianInfo extends Component {
   }
 
   _offerRequest = async () => {
-    const requests = this.state.needRequests.slice(0)
-    this.setState({needRequests: null, requested: true})
+    // const requests = this.state.needRequests.slice(0)
+    // this.setState({needRequests: null, requested: true})
+    this.setState({needRequests: null})
     try {
       console.log("TRYING");
       const _id = this.props._id
@@ -179,8 +181,8 @@ class GuardianInfo extends Component {
           need: this.props._id
         }
       })
-      requests.push(data.createNeedRequest)
-      this.setState({needRequests: requests})
+      // requests.push(data.createNeedRequest)
+      // this.setState({needRequests: requests})
       console.log("DATA", data);
     } catch(e) {
       console.log("error",e);
@@ -188,7 +190,7 @@ class GuardianInfo extends Component {
       return null
     } finally {
       console.log("FINALLY");
-      // this.getRequests()
+      this.getRequests()
     }
   }
 
@@ -207,34 +209,34 @@ class GuardianInfo extends Component {
           </Container>
           <DateText>Posted { distanceInWordsToNow(this.props.posted, {addSuffix:true}) }</DateText>
         </UserDetails>
-        <OfferDetails>
-          <MessageButton style={isCurrentUser ? disabledButton :
-              this.state.requested ? requestedButton : {}}
-            disabled={isCurrentUser ? true : false} onPress={this._offerRequest}>
-            <ButtonText style={isCurrentUser ? disabledButtonText : {}}>
-              { this.state.requested ? 'Offered' : 'Offer Service' }
-            </ButtonText>
-          </MessageButton>
-
-            {
-              this.state.needRequests !== null ? (
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-                  <View style={{marginRight: 10}}>
-                    <OfferText>
-                      Total Offers
-                    </OfferText>
-                  </View>
-                  <ShieldImage source={{uri: shield}}>
-                    <ShieldText>
-                      { this.state.needRequests.length}
-                    </ShieldText>
-                  </ShieldImage>
+        {
+          this.state.needRequests !== null ? (
+            <OfferDetails>
+              <MessageButton style={isCurrentUser ? disabledButton :
+                  this.state.requested ? requestedButton : {}}
+                disabled={isCurrentUser ? true : false} onPress={this._offerRequest}>
+                <ButtonText style={isCurrentUser ? disabledButtonText : {}}>
+                  { this.state.requested ? 'Offered' : 'Offer Service' }
+                </ButtonText>
+              </MessageButton>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{marginRight: 10}}>
+                  <OfferText>
+                    Total Offers
+                  </OfferText>
                 </View>
+                <ShieldImage source={{uri: shield}}>
+                  <ShieldText>
+                    { this.state.needRequests.length}
+                  </ShieldText>
+                </ShieldImage>
+              </View>
+            </OfferDetails>
               ) : (
                 <Loading />
               )
             }
-        </OfferDetails>
+
       </Root>
     )
   }
@@ -246,7 +248,7 @@ const mapStateToProps = ( state, ownProps ) => {
 
 export default withApollo(
   compose(
-    connect(state => ({}), null),
+    connect(state => ({apollo: state.apollo.data}), null),
     graphql(CREATE_NEED_REQUEST),
     graphql(GET_NEED_REQUESTS)
   )(withNavigation(GuardianInfo))
