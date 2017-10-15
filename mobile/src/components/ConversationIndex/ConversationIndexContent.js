@@ -12,7 +12,7 @@ const T = styled.Text`
 
 const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
 
-function MessageIndexContent() {
+function ConversationIndexContent() {
   return (
     <Root>
       <T>{text}</T>
@@ -20,4 +20,4 @@ function MessageIndexContent() {
   )
 }
 
-export default MessageIndexContent;
+export default ConversationIndexContent;

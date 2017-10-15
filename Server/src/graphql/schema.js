@@ -21,6 +21,8 @@ export default `
     _id: ID!
     author: User!
     recipient: User!
+    updatedAt: Date!
+    createdAt: Date!
   }
 
   type AreaFollow {
@@ -91,13 +93,13 @@ export default `
     updatedAt: Date!
   }
 
-
   type Query {
     getNeeds: [Need]
     getNeed(_id: ID!): Need
     getNeedRequest(_id: ID!): [NeedRequest]
     getMessage(_id: ID!): Message
     getConversation(_id: ID!): Conversation
+    getUserConversations(_id: ID!): [Conversation]
     getConversationMessages(_id: ID!): [Message]
     getUserTag(_id: ID!): UserTag
     getNeedTag(_id: ID!): NeedTag
@@ -111,7 +113,8 @@ export default `
     createNeed(title: String!, description: String!): Need
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
-    createConversation(author: ID!, recipient: ID!): Conversation
+    createConversation(recipient: ID!): Conversation
+    deleteConversation(_id: ID!): Conversation
     createMessage(conversation: ID!, author: ID!, content: String!): Message
     createUserTag(user: ID!, tag: ID!): UserTag
     createNeedTag(need: ID!, tag: ID!): NeedTag
@@ -123,6 +126,7 @@ export default `
 
   type Subscription {
     needAdded: Need
+    conversationJoined: Conversation
   }
 
   schema {

@@ -29,7 +29,7 @@ const Avatar = styled.Image`
 
 const avatar = fakeAvatar;
 
-function MessageLeft() {
+function ConversationLeft() {
   return (
     <Root>
      <AvatarContainer>
@@ -39,4 +39,4 @@ function MessageLeft() {
   )
 }
 
-export default MessageLeft;
+export default ConversationLeft;
