@@ -166,7 +166,8 @@ class GuardianInfo extends Component {
   }
 
   _offerRequest = async () => {
-    this.setState({needRequests: null})
+    const requests = this.state.needRequests.slice(0)
+    this.setState({needRequests: null, requested: true})
     try {
       console.log("TRYING");
       const _id = this.props._id
@@ -178,6 +179,8 @@ class GuardianInfo extends Component {
           need: this.props._id
         }
       })
+      requests.push(data.createNeedRequest)
+      this.setState({needRequests: requests})
       console.log("DATA", data);
     } catch(e) {
       console.log("error",e);
@@ -185,7 +188,7 @@ class GuardianInfo extends Component {
       return null
     } finally {
       console.log("FINALLY");
-      this.getRequests()
+      // this.getRequests()
     }
   }
 
