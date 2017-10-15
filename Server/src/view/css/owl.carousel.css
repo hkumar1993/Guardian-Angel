@@ -1,0 +1,586 @@
+/*
+* 	Owl Carousel Owl Demo Theme 
+*	v1.24
+*/
+    #owl-demo .item{
+       margin: 0.5em;
+		transition: 0.5s all;
+		-webkit-transition: 0.5s all;
+		-moz-transition: 0.5s all;
+		-o-transition: 0.5s all;
+		padding: 1em;
+		cursor:pointer;
+    }
+    #owl-demo .item:hover a{
+    	color:#171717;
+    }
+    #owl-demo .item img{
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+.item img,.item a,.item p{
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+}
+.item img:hover,.item a:hover,.item p:hover{
+	opacity:1;
+}
+.owl-theme .owl-controls{
+	margin-top: 10px;
+	text-align: center;
+}
+/*****/
+.carousel{
+	margin: 0 0.7em;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+
+}
+.flexslider .slides img {width: 100%; display: block;}
+/*-----*/
+.caption-info-head-right span{
+	width:20px;
+	height:16px;
+	background:url(../images/arrows.png) no-repeat 0px 0px;
+	display:inline-block;
+	}
+/******/
+
+.group_2_img {
+	text-align:center;
+}
+
+/*****/
+.group_2 {
+	padding:3em 0em 1em 0em;
+	text-align: center;
+}
+
+.group_2_img1 img
+{
+	width:100%;
+}
+div.group_2_img1 {
+	width: 860px;
+	height: 581px;
+	margin-left: -151px;
+}
+/* Styling Next and Prev buttons */
+
+.owl-theme .owl-controls .owl-buttons div{
+	color: #FFF;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+	margin: 5px;
+	height:35px;
+	width:35px;
+	display:block;
+	font-size: 12px;
+}
+/* Clickable class fix problem with hover on touch devices */
+/* Use it for non-touch hover action */
+.owl-theme .owl-controls.clickable .owl-buttons div:hover{
+	text-decoration: none;
+}
+.owl-prev {
+	position: absolute;
+	top:55%;
+	left: -13%;
+	background: url(../images/sprite.png)0px 0px no-repeat;
+}
+.owl-next{
+	position: absolute;
+	top: 58%;
+	right:-12%;
+	background: url(../images/sprite.png) no-repeat -40px 0px;
+}
+/***********************/
+/*****/
+.carousel{
+	margin: 0 10.7em;
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+
+}
+.flexslider .slides img {width: 100%; display: block;}
+/*-----*/
+.caption-info-head-right span{
+	width:20px;
+	height:16px;
+	background:url(../images/arrows.png) no-repeat 0px 0px;
+	display:inline-block;
+	}
+/******/
+.group_1
+{
+	padding: 2em 0em;
+	background: #D43836;
+}
+.group_1_img
+{
+	float:left;
+}
+.group_1_img {
+	float: left;
+}
+.group_1_img img{
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border: 8px solid #3A9ADA;
+}
+.group_1_img .fontend
+{
+	padding: 2.283em 0.4em;
+	font-size: 2.1em;
+	background: #34CF75;
+	color: #FFF;
+	text-shadow: 0px 0px 2px #fff;
+}
+.group_1_img .core
+{
+	padding: 1.75em 1.2em;
+	background: #35AFBA;
+	font-size: 2.5em;
+}
+.group_1_img .ui1
+{
+	padding: 1.5em 1.7em;
+	font-size: 2.8em;
+	color:#FF605F;
+	text-shadow: 0px 0px 2px #FF605F;
+}
+.group_1_text {
+	float: right;
+	width: 70%;
+	margin: 2% 0% 3% 4%;
+}
+.group_1_text h3 {
+	color: #fff;
+	font-size: 1.9em;
+	font-weight: 700;
+}
+.group_1_text p
+{
+	color: #fff;
+	font-size: 1.3em;
+	line-height: 1.9em;
+}
+/*****/
+/*******/
+/* Styling Pagination*/
+
+.owl-theme .owl-controls .owl-page{
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+}
+/* If PaginationNumbers is true */
+
+.owl-theme .owl-controls .owl-page span.owl-numbers{
+	height: auto;
+	width: auto;
+	color: #FFF;
+	padding: 2px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	-o-border-radius: 30px;
+	border-radius: 30px;
+}
+
+/* preloading images */
+.owl-item.loading{
+	min-height: 150px;
+	background: url(AjaxLoader.gif) no-repeat center center
+}
+/* 
+ * 	Core Owl Carousel CSS File
+ *	v1.24
+ */
+/* clearfix */
+.owl-carousel .owl-wrapper:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+/* display none until init */
+.owl-carousel {
+	display: none;
+	position: relative;
+	width: 80%;
+	-ms-touch-action: pan-y;
+	margin: 0 auto;
+}
+.owl-carousel .owl-wrapper{
+	display: none;
+	position: relative;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-wrapper-outer{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	padding: 1.2em 0em;
+	width: 860px;
+	height: 541px;
+	display: inline-block;
+	border-radius: 16px;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	-o-border-radius: 16px;
+}
+.owl-carousel .owl-wrapper-outer.autoHeight{
+	-webkit-transition: height 500ms ease-in-out;
+	-moz-transition: height 500ms ease-in-out;
+	-ms-transition: height 500ms ease-in-out;
+	-o-transition: height 500ms ease-in-out;
+	transition: height 500ms ease-in-out;
+}
+.owl-carousel .owl-item{
+	float: left;
+}
+.owl-controls .owl-page,
+.owl-controls .owl-buttons div{
+	cursor: pointer;
+}
+.owl-controls {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/*******/
+/* mouse grab icon */
+.grabbing { 
+    cursor:url(grabbing.png) 8 8, move;
+}
+
+/* fix */
+.owl-carousel  .owl-wrapper,
+.owl-carousel  .owl-item{
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility:    hidden;
+	-ms-backface-visibility:     hidden;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+}
+
+/* CSS3 Transitions */
+
+.owl-origin {
+	-webkit-perspective: 1200px;
+	-webkit-perspective-origin-x : 50%;
+	-webkit-perspective-origin-y : 50%;
+	-moz-perspective : 1200px;
+	-moz-perspective-origin-x : 50%;
+	-moz-perspective-origin-y : 50%;
+	perspective : 1200px;
+}
+/* fade */
+.owl-fade-out {
+  z-index: 10;
+  -webkit-animation: fadeOut .7s both ease;
+  -moz-animation: fadeOut .7s both ease;
+  animation: fadeOut .7s both ease;
+}
+.owl-fade-in {
+  -webkit-animation: fadeIn .7s both ease;
+  -moz-animation: fadeIn .7s both ease;
+  animation: fadeIn .7s both ease;
+}
+/* backSlide */
+.owl-backSlide-out {
+  -webkit-animation: backSlideOut 1s both ease;
+  -moz-animation: backSlideOut 1s both ease;
+  animation: backSlideOut 1s both ease;
+}
+.owl-backSlide-in {
+  -webkit-animation: backSlideIn 1s both ease;
+  -moz-animation: backSlideIn 1s both ease;
+  animation: backSlideIn 1s both ease;
+}
+/* goDown */
+.owl-goDown-out {
+  -webkit-animation: scaleToFade .7s ease both;
+  -moz-animation: scaleToFade .7s ease both;
+  animation: scaleToFade .7s ease both;
+}
+.owl-goDown-in {
+  -webkit-animation: goDown .6s ease both;
+  -moz-animation: goDown .6s ease both;
+  animation: goDown .6s ease both;
+}
+/* scaleUp */
+.owl-fadeUp-in {
+  -webkit-animation: scaleUpFrom .5s ease both;
+  -moz-animation: scaleUpFrom .5s ease both;
+  animation: scaleUpFrom .5s ease both;
+}
+
+.owl-fadeUp-out {
+  -webkit-animation: scaleUpTo .5s ease both;
+  -moz-animation: scaleUpTo .5s ease both;
+  animation: scaleUpTo .5s ease both;
+}
+/* Keyframes */
+/*empty*/
+@-webkit-keyframes empty {
+  0% {opacity: 1}
+}
+@-moz-keyframes empty {
+  0% {opacity: 1}
+}
+@keyframes empty {
+  0% {opacity: 1}
+}
+@-webkit-keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@-moz-keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@-webkit-keyframes backSlideOut {
+  25% { opacity: .5; -webkit-transform: translateZ(-500px); }
+  75% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); }
+  100% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); }
+}
+@-moz-keyframes backSlideOut {
+  25% { opacity: .5; -moz-transform: translateZ(-500px); }
+  75% { opacity: .5; -moz-transform: translateZ(-500px) translateX(-200%); }
+  100% { opacity: .5; -moz-transform: translateZ(-500px) translateX(-200%); }
+}
+@keyframes backSlideOut {
+  25% { opacity: .5; transform: translateZ(-500px); }
+  75% { opacity: .5; transform: translateZ(-500px) translateX(-200%); }
+  100% { opacity: .5; transform: translateZ(-500px) translateX(-200%); }
+}
+@-webkit-keyframes backSlideIn {
+  0%, 25% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(200%); }
+  75% { opacity: .5; -webkit-transform: translateZ(-500px); }
+  100% { opacity: 1; -webkit-transform: translateZ(0) translateX(0); }
+}
+@-moz-keyframes backSlideIn {
+  0%, 25% { opacity: .5; -moz-transform: translateZ(-500px) translateX(200%); }
+  75% { opacity: .5; -moz-transform: translateZ(-500px); }
+  100% { opacity: 1; -moz-transform: translateZ(0) translateX(0); }
+}
+@keyframes backSlideIn {
+  0%, 25% { opacity: .5; transform: translateZ(-500px) translateX(200%); }
+  75% { opacity: .5; transform: translateZ(-500px); }
+  100% { opacity: 1; transform: translateZ(0) translateX(0); }
+}
+@-webkit-keyframes scaleToFade {
+  to { opacity: 0; -webkit-transform: scale(.8); }
+}
+@-moz-keyframes scaleToFade {
+  to { opacity: 0; -moz-transform: scale(.8); }
+}
+@keyframes scaleToFade {
+  to { opacity: 0; transform: scale(.8); }
+}
+@-webkit-keyframes goDown {
+  from { -webkit-transform: translateY(-100%); }
+}
+@-moz-keyframes goDown {
+  from { -moz-transform: translateY(-100%); }
+}
+@keyframes goDown {
+  from { transform: translateY(-100%); }
+}
+
+@-webkit-keyframes scaleUpFrom {
+  from { opacity: 0; -webkit-transform: scale(1.5); }
+}
+@-moz-keyframes scaleUpFrom {
+  from { opacity: 0; -moz-transform: scale(1.5); }
+}
+@keyframes scaleUpFrom {
+  from { opacity: 0; transform: scale(1.5); }
+}
+
+@-webkit-keyframes scaleUpTo {
+  to { opacity: 0; -webkit-transform: scale(1.5); }
+}
+@-moz-keyframes scaleUpTo {
+  to { opacity: 0; -moz-transform: scale(1.5); }
+}
+@keyframes scaleUpTo {
+  to { opacity: 0; transform: scale(1.5); }
+}
+/******************/
+/*------Start-Media-quries------*/
+/*----start-media-quries-for-1024px-Laptops-----*/
+@media (max-width:1024px){
+	.owl-carousel .owl-wrapper-outer {
+		width: 730px;
+		height: 504px;
+	}
+	div.group_2_img1 {
+		width: 730px;
+		height:504px;
+		margin-left: -143px;
+	}
+	.owl-next {
+		top: 56%;
+	}
+}
+/*----start-media-quries-for-800px-----*/
+@media (max-width:800px){
+	.owl-carousel .owl-wrapper-outer {
+	width: 600px;
+	height: 306px;
+	}
+	div.group_2_img1 {
+		width: 600px;
+		height: 427px;
+		margin-left: -143px;
+	}
+	.owl-next {
+		top: 56%;
+	}
+	.group_2_img1 img{
+		width:84%;
+	}
+	.owl-prev {
+		top: 55%;
+		left: -7%;
+	}
+	
+}
+/*----start-media-quries-for-768px-----*/
+@media (max-width:768px){
+	.owl-carousel .owl-wrapper-outer {
+	width: 600px;
+	height: 306px;
+	}
+	div.group_2_img1 {
+		width: 600px;
+		height: 427px;
+		margin-left: -143px;
+	}
+	.owl-next {
+		top: 56%;
+	}
+	.group_2_img1 img{
+		width:84%;
+	}
+	.owl-prev {
+		top: 55%;
+		left: -7%;
+	}
+	
+}
+/*----//End-media-quries-for-768-----*/
+/*----start-media-quries-for-640-----*/
+@media (max-width:640px){
+	.group_2_img1 img {
+		width: 95%;
+	}
+	.owl-carousel .owl-wrapper-outer {
+		width: 480px;
+		height: 274px;
+	}
+	div.group_2_img1 {
+		width: 480px;
+		height: 274px;
+		margin-left: -152px;
+	}
+	.owl-prev {
+		top: 48%;
+		left: -11%;
+	}
+	.owl-next {
+		top: 48%;
+	}
+}
+/*----//End-media-quries-for-640px-----*/
+/*----start-media-quries-for-480-----*/
+@media (max-width:480px){
+	.group_2_img1 img {
+		width:70%;
+		}
+	.owl-carousel .owl-wrapper-outer {
+		width: 358px;
+		height: 184px;
+	}
+	div.group_2_img1 {
+		width: 358px;
+		height: 184px;
+		margin-left: -152px;
+	}
+	.owl-prev {
+		top: 46%;
+		left: -14%;
+	}
+	.owl-next {
+		top: 46%;
+		right: -61px;
+	}
+
+}
+/*----//End-media-quries-for-480px-----*/
+/*----start-media-quries-for-320-----*/
+@media (max-width:320px){
+	.group_2_img1 img {
+		width:100%;
+		}
+	.owl-carousel {
+		position: relative;
+		width: 72%;
+	}
+	.owl-carousel .owl-wrapper-outer {
+		width: 179px;
+		height: 105px;
+	}
+	div.group_2_img1 {
+		width: 179px;
+		height: 105px;
+	}
+	.owl-prev {
+		top: 41%;
+		left: -19%;
+	}
+	.owl-next {
+		top: 43%;
+		right: -50px;
+	}
+	.group_2 {
+	padding: 0;
+	}
+}
+/*----//End-media-quries-for-320px-----*/
+
