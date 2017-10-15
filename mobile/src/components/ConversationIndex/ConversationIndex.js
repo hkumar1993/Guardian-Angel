@@ -1,54 +1,44 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { withNavigation } from 'react-navigation';
-import Touchable from '@appandflow/touchable';
+import { connect } from 'react-redux';
+import { graphql, withApollo, compose } from 'react-apollo';
 
-import ConversationIndexLeft from './ConversationIndexLeft';
-import ConversationIndexContent from './ConversationIndexContent';
-import ConversationIndexHeader from './ConversationIndexHeader';
+import ConversationIndexItem from './ConversationIndexItem'
+import { ActivityIndicator, FlatList } from 'react-native';
 
+class ConversationIndex extends React.Component {
 
-const Root = styled(Touchable).attrs({
-  feedback: 'opacity'
-})`
-  minHeight: 80;
-  padding: 5px;
-  backgroundColor: white;
-  width: 100%;
-  shadowColor: ${ props => props.theme.LIGHT_BLUE };
-  shadowOffset: 0px 5px;
-  shadowRadius: 2;
-  shadowOpacity: 0.1;
-`;
+  constructor(props) {
+    super(props);
+  }
 
-const ConversationContentContainer = styled.View`
-  flex: 1;
-  flexDirection: row;
-`;
+  _renderItem = (props) => <ConversationIndexItem {...props} user={this.props.user}/>
 
-const AvatarContainer = styled.View`
-  width: 50;
-`;
+  render(){
+    console.log('PROPS ConversationIndex', this.props);
+    const { data, user } = this.props;
+    return (
+      <FlatList
+        contentContainerStyle={{
+          alignSelf: 'stretch'
+        }}
+        data={data.getUserConversations}
+        extraData={this.state}
+        keyExtractor={item => item._id}
+        renderItem={this._renderItem}
+        />
+    )
+  }
+}
 
-const ConversationTextContainer = styled.View`
-  marginLeft: 5;
-`;
+// export default withNavigation(ConversationIndex);
 
-function ConversationIndex(props) {
-  const { navigate } = props.navigation
-  return (
-    <Root onPress={() => navigate('Conversation')} >
-      <ConversationContentContainer>
-        <AvatarContainer >
-          <ConversationIndexLeft />
-        </AvatarContainer>
-        <ConversationTextContainer >
-          <ConversationIndexHeader style={{ width: 20 }}/>
-          <ConversationIndexContent />
-        </ConversationTextContainer>
-      </ConversationContentContainer>
-    </Root>
-  );
-};
-
-export default withNavigation(ConversationIndex);
+export default withApollo(compose(
+  connect( state => {
+            return {
+              user: state.user,
+              _id: state.user.info._id
+            }
+          }, null)
+)(withNavigation(ConversationIndex)));
