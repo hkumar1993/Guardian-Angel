@@ -36,13 +36,20 @@ export default {
 
   createNeed: async (_, args, { user }) => {
     try {
-      console.log("ARGS=========", args);
-      console.log("user=========", user);
-      let area = Area.find({zipcode: args['area']});
+      // console.log("ARGS=========", args);
+      // console.log("user=========", user);
+      // console.log("AREA args========",args['area']);
+      // console.log(Need.find({}).sort({ createdAt: -1 }));
+      let area = await Area.findOne({zipcode: args['area']});
+      console.log("AREA========",area);
       if (!area) {
-        area = Area.create({zipcode:args['area']});
+        console.log("could not find area");
+        area = await Area.create({zipcode:args['area']});
       }
+      // console.log("AREA========",Area.find({}));
+      console.log("AREA========",area._id);
       args['area'] = area._id;
+      console.log("args area",args['area']);
 
       await requireAuth(user);
       const need = await Need.create({ ...args, user: user._id });
