@@ -56,6 +56,8 @@ export default {
     getNeedTags: NeedTagResolvers.getNeedTags,
     getUserNeeds: NeedResolvers.getUserNeeds,
     getNeedRequest: NeedRequestResolvers.getNeedRequest,
+    getNeedRequests: NeedRequestResolvers.getNeedRequests,
+    getUserRequests: NeedRequestResolvers.getUserRequests,
     me: UserResolvers.me
   },
 
@@ -70,6 +72,7 @@ export default {
     deleteNeedTag: NeedTagResolvers.deleteNeedTag,
     updateNeed: NeedResolvers.updateNeed,
     deleteNeed: NeedResolvers.deleteNeed,
+    createNeedRequest: NeedRequestResolvers.createNeedRequest,
     signup: UserResolvers.signup,
     login: UserResolvers.login
   },
