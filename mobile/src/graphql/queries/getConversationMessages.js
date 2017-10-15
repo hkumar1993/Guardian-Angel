@@ -21,7 +21,3 @@ export default gql`
     }
   }
 `;
-
-_id: ID!
-conversation: ID!
-author: ID!
