@@ -3,9 +3,10 @@ import styled from 'styled-components/native';
 import { withNavigation } from 'react-navigation';
 import Touchable from '@appandflow/touchable';
 
-import MessageIndexLeft from './MessageIndexLeft';
-import MessageIndexContent from './MessageIndexContent';
-import MessageIndexHeader from './MessageIndexHeader';
+import ConversationIndexLeft from './ConversationIndexLeft';
+import ConversationIndexContent from './ConversationIndexContent';
+import ConversationIndexHeader from './ConversationIndexHeader';
+
 
 const Root = styled(Touchable).attrs({
   feedback: 'opacity'
@@ -20,7 +21,7 @@ const Root = styled(Touchable).attrs({
   shadowOpacity: 0.1;
 `;
 
-const MessageContentContainer = styled.View`
+const ConversationContentContainer = styled.View`
   flex: 1;
   flexDirection: row;
 `;
@@ -29,25 +30,25 @@ const AvatarContainer = styled.View`
   width: 50;
 `;
 
-const MessageTextContainer = styled.View`
+const ConversationTextContainer = styled.View`
   marginLeft: 5;
 `;
 
-function MessageIndex(props) {
+function ConversationIndex(props) {
   const { navigate } = props.navigation
   return (
     <Root onPress={() => navigate('Conversation')} >
-      <MessageContentContainer>
+      <ConversationContentContainer>
         <AvatarContainer >
-          <MessageIndexLeft />
+          <ConversationIndexLeft />
         </AvatarContainer>
-        <MessageTextContainer >
-          <MessageIndexHeader style={{ width: 20 }}/>
-          <MessageIndexContent />
-        </MessageTextContainer>
-      </MessageContentContainer>
+        <ConversationTextContainer >
+          <ConversationIndexHeader style={{ width: 20 }}/>
+          <ConversationIndexContent />
+        </ConversationTextContainer>
+      </ConversationContentContainer>
     </Root>
   );
 };
 
-export default withNavigation(MessageIndex);
+export default withNavigation(ConversationIndex);

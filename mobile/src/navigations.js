@@ -13,8 +13,10 @@ import { colors } from './utils/constants';
 import HomeScreen from './screens/HomeScreen';
 import NeedScreen from './screens/NeedScreen';
 import ProfileScreenContainer from './screens/ProfileScreenContainer';
-import MessagesScreen from './screens/MessagesScreen';
-import ConversationScreen from './screens/ConversationScreen';
+
+import ConversationIndexScreen from './screens/ConversationIndexScreen';
+// import ConversationScreen from './screens/ConversationScreen';
+
 import DashboardScreen from './screens/DashboardScreen';
 import MapScreen from './screens/MapScreen';
 import AuthenticationScreen from './screens/AuthenticationScreen';
@@ -51,8 +53,8 @@ const Tabs = TabNavigator(
       })
     },
 
-    Messages: {
-      screen: MessagesScreen,
+    ConversationIndex: {
+      screen: ConversationIndexScreen,
       navigationOptions: () => ({
         headerTitle: 'Messages',
         tabBarIcon: ({ tintColor }) => (
@@ -123,12 +125,12 @@ const AppMainNav = StackNavigator(
       })
     },
 
-    Conversation: {
-      screen: ConversationScreen,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: 'UserNameHere'
-      })
-    },
+    // Conversation: {
+    //   screen: ConversationScreen,
+    //   navigationOptions: ({ navigation }) => ({
+    //     headerTitle: 'UserNameHere'
+    //   })
+    // },
 
     NewNeed: {
       screen: NewNeedScreen,
