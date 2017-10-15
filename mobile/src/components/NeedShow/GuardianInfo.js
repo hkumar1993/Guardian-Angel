@@ -110,9 +110,15 @@ const disabledButton = {
   backgroundColor: `rgba(0,0,0,0.2)`
 }
 
+const requestedButton = {
+  backgroundColor: colors.DARK_BLUE,
+  shadowOpacity: 0
+}
+
 const disabledButtonText = {
   color: `rgba(255,255,255,0.2)`
 }
+
 
 class GuardianInfo extends Component {
 
@@ -138,6 +144,7 @@ class GuardianInfo extends Component {
         res.getNeedRequests.forEach(needRequest => {
           requested = requested || needRequest.user._id === this.props.currentUser.info._id
         })
+        console.log("SETTING STATE");
         this.setState({needRequests: res.getNeedRequests, requested})
       }
     )
@@ -198,9 +205,11 @@ class GuardianInfo extends Component {
           <DateText>Posted { distanceInWordsToNow(this.props.posted, {addSuffix:true}) }</DateText>
         </UserDetails>
         <OfferDetails>
-          <MessageButton style={isCurrentUser ? disabledButton : {}} disabled={isCurrentUser ? true : false} onPress={this._offerRequest}>
+          <MessageButton style={isCurrentUser ? disabledButton :
+              this.state.requested ? requestedButton : {}}
+            disabled={isCurrentUser ? true : false} onPress={this._offerRequest}>
             <ButtonText style={isCurrentUser ? disabledButtonText : {}}>
-              Offer Service
+              { this.state.requested ? 'Offered' : 'Offer Service' }
             </ButtonText>
           </MessageButton>
 
