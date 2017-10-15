@@ -132,7 +132,7 @@ class LoginForm extends Component {
         }
       });
 
-      await AsyncStorage.setItem('@guardianangle', data.login.token);
+      await AsyncStorage.setItem('@guardian_angel', data.login.token);
       this.setState({ loading: false });
 
       return this.props.login();

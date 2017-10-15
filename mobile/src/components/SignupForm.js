@@ -137,7 +137,7 @@ class SignupForm extends Component {
         }
       });
 
-      await AsyncStorage.setItem('@guardianangle', data.signup.token);
+      await AsyncStorage.setItem('@guardian_angel', data.signup.token);
       this.setState({ loading: false });
 
       return this.props.login();

@@ -25,7 +25,7 @@ networkInterface.use([
       }
 
       try {
-        const token = await AsyncStorage.getItem('@guardianangle');
+        const token = await AsyncStorage.getItem('@guardian_angel');
         if (token != null) {
           req.options.headers.authorization = `Bearer ${token}` || null;
         }
