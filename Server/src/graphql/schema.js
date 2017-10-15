@@ -89,6 +89,7 @@ export default `
     title: String
     description: String
     completed: Boolean
+    area: Area!
     user: User!
     createdAt: Date!
     updatedAt: Date!
@@ -114,7 +115,7 @@ export default `
   }
 
   type Mutation {
-    createNeed(title: String!, description: String!): Need
+    createNeed(title: String!, description: String!, area: Int!): Need
     updateNeed(_id: ID!, description: String, completed: Boolean): Need
     deleteNeed(_id: ID!): Status
     createConversation(recipient: ID!): Conversation

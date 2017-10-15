@@ -34,7 +34,7 @@ const CardContentText = styled.Text`
 
 // const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut'
 
-function NeedCard({item, item: { title, description, user, createdAt }, navigation}) {
+function NeedCard({item, item: { title, description, user, area, createdAt }, navigation}) {
     const headInfo = {
       need: item,
       title,
@@ -49,7 +49,7 @@ function NeedCard({item, item: { title, description, user, createdAt }, navigati
             {description}
           </CardContentText>
         </CardContentContainer>
-        <NeedCardBottom />
+        <NeedCardBottom area={area} />
       </Root>
     );
 };

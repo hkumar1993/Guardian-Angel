@@ -64,7 +64,7 @@ const isFavorited = false;
 const location = 94114;
 const tag = 'housing'
 
-function NeedCardBottom() {
+function NeedCardBottom({area}) {
   return (
     <Root>
       <InfoContainer>
@@ -77,7 +77,7 @@ function NeedCardBottom() {
             />
           <Button>
             <ButtonText>
-              { location }
+              { area.zipcode }
             </ButtonText>
           </Button>
         </ZipCode>
