@@ -11,6 +11,7 @@ const MessageSchema = new Schema({
   conversation: {
     type: Schema.Types.ObjectId
   }
-});
+}, { timestamps: true }
+);
 
 export default mongoose.model("Message", MessageSchema);

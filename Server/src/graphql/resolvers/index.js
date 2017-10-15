@@ -50,6 +50,7 @@ export default {
     getUserConversations: ConversationResolvers.getUserConversations,
     getConversationMessages: MessageResolvers.getConversationMessages,
     getMessage: MessageResolvers.getMessage,
+    getLastMessage: MessageResolvers.getLastMessage,
     getUserTag: UserTagResolvers.getUserTag,
     getNeedTag: NeedTagResolvers.getNeedTag,
     getUserTags: UserTagResolvers.getUserTags,
