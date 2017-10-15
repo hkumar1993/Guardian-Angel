@@ -20,8 +20,6 @@ class Conversation extends Component {
   }
 
   componentWillMount() {
-    console.log('hi');
-    console.log(this.props);
 
     this.setState({
       messages: [

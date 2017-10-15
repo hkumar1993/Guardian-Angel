@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Keyboard, AsyncStorage } from 'react-native';
+import { Platform, Keyboard, AsyncStorage, Alert } from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 

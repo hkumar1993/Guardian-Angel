@@ -11,6 +11,15 @@ export default {
     }
   },
 
+  getLastMessage: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+      return Message.findOne({ conversation: _id }).sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getConversationMessages: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
@@ -19,15 +28,6 @@ export default {
       throw error;
     }
   },
-
-  // getMessages: async (_, { _id }, { user }) => {
-  //   try {
-  //     await requireAuth(user);
-  //     return Message.find({ user: _id }).sort({ createdAt: -1 });
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // },
 
   createMessage: async (_, args, { user }) => {
     try {

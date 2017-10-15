@@ -8,7 +8,7 @@ import Touchable from '@appandflow/touchable';
 
 import { colors, fakeAvatar } from '../utils/constants';
 
-import { Platform, Keyboard, AsyncStorage } from 'react-native';
+import { Platform, Keyboard, AsyncStorage, Alert } from 'react-native';
 
 // graphql
 import LOGIN_MUTATION from '../graphql/mutations/login'

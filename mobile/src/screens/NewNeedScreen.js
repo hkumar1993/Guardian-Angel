@@ -114,7 +114,9 @@ class NewNeedScreen extends Component {
   _onChangeText = (value, type) => this.setState({ [type]: value });
 
   componentWillMount() {
+    console.log('=-=-=-=-=-=-=-=-==');
     navigator.geolocation.getCurrentPosition(position => {
+      console.log('position was ', position);
       fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${GOOGLE_API_KEY}`)
       .then(resp => resp.json())
       .then((responseJson) => {
