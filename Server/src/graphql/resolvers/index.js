@@ -16,7 +16,8 @@ import Conversation from "../../models/Conversation";
 export default {
   Date: GraphQLDate,
   Need: {
-    user: ({ user }) => User.findById(user)
+    user: ({ user }) => User.findById(user),
+    area: ({ area }) => Area.find({zipcode: area})
   },
   UserTag: {
     user: ({ user }) => User.findById(user),
