@@ -68,7 +68,7 @@ class NeedShow extends React.Component {
           </NeedDescription>
         </NeedContentContainer>
         <NeedCardBottom />
-        <GuardianInfo user={need.user} posted={need.createdAt} currentUser={this.props.currentUser}/>
+        <GuardianInfo need={need} user={need.user} posted={need.createdAt} currentUser={this.props.currentUser} _id={need._id}/>
       </Root>
     );
   }

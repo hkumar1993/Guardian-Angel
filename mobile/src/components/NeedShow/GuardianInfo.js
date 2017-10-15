@@ -7,6 +7,14 @@ import { colors, angel, shield } from '../../utils/constants';
 import { FontAwesome, SimpleLineIcons, EvilIcons } from '@expo/vector-icons';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import { View } from 'react-native'
+import Loading from '../Loading'
+
+import { graphql, compose, withApollo } from 'react-apollo';
+import { connect } from 'react-redux';
+
+import { GET_NEED_REQUESTS } from '../../graphql/queries/getRequests'
+import CREATE_NEED_REQUEST from '../../graphql/mutations/createNeedRequest'
+
 
 const Root = styled.View`
   alignItems: stretch;
@@ -84,26 +92,102 @@ const ShieldImage = styled.Image`
   height: 30;
   width: 30;
   position: relative;
+  flexDirection: row;
+  justifyContent: center;
+  alignItems: center;
 `;
 
 const ShieldText =styled.Text`
   backgroundColor: rgba(0,0,0,0);
   width: 100%;
-  position: absolute;
-  top: 22%;
-  left: 22%;
+  textAlign: center;
+  alignSelf: center;
   color: white;
   fontWeight: 700;
 `;
+
+const disabledButton = {
+  backgroundColor: `rgba(0,0,0,0.2)`
+}
+
+const disabledButtonText = {
+  color: `rgba(255,255,255,0.2)`
+}
 
 class GuardianInfo extends Component {
 
   constructor(props){
     super(props)
+    this.state = { needRequests: null, requested: null }
+  }
+
+  componentWillMount(){
+    this.getRequests()
+  }
+
+  componentWillReceiveProps(){
+    console.log("NEW PROPS!!");
+  }
+
+  getRequests() {
+    console.log("IN HERE!!");
+    this._getNeedRequests(this.props._id).
+      then(res => {
+        console.log("RES", res);
+        let requested = false
+        res.getNeedRequests.forEach(needRequest => {
+          requested = requested || needRequest.user._id === this.props.currentUser.info._id
+        })
+        this.setState({needRequests: res.getNeedRequests, requested})
+      }
+    )
+  }
+
+  _getNeedRequests = async (id) => {
+    console.log("IN HERE NOW!!");
+    try {
+      const { data } = await this.props.client.query({
+        query: GET_NEED_REQUESTS,
+        variables: {
+          _id: id
+        }
+      })
+      return data
+    } catch (e) {
+      return null
+    }
+  }
+
+  _offerRequest = async () => {
+    this.setState({needRequests: null})
+    try {
+      console.log("TRYING");
+      const _id = this.props._id
+      const user = this.props.currentUser.info
+      const need = this.props.need
+      const { data } = await this.props.mutate({
+        variables: {
+          user: this.props.currentUser.info._id,
+          need: this.props._id
+        }
+      })
+      console.log("DATA", data);
+    } catch(e) {
+      console.log("error",e);
+      console.log("failed");
+      return null
+    } finally {
+      console.log("FINALLY");
+      this.getRequests()
+    }
   }
 
   render() {
     const user = this.props.user
+    const currentUser = this.props.currentUser.info
+    const isCurrentUser = user.username === currentUser.username
+    console.log("Info Props",this.props);
+    console.log("Info State",this.state);
     return (
       <Root>
         <UserDetails>
@@ -114,27 +198,44 @@ class GuardianInfo extends Component {
           <DateText>Posted { distanceInWordsToNow(this.props.posted, {addSuffix:true}) }</DateText>
         </UserDetails>
         <OfferDetails>
-          <MessageButton>
-            <ButtonText>
+          <MessageButton style={isCurrentUser ? disabledButton : {}} disabled={isCurrentUser ? true : false} onPress={this._offerRequest}>
+            <ButtonText style={isCurrentUser ? disabledButtonText : {}}>
               Offer Service
             </ButtonText>
           </MessageButton>
-          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-            <View style={{marginRight: 10}}>
-              <OfferText>
-                Total Offers
-              </OfferText>
-            </View>
-            <ShieldImage source={{uri: shield}}>
-              <ShieldText>
-                12
-              </ShieldText>
-            </ShieldImage>
-          </View>
+
+            {
+              this.state.needRequests !== null ? (
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={{marginRight: 10}}>
+                    <OfferText>
+                      Total Offers
+                    </OfferText>
+                  </View>
+                  <ShieldImage source={{uri: shield}}>
+                    <ShieldText>
+                      { this.state.needRequests.length}
+                    </ShieldText>
+                  </ShieldImage>
+                </View>
+              ) : (
+                <Loading />
+              )
+            }
         </OfferDetails>
       </Root>
     )
   }
 }
 
-export default withNavigation(GuardianInfo)
+const mapStateToProps = ( state, ownProps ) => {
+  console.log
+}
+
+export default withApollo(
+  compose(
+    connect(state => ({}), null),
+    graphql(CREATE_NEED_REQUEST),
+    graphql(GET_NEED_REQUESTS)
+  )(withNavigation(GuardianInfo))
+)
