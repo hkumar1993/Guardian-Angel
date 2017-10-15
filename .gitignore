@@ -4,3 +4,4 @@ mobile/.expo/
 .expo/
 .*/
 .env
+.DS_Store

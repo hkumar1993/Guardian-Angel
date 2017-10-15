@@ -72,6 +72,10 @@ const ButtonConfirmText = styled.Text`
   fontWeight: 600;
 `;
 
+const ErrorText = styled.Text`
+  color: rgb(193, 29, 42);
+`;
+
 
 const InputWrapper = styled.View`
   height: 50;
@@ -97,7 +101,8 @@ class LoginForm extends Component {
     fullName: '',
     email: '',
     password: '',
-    username: ''
+    username: '',
+    errors: []
   }
 
   _onChangeForm = (value, type) => this.setState({ [type]: value });
@@ -127,18 +132,16 @@ class LoginForm extends Component {
         }
       });
 
-      await AsyncStorage.setItem('@guardianangle', data.login.token);
-      // this.setState({ loading: false });
+      await AsyncStorage.setItem('@guardian_angel', data.login.token);
+      this.setState({ loading: false });
 
       return this.props.login();
     } catch (e) {
-      console.log("Error": e);
-      Alert.alert(
-        'Something went wrong',
-        e.message
-      )
-    } finally {
-      this.setState({ loading: false });
+      const errors = [];
+      e["graphQLErrors"].forEach(error => {
+          errors.push(error['message']);
+      });
+      this.setState({ loading: false, errors });
     }
   }
 
@@ -147,6 +150,7 @@ class LoginForm extends Component {
       return <Loading />;
     }
 
+
     return (
       <Root onPress={this._keyBoardDismiss}>
         <BackButton onPress={this.props.onBackPress}>
@@ -154,6 +158,7 @@ class LoginForm extends Component {
         </BackButton>
 
         <Wrapper>
+        {this.state.errors.length > 0 ? this.state.errors.map((e,i) => <ErrorText key={i}>{e}</ErrorText>) : null}
 
           <InputWrapper>
             <Input

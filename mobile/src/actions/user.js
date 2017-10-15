@@ -16,7 +16,7 @@ export function getUserInfo(info) {
 export function logout() {
   return async (dispatch) => {
     try {
-      await AsyncStorage.removeItem('@guardianangle');
+      await AsyncStorage.removeItem('@guardian_angel');
       return dispatch({
         type: 'LOG_OUT'
       })

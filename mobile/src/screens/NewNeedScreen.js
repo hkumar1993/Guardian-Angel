@@ -126,6 +126,7 @@ class NewNeedScreen extends Component {
           completed: false,
           createdAt: new Date(),
           updatedAt: new Date(),
+
           user: {
             __typename: 'User',
             _id: user._id,

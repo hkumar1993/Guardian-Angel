@@ -3,12 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import {
-  SubscriptionClient,
-  addGraphQLSubscriptions
-} from 'subscriptions-transport-ws';
-// npm install subscriptions-transport-ws
-
+import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
 import { AsyncStorage } from 'react-native';
 
 import reducers from './reducers';
@@ -20,7 +15,7 @@ const networkInterface = createNetworkInterface({
 const wsClient = new SubscriptionClient('ws://localhost:3000/subscriptions', {
   reconnect: true,
   connectionParams: {}
-});
+})
 
 networkInterface.use([
   {
@@ -30,7 +25,7 @@ networkInterface.use([
       }
 
       try {
-        const token = await AsyncStorage.getItem('@guardianangle');
+        const token = await AsyncStorage.getItem('@guardian_angel');
         if (token != null) {
           req.options.headers.authorization = `Bearer ${token}` || null;
         }
