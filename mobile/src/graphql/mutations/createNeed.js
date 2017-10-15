@@ -7,7 +7,10 @@ export default gql`
       _id
       title
       description
-      area
+      area {
+        _id
+        zipcode
+      }
       completed
       createdAt
       updatedAt

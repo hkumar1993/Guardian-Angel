@@ -150,7 +150,11 @@ class NewNeedScreen extends Component {
           __typename: 'Need',
           title: this.state.title,
           description: this.state.description,
-          area: this.state.area,
+          area: {
+            __typename: 'Area',
+            _id: Math.round(Math.random() - 10000000),
+            zipcode: this.state.area
+          },
           _id: Math.round(Math.random() - 10000000),
           completed: false,
           createdAt: new Date(),

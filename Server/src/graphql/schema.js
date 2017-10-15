@@ -89,7 +89,7 @@ export default `
     title: String
     description: String
     completed: Boolean
-    area: ID!
+    area: Area!
     user: User!
     createdAt: Date!
     updatedAt: Date!
