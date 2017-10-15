@@ -13,12 +13,10 @@ const T = styled.Text`
   color: ${props => props.theme.LIGHT_BLUE}
 `;
 
-const user = 'User123'
-
-function ConversationIndexHeader() {
+function ConversationIndexHeader({ name }) {
   return (
     <Root>
-      <T>{user}</T>
+      <T>{name}</T>
     </Root>
   )
 }
