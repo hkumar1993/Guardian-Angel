@@ -15,6 +15,7 @@ export default `
     conversation: ID!
     author: ID!
     content: String!
+    createdAt: Date!
   }
 
   type Conversation {
@@ -98,6 +99,7 @@ export default `
     getNeed(_id: ID!): Need
     getNeedRequest(_id: ID!): [NeedRequest]
     getMessage(_id: ID!): Message
+    getLastMessage(_id: ID!): Message
     getConversation(_id: ID!): Conversation
     getUserConversations(_id: ID!): [Conversation]
     getConversationMessages(_id: ID!): [Message]
