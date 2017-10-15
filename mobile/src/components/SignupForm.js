@@ -92,12 +92,17 @@ const Input = styled.TextInput.attrs({
   color: ${props => props.theme.LIGHT_PINK}
 `;
 
+const ErrorText = styled.Text`
+  color: rgb(193, 29, 42);
+`;
+
 class SignupForm extends Component {
   state = {
     fullName: '',
     email: '',
     password: '',
-    username: ''
+    username: '',
+    errors: []
   }
 
   _onChangeForm = (value, type) => this.setState({ [type]: value });
@@ -132,12 +137,16 @@ class SignupForm extends Component {
         }
       });
 
-      await AsyncStorage.setItem('@guardianangle', data.signup.token);
+      await AsyncStorage.setItem('@guardian_angel', data.signup.token);
       this.setState({ loading: false });
 
       return this.props.login();
     } catch (e) {
-      throw e;
+      const errors = [];
+      e["graphQLErrors"].forEach(error => {
+          errors.push(error['message']);
+      });
+      this.setState({ loading: false, errors });
     }
   }
 
@@ -153,6 +162,7 @@ class SignupForm extends Component {
         </BackButton>
 
         <Wrapper>
+          {this.state.errors.length > 0 ? this.state.errors.map((e,i) => <ErrorText key={i}>{e}</ErrorText>) : null}
 
           <InputWrapper>
             <Input

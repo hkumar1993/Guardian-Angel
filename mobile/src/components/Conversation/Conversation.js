@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { withNavigation } from 'react-navigation';
 import {
   View,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
 import Dimensions from 'Dimensions';
-import { GiftedChat } from 'react-native-gifted-chat';
-import io from 'socket.io-client';
 
 import ConversationMessage from './ConversationMessage';
-const API_URL = 'http://localhost:3000/graphiql';
 
 
 class Conversation extends Component {
@@ -23,8 +21,7 @@ class Conversation extends Component {
 
   componentWillMount() {
     console.log('hi');
-
-
+    console.log(this.props);
 
     this.setState({
       messages: [
@@ -55,8 +52,6 @@ class Conversation extends Component {
       messages: GiftedChat.append(previousState.messages, messages),
     }));
   }
-
-
 
 
   render() {
@@ -93,4 +88,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Conversation;
+export default withNavigation(Conversation)

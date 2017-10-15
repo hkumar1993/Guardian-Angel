@@ -15,7 +15,7 @@ const T = styled.Text`
 
 const user = 'User123'
 
-function MessageIndexHeader() {
+function ConversationIndexHeader() {
   return (
     <Root>
       <T>{user}</T>
@@ -23,4 +23,4 @@ function MessageIndexHeader() {
   )
 }
 
-export default MessageIndexHeader;
+export default ConversationIndexHeader;
