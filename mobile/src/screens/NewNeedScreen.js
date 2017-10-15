@@ -7,7 +7,7 @@ import { Platform, Keyboard } from 'react-native';
 
 import Touchable from '@appandflow/touchable';
 
-import { colors } from '../utils/constants';
+import { GOOGLE_API_KEY, colors } from '../utils/constants';
 
 // graphql
 import CREATE_NEED_MUTATION from '../graphql/mutations/createNeed';
@@ -57,6 +57,15 @@ const Input = styled.TextInput.attrs({
   height: 30;
   color: ${props => props.theme.LIGHT_BLUE}
 `;
+const ZipInput = styled.TextInput.attrs({
+  placeholderTextColor: colors.LIGHT_GREY,
+  placeholder: 'Zip ...',
+  selectionColor: Platform.OS === 'ios' ? colors.TAG_BLUE : undefined,
+  autoCorrect: false
+})`
+  height: 30;
+  color: ${props => props.theme.LIGHT_BLUE}
+`;
 
 
 
@@ -93,27 +102,46 @@ const TextLength = styled.Text`
 
 
 class NewNeedScreen extends Component {
-  state = {
-    title: '',
-    description: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+      area: ''
+    }
+  }
 
   _onChangeText = (value, type) => this.setState({ [type]: value });
 
+  componentWillMount() {
+    console.log('=-=-=-=-=-=-=-=-==');
+    navigator.geolocation.getCurrentPosition(position => {
+      console.log('position was ', position);
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=${GOOGLE_API_KEY}`)
+      .then(resp => resp.json())
+      .then((responseJson) => {
+        this.setState({area:responseJson.results[0].address_components[7].short_name})
+      })
+    });
+  }
 
+  componentDidUpdate() {
+    console.log('component updated, state is ', this.state);
+  }
 
   descriptionLength() {
     return 200 - this.state.description.length;
   }
 
   _handleSubmit = async () => {
-    const { title, description } = this.state;
+    const { title, description, area } = this.state;
     const { user } = this.props;
 
     await this.props.mutate({
       variables: {
         title,
-        description
+        description,
+        area
       },
 
       optimisticResponse: {
@@ -122,6 +150,7 @@ class NewNeedScreen extends Component {
           __typename: 'Need',
           title: this.state.title,
           description: this.state.description,
+          area: this.state.area,
           _id: Math.round(Math.random() - 10000000),
           completed: false,
           createdAt: new Date(),
@@ -167,6 +196,10 @@ class NewNeedScreen extends Component {
 
           <InputWrapper>
             <Input value={this.state.title} onChangeText={value => this._onChangeText(value, 'title')}/>
+          </InputWrapper>
+
+          <InputWrapper>
+            <ZipInput value={this.state.area} onChangeText={value => this._onChangeText(value, 'area')}/>
           </InputWrapper>
 
           <InputDescription value={this.state.description} onChangeText={value => this._onChangeText(value, 'description')}/>
