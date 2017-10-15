@@ -1,24 +1,19 @@
 /* eslint-disable no-console */
 
-import express from 'express';
+import express from "express";
 
-import { createServer } from 'http';
-import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
-// npm install subscriptions-transport-ws
-// npm add graphql-subscriptions
+import { createServer } from "http";
+import { graphiqlExpress, graphqlExpress } from "apollo-server-express";
+import { makeExecutableSchema } from "graphql-tools";
+import { SubscriptionServer } from 'subscriptions-transport-ws'
+import { execute, subscribe } from 'graphql'
 
-import { execute, subscribe } from 'graphql';
-
-// import constants from './constants';
-import typeDefs from './graphql/schema';
-import resolvers from './graphql/resolvers';
-
-import './config/db';
-import constants from './config/constants';
-import middlewares from './config/middlewares';
-import mocks from './mocks';
+import "./config/db";
+import typeDefs from "./graphql/schema";
+import resolvers from "./graphql/resolvers";
+import constants from "./config/constants";
+import middlewares from "./config/middlewares";
+import mocks from "./mocks";
 
 const app = express();
 
