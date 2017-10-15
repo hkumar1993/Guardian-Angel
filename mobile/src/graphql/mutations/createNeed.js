@@ -2,11 +2,15 @@ import { gql } from 'react-apollo';
 
 
 export default gql`
-  mutation createNeed($title: String!, $description: String!) {
-    createNeed(title: $title, description: $description) {
+  mutation createNeed($title: String!, $description: String!, $area: Int!) {
+    createNeed(title: $title, description: $description, area: $area) {
       _id
       title
       description
+      area {
+        _id
+        zipcode
+      }
       completed
       createdAt
       updatedAt
