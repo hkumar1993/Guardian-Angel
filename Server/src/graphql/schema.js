@@ -98,6 +98,8 @@ export default `
     getNeeds: [Need]
     getNeed(_id: ID!): Need
     getNeedRequest(_id: ID!): [NeedRequest]
+    getNeedRequests(_id: ID!): [NeedRequest]
+    getUserRequests(_id: ID!): [NeedRequest]
     getMessage(_id: ID!): Message
     getLastMessage(_id: ID!): Message
     getConversation(_id: ID!): Conversation
@@ -122,11 +124,13 @@ export default `
     createNeedTag(need: ID!, tag: ID!): NeedTag
     deleteNeedTag(_id: ID!): Status
     deleteUserTag(_id: ID!): Status
+    createNeedRequest(user: ID!, need: ID!): NeedRequest
     signup(email: String!, fullName: String!, password: String!, avatar: String, username: String): Auth
     login(email: String!, password: String!): Auth
   }
 
   type Subscription {
+    needAdded: Need
     conversationJoined: Conversation
   }
 

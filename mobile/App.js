@@ -34,7 +34,7 @@ export default class App extends React.Component {
 
   _checkToken = async () => {
     try {
-      const token = await AsyncStorage.getItem('@guardianangle');
+      const token = await AsyncStorage.getItem('@guardian_angel');
       console.log('Token ===== before', token);
       if (token != null) {
         console.log('Token ===== inside', token);

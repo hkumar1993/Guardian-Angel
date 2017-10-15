@@ -1,6 +1,5 @@
-import bodyParser from "body-parser";
-
-import { decodeToken } from "../services/auth";
+import bodyParser from 'body-parser';
+import { decodeToken } from '../services/auth';
 
 async function auth(req, res, next) {
   try {
@@ -11,6 +10,7 @@ async function auth(req, res, next) {
     } else {
       req.user = null;
     }
+
     return next();
   } catch (error) {
     throw error;
@@ -20,5 +20,4 @@ async function auth(req, res, next) {
 export default app => {
   app.use(bodyParser.json());
   app.use(auth);
-
 };

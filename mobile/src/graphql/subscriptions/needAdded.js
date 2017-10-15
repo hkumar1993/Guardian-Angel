@@ -1,9 +1,8 @@
 import { gql } from 'react-apollo';
 
-
 export default gql`
-  mutation createNeed($title: String!, $description: String!) {
-    createNeed(title: $title, description: $description) {
+  subscription {
+    needAdded {
       _id
       title
       description
@@ -13,9 +12,9 @@ export default gql`
       user {
         _id
         username
+        email
         firstName
         lastName
-        email
         avatar
         createdAt
         updatedAt

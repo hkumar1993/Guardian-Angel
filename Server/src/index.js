@@ -20,7 +20,7 @@ const app = express();
 middlewares(app);
 
 app.use(
-  "/graphiql",
+  '/graphiql',
   graphiqlExpress({
     endpointURL: constants.GRAPHQL_PATH,
     SubscriptionsEndpoint: `ws://localhost:${constants.PORT}${constants.SUBSCRIPTIONS_PATH}`
@@ -39,26 +39,28 @@ app.use(
     context: {
       user: req.user
     }
-  })),
+  }))
 );
 
 const graphQLServer = createServer(app);
 
 // mocks().then(() => {
-  graphQLServer.listen(constants.PORT, err => {
-    if (err) {
-      console.error(err);
-    } else {
-      new SubscriptionServer({
+graphQLServer.listen(constants.PORT, err => {
+  if (err) {
+    console.error(err);
+  } else {
+    new SubscriptionServer(
+      {
         schema,
         execute,
         subscribe
-      }, {
+      },
+      {
         server: graphQLServer,
         path: constants.SUBSCRIPTIONS_PATH
-      })
-      console.log(`App listen to port: ${constants.PORT}`);
-    }
-  });
-// });
+      }
+    );
+    console.log(`App listen to port: ${constants.PORT}`);
+  }
+});
 // });
