@@ -5,15 +5,13 @@ import Touchable from '@appandflow/touchable';
 import { withNavigation } from 'react-navigation'
 import Loading from '../Loading'
 import { colors } from '../../utils/constants'
-
-import { FlatList } from 'react-native';
+import NeedRow from './NeedRow'
+import { FlatList, Text, View } from 'react-native';
 import { graphql, compose, withApollo } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import GET_USER_NEEDS_QUERY from '../../graphql/queries/getUserNeeds';
-import { GET_NEED_REQUESTS, GET_USER_REQUESTS } from '../../graphql/queries/getRequests'
-import { NEED_REQUEST_ADDED, NEED_REQUEST_DELETED } from '../../graphql/subscriptions/needRequestSubscriptions'
-
+import { GET_NEED_REQUESTS } from '../../graphql/queries/getRequests'
 
 const Root = styled.View`
   width: 100%;
@@ -34,6 +32,7 @@ const Table = styled.View`
 const TableHeader = styled.View`
   height: 10%;
   backgroundColor: ${colors.LIGHT_BLUE}
+  borderColor: ${colors.DARK_BLUE}
   borderTopLeftRadius: 5;
   borderTopRightRadius: 5;
   flexDirection: row;
@@ -43,7 +42,7 @@ const TableHeader = styled.View`
   shadowOffset: 0px 2px;
   shadowRadius: 1;
   shadowOpacity: 0.3;
-  zIndex: 111;
+  zIndex: 10;
 `;
 
 const TableHeaderCell = styled.View`
@@ -62,7 +61,6 @@ const TableHeaderText = styled.Text`
 `;
 
 const TableBody = styled.View`
-  height: 90%;
   width: 100%;
   borderBottomLeftRadius: 5;
   borderBottomRightRadius: 5;
@@ -72,10 +70,21 @@ const TableBody = styled.View`
 class PostedNeedScreen extends Component {
   constructor(props){
     super(props)
-
+    this.state = { loading: true}
   }
 
+  _renderItem = (props) => <NeedRow _id={props.item._id} need={props.item}/>
+
+
   render() {
+    console.log("PROPS",this.props);
+    const data = this.props.data
+    const needs = data.getUserNeeds
+    if(data.loading){
+      return (
+        <Loading />
+      )
+    }
     return (
       <Root>
         <Table>
@@ -96,9 +105,14 @@ class PostedNeedScreen extends Component {
               </TableHeaderText>
             </TableHeaderCell>
           </TableHeader>
-          <TableBody>
-
-          </TableBody>
+          <FlatList
+            contentContainerStyle={{
+              alignSelf: 'stretch'
+            }}
+            data={this.props.data.getUserNeeds}
+            keyExtractor={item => item._id}
+            renderItem={this._renderItem}
+            />
         </Table>
       </Root>
     )
