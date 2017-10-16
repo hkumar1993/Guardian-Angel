@@ -1,5 +1,9 @@
 import NeedRequest from "../../models/NeedRequest";
 import { requireAuth } from "../../services/auth";
+import { pubsub } from '../../config/pubsub'
+
+const NEED_REQUEST_ADDED ='needRequestAdded'
+const NEED_REQUEST_DELETED ='needRequestDeleted'
 
 export default {
   getNeedRequest: async (_, { _id }, { user }) => {
@@ -32,7 +36,9 @@ export default {
   createNeedRequest: async (_, args, { user }) => {
     try {
       await requireAuth(user);
-      return NeedRequest.create(args);
+      const needRequest = NeedRequest.create(args)
+      pubsub.publish(NEED_REQUEST_ADDED, { [NEED_REQUEST_ADDED]: needRequest });
+      return needRequest;
     } catch (error) {
       throw error;
     }
@@ -53,5 +59,14 @@ export default {
     } catch (error) {
       throw error;
     }
-  }
+  },
+
+  needRequestAdded: {
+    subscribe: () => pubsub.asyncIterator(NEED_REQUEST_ADDED)
+  },
+
+  needRequestDeleted: {
+    subscribe: () => pubsub.asyncIterator(NEED_REQUEST_DELETED)
+  },
+
 };

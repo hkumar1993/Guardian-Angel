@@ -4,7 +4,8 @@ import { gql } from 'react-apollo';
 
 export default gql`
   mutation createNeedRequest($user: ID!, $need: ID!) {
-    createNeedRequest(user, need) {
+    createNeedRequest(user: $user, need: $need) {
+      _id
       need{
         _id
         title
