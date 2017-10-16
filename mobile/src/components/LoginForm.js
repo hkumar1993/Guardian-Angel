@@ -86,6 +86,7 @@ const InputWrapper = styled.View`
   justifyContent: flex-end;
 `;
 
+Keyboard.dismiss();
 
 const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.LIGHT_GREY,
