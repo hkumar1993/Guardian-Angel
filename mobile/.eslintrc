@@ -1,8 +1,0 @@
-{
-  "parser": "babel-eslint",
-  "extends": [
-    "equimper",
-    "prettier/react",
-    "prettier"
-  ]
-}
