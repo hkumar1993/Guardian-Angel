@@ -9,11 +9,12 @@ import { AsyncStorage } from 'react-native';
 import reducers from './reducers';
 
 const networkInterface = createNetworkInterface({
-  uri: 'http://localhost:3000/graphql'
-  // uri: 'https://guardian-angel.herokuapp.com/graphql'
+  // uri: 'http://localhost:3000/graphql'
+  uri: 'https://guardian-angel.herokuapp.com/graphql'
 });
 
-const wsClient = new SubscriptionClient('ws://localhost:3000/subscriptions', {
+// const wsClient = new SubscriptionClient('ws://localhost:3000/subscriptions', {
+const wsClient = new SubscriptionClient('ws://guardian-angel.herokuapp.com/subscriptions', {
   reconnect: true,
   connectionParams: {}
 })
