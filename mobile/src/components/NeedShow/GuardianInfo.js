@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 
 import { GET_NEED_REQUESTS } from '../../graphql/queries/getRequests'
 import CREATE_NEED_REQUEST from '../../graphql/mutations/createNeedRequest'
-
+import { NEED_REQUEST_ADDED, NEED_REQUEST_DELETED } from '../../graphql/subscriptions/needRequestSubscriptions'
 
 const Root = styled.View`
   alignItems: stretch;
@@ -129,14 +129,35 @@ class GuardianInfo extends Component {
 
   componentWillMount(){
     this.getRequests()
-  }
+    this.props.data.subscribeToMore({
+      document: NEED_REQUEST_ADDED,
+      updateQuery: ( prev, { subscriptionData }) => {
+        console.log("prev===", prev);
+        console.log("subscriptionData===", subscriptionData);
+        console.log("subscriptionData data===", subscriptionData.data);
+        if(!subscriptionData.data) {
+          console.log("prev inside", prev);
+          return prev;
+        }
 
-  componentWillReceiveProps(newProps){
-    console.log("NEW PROPS!!", newProps);
-    this.getRequests()
+        const newNeedRequest = subscriptionData.data.needRequestAdded;
+        console.log("newNeedRequest====", newNeedRequest);
+
+        if(!prev.getNeedRequests.find(needRequest => needRequest._id === newNeedRequest._id)) {
+
+          return {
+            ...prev,
+            getNeedRequests: [{ ...newNeedRequest }, ...prev.getNeedRequests ]
+          }
+        }
+
+        return prev;
+      }
+    });
   }
 
   getRequests() {
+    this.setState({needRequests: null})
     console.log("IN HERE!!");
     this._getNeedRequests(this.props._id).
       then(res => {
@@ -214,7 +235,7 @@ class GuardianInfo extends Component {
             <OfferDetails>
               <MessageButton style={isCurrentUser ? disabledButton :
                   this.state.requested ? requestedButton : {}}
-                disabled={isCurrentUser ? true : false} onPress={this._offerRequest}>
+                disabled={isCurrentUser || this.state.requested ? true : false} onPress={this._offerRequest}>
                 <ButtonText style={isCurrentUser ? disabledButtonText : {}}>
                   { this.state.requested ? 'Offered' : 'Offer Service' }
                 </ButtonText>
@@ -227,7 +248,7 @@ class GuardianInfo extends Component {
                 </View>
                 <ShieldImage source={{uri: shield}}>
                   <ShieldText>
-                    { this.state.needRequests.length}
+                    { this.state.needRequests.length }
                   </ShieldText>
                 </ShieldImage>
               </View>
@@ -240,10 +261,6 @@ class GuardianInfo extends Component {
       </Root>
     )
   }
-}
-
-const mapStateToProps = ( state, ownProps ) => {
-  console.log
 }
 
 export default withApollo(
