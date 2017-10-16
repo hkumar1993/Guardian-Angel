@@ -67,7 +67,7 @@ class NeedRow extends Component {
     }
     return (
       <Root>
-        <Cell style={{flex: 2, paddingLeft: 30, justifyContent: 'start-end'}}>
+        <Cell style={{flex: 2, paddingLeft: 30, justifyContent: 'flex-end'}}>
           <CellText style={{textAlign: 'left'}}>{need.title}</CellText>
         </Cell>
         <Cell style={{flex: 1}}>
