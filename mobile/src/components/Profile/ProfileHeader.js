@@ -6,6 +6,10 @@ import Touchable from '@appandflow/touchable';
 import { colors, angel, shield } from '../../utils/constants';
 import { FontAwesome, SimpleLineIcons, EvilIcons } from '@expo/vector-icons';
 
+import { connect } from 'react-redux';
+import { graphql, compose, withApollo } from 'react-apollo';
+import CREATE_CONVERSATION_MUTATION from '../../graphql/mutations/createConversation';
+
 const Root = styled.View`
   alignItems: center;
   flexDirection: row;
@@ -78,8 +82,25 @@ class ProfileHeader extends Component {
     super(props)
   }
 
+  _onSubmitConversation = async () => {
+
+
+    const conversation  = await this.props.mutate({
+      variables: {
+        recipient: this.props.user._id
+      }
+    })
+
+    const conversationId = conversation.data.createConversation._id;
+    console.log("New conversation=====", conversation);
+    const { navigate }  = this.props.navigation;
+    return navigate('Conversation', {_id: conversationId });
+  }
+
   render() {
     const user = this.props.user
+
+    console.log("USERWERWERWERWERWERWERWERWER ", user);
     return (
       <Root>
         <Avatar user={user} size={100} touchable={false} />
@@ -95,7 +116,7 @@ class ProfileHeader extends Component {
               <StatText>5</StatText>
             </Stat>
           </UserStats>
-          <MessageButton>
+          <MessageButton onPress={this._onSubmitConversation}>
             <ButtonText>
               Message
             </ButtonText>
@@ -106,4 +127,12 @@ class ProfileHeader extends Component {
   }
 }
 
-export default withNavigation(ProfileHeader)
+export default compose(
+  graphql(CREATE_CONVERSATION_MUTATION),
+  connect(state => {
+    console.log("STATE====", state);
+    return {
+      currentUser: state.user.info
+    }
+  }, null)
+)(withNavigation(ProfileHeader));

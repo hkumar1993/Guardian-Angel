@@ -19,7 +19,9 @@ import Loading from './Loading';
 // actions
 import { login } from '../actions/user';
 
-const Root = styled.View`
+const Root = styled(Touchable).attrs({
+  feedback: 'none'
+})`
   flex: 1;
   position: relative;
   justifyContent: center;

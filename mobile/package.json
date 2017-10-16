@@ -11,11 +11,11 @@
   "dependencies": {
     "@appandflow/touchable": "^1.2.2",
     "@expo/react-native-action-sheet": "^1.0.1",
-    "apollo-client": "^1.9.0-0",
+    "apollo-client": "1.8.1",
     "date-fns": "^1.28.5",
     "expo": "20.0.0",
     "react": "^16.0.0-alpha.12",
-    "react-apollo": "^1.4.16",
+    "react-apollo": "1.4.15",
     "react-native": "https://github.com/expo/react-native/archive/sdk-19.0.0.tar.gz",
     "react-native-gifted-chat": "^0.2.7",
     "react-native-table-component": "^1.1.0",
