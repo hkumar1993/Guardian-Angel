@@ -153,7 +153,8 @@ class NewNeedScreen extends Component {
           area: {
             __typename: 'Area',
             _id: Math.round(Math.random() - 10000000),
-            zipcode: this.state.area
+            zipcode: this.state.area,
+            name: ''
           },
           _id: Math.round(Math.random() - 10000000),
           completed: false,

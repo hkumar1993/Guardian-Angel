@@ -200,6 +200,40 @@ class GuardianInfo extends Component {
         variables: {
           user: this.props.currentUser.info._id,
           need: this.props._id
+        },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          createNeedRequest: {
+            __typename: 'NeedRequest',
+            _id: Math.round(Math.random() - 10000000),
+            need: {
+              __typename: 'Need',
+              _id: Math.round(Math.random() - 10000000),
+              title: ' ',
+              description: ' ',
+              completed: false,
+              createdAt: new Date(),
+              updatedAt: new Date()
+            },
+            user: {
+              __typename: 'User',
+              _id: Math.round(Math.random() - 10000000),
+              username: ' ',
+              firstName: ' ',
+              lastName: ' ',
+              email: ' ',
+              avatar: ' ',
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            }
+          }
+        },
+        update: (store, { data: { createNeedRequest } }) => {
+          const data = store.readQuery({ query: GET_NEED_REQUESTS, variables: { _id: this.props._id} });
+
+          if(!data.getNeedRequests.find(needRequest => needRequest._id === createNeedRequest._id)) {
+            store.writeQuery({ query: GET_NEED_REQUESTS, variables: { _id: this.props._id}, data: { getNeedRequests: [{ ...createNeedRequest }, ...data.getNeedRequests] } });
+          }
         }
       })
       // requests.push(data.createNeedRequest)
