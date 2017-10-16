@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { withNavigation } from 'react-navigation';
+import { graphql, withApollo, compose } from 'react-apollo';
+import { connect } from 'react-redux';
+
+import CREATE_MESSAGE_MUTATION from '../../graphql/mutations/createMessage';
+// import GET_CONVERSATION_MESSAGES_QUERY from '../../graphql/queries/getConversationMessages';
+
 import {
   View,
   AsyncStorage,
@@ -15,45 +21,87 @@ class Conversation extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: this.props.messages,
+      user: this.props.user,
+      conversationId: this.props.conversationId
     }
+    this.giftUser = this.giftUser.bind(this)
   }
 
-  componentWillMount() {
-
+  componentWillReceiveProps(ownProps) {
+    console.log("Hello?", ownProps);
+    console.log("PROPS=======", this.props);
+    const { messages, user, conversationId } = ownProps
     this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        },
-      ],
-    });
+      messages,
+      user,
+      conversationId
+    })
   }
 
-  componentDidMount() {
-    // load messages
-  }
-
-  componentWillUnmount() {
-    // close IO connection
-  }
-
-  onSend(messages = []) {
+  async onSend(messages = []) {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }));
+
+    const { conversationId } = this.state;
+    const userId = messages[0].user._id;
+    const user = messages[0].user;
+    const newText = messages[0].text;
+    const createdAt = messages[0].createdAt;
+    const _id = messages[0]._id;
+    console.log("new message is========", messages);
+    console.log("userid========", userId);
+    console.log("newtext========", newText);
+    console.log("createdAt========", createdAt);
+
+    await this.props.mutate({
+      variables: {
+        conversation: conversationId,
+        text: newText,
+        user: userId
+      },
+
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createMessage: {
+          __typename: 'Message',
+          text: newText,
+          _id: _id,
+          createdAt: createdAt,
+          conversation: {
+            __typename: 'Conversation',
+            _id: conversationId
+          },
+          user: {
+            __typename: 'User',
+            _id: userId,
+            username: this.props.user.username,
+            firstName: this.props.user.firstName,
+            lastName: this.props.user.lastName,
+            avatar: this.props.user.avatar,
+            email: this.props.user.email,
+          },
+
+        }
+      },
+
+
+    })
   }
 
+  giftUser(){
+    if (!this.props.user) {return (<View></View>)}
+    return {
+      _id: this.props.user._id,
+      name: this.props.user.firstName + ' ' + this.props.user.lastName,
+      avatar: this.props.user.avatar
+    };
+  }
 
   render() {
-    console.log(this.state);
+    console.log("PROPS Conversation: ", this.props);
+    console.log("STATE Conversation: ", this.state);
     return (
       <View style={styles.container}>
         <View style={styles.giftedChat}>
@@ -63,17 +111,12 @@ class Conversation extends Component {
               // this needs to go to back end later
               this.onSend(messages)
             }}
-            user={{
-              _id: 1,
-            }}
+            user={this.giftUser()}
             />
         </View>
-
       </View>
-
     );
   }
-
 };
 
 const styles = StyleSheet.create({
@@ -86,4 +129,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withNavigation(Conversation)
+export default withApollo(
+  compose(
+    connect(state => {
+      return {
+        user: state.user.info
+      }
+    }, null),
+    graphql(CREATE_MESSAGE_MUTATION)
+  )(withNavigation(Conversation))
+);
