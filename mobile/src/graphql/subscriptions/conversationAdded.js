@@ -1,18 +1,23 @@
 import { gql } from 'react-apollo';
 
 export default gql`
-  query getConversationMessages($_id: ID!){
-    getConversationMessages(_id: $_id){
+  subscription {
+    conversationAdded {
       _id
-      text
-      user {
-        _id
+      author {
+        username
         firstName
         lastName
+        avatar
+      }
+      recipient {
         username
+        firstName
+        lastName
         avatar
       }
       createdAt
+      updatedAt
     }
   }
 `;
