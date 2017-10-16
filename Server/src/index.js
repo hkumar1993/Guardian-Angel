@@ -64,3 +64,12 @@ graphQLServer.listen(constants.PORT, err => {
   }
 });
 // });
+
+// Landing Page
+var path = require('path');
+app.use(express.static(__dirname + '/view'));
+//Store all HTML files in view folder.
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
