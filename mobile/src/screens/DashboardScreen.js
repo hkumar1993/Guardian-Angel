@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components/native';
 import { TabNavigator } from 'react-navigation';
 import { colors } from '../utils/constants'
-import PostedNeedScreen from './PostedNeedScreen'
-import RequestedNeedScreen from './RequestedNeedScreen'
+import PostedNeedScreen from '../components/Dashboard/PostedNeedScreen'
+import RequestedNeedScreen from '../components/Dashboard/RequestedNeedScreen'
 import Touchable from '@appandflow/touchable';
+import { Text } from 'react-native'
+import { connect } from 'react-redux'
 
 const Root = styled.View`
   alignItems: center;
@@ -34,6 +36,16 @@ const Tab = styled(Touchable).attrs({
   borderWidth: 1;
 `;
 
+const PaneContainer = styled.View`
+  width: 200%;
+  minHeight: 100%;
+  flexDirection: row
+`;
+
+const Pane = styled.View`
+  width: 50%;
+  minHeight: 100%;
+`;
 const activeButton = {
   backgroundColor: colors.LIGHT_BLUE,
 }
@@ -69,9 +81,17 @@ class DashboardScreen extends Component {
             <T style={this.state.currentTab === 2 ? activeText : {} }>Requested Needs</T>
           </Tab>
         </TabContainer>
+        <PaneContainer style={{alignSelf: this.state.currentTab === 1 ? 'flex-start' : 'flex-end'}}>
+          <Pane>
+            <PostedNeedScreen />
+          </Pane>
+          <Pane>
+            <RequestedNeedScreen />
+          </Pane>
+        </PaneContainer>
       </Root>
     )
   }
 }
 
-export default DashboardScreen;
+export default connect(state => ({user: state.user}))(DashboardScreen);

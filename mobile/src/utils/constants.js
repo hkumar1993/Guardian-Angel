@@ -5,7 +5,9 @@ export const colors = {
   LIGHT_PINK: "#ffafea",
   LIGHT_GREY: "#b7b7b7",
   LIGHTEST_GREY: "#F7F6F6",
-  DARK_GREY: "#505050"
+  DARK_GREY: "#505050",
+  APPROVED_GREEN: "#00f83e",
+  DENIED_RED: "#ea0000"
 };
 
 export const fakeAvatar = "https://robohash.org/my-own-slug.jpg?size=200x200";
