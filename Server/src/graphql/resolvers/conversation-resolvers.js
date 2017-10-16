@@ -3,6 +3,7 @@ import { requireAuth } from "../../services/auth";
 import { pubsub } from '../../config/pubsub';
 
 import User from "../../models/User";
+import Message from "../../models/Message";
 
 const CONVERSATION_ADDED = 'conversationAdded';
 
@@ -18,6 +19,7 @@ export default {
 
   getUserConversations: async (_, { _id }, { user }) => {
     try {
+      console.log("Conversation Begin");
       await requireAuth(user);
 
       const authorConversations = await Conversation.find({ author: _id })
@@ -30,7 +32,22 @@ export default {
       ).sort( (x, y) => x['updatedAt'] < y['updatedAt'] );
 
       // return Conversation.find({ author: _id }).sort({ createdAt: -1 });
-      return allConversations;
+      // return allConversations;
+
+      // const result = [];
+      const result = await allConversations.filter(async conversation => {
+        console.log("convsersdsfd Inside = ", conversation);
+        const message = await Message.find({ conversation: conversation._id});
+        console.log("message=s=df=sdf==== ", message  );
+        return message.length > 0;
+      });
+
+      console.log("allConversations====", allConversations);
+      console.log("result====", result);
+
+      const conversations = result;
+
+      return conversations;
     } catch (error) {
       throw error;
     }
@@ -44,12 +61,31 @@ export default {
       await requireAuth(user);
       console.log(user);
 
+      const conversationExist1 = await Conversation.findOne({ author: args['recipient'], recipient: user._id })
+
+      // console.log("conversationExist1 ==== ", conversationExist1);
+      if(conversationExist1) {
+        console.log("conversationExist1 INside ==== ", conversationExist1);
+        return conversationExist1;
+      }
+
+      const conversationExist2 = await Conversation.findOne({ author: user._id, recipient: args['recipient'] })
+
+      // console.log("conversationExist1 ==== ", conversationExist1);
+      if(conversationExist2) {
+        console.log("conversationExist2 INside ==== ", conversationExist2);
+        return conversationExist2;
+      }
+
+
       const conversation = await Conversation.create(
         {author: user._id, recipient: args["recipient"]}
       )
       console.log(conversation);
 
       // const conversation = await Conversation.create(args);
+
+      console.log("heloo");
 
       const author = await User.findOne({ _id: user._id })
       const recipient = await User.findOne({ _id: args["recipient"] });
@@ -65,6 +101,8 @@ export default {
       recipient.save();
 
       pubsub.publish(CONVERSATION_ADDED, { [CONVERSATION_ADDED]: conversation });
+
+      console.log("Coversion ending===", conversation);
 
       return conversation;
     } catch (error) {

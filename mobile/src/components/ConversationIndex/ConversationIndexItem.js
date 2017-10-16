@@ -34,6 +34,8 @@ const AvatarContainer = styled.View`
 
 const ConversationTextContainer = styled.View`
   marginLeft: 5;
+  alignItems: center;
+  justifyContent: center;
 `;
 
 
@@ -70,7 +72,6 @@ class ConversationIndexItem extends React.Component {
           </AvatarContainer>
           <ConversationTextContainer >
             <ConversationIndexHeader name={name} style={{ width: 20 }}/>
-            <ConversationIndexContent/>
           </ConversationTextContainer>
         </ConversationContentContainer>
       </Root>

@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "graphql-date": "^1.0.3",
-    "graphql-subscriptions": "^0.5.4"
+    "graphql-subscriptions": "^0.5.4",
+    "react": "^16.0.0",
+    "react-native-maps": "^0.17.0"
   }
 }
