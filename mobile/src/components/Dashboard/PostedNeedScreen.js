@@ -35,4 +35,9 @@ class PostedNeedScreen extends Component {
   }
 }
 
-export default PostedNeedScreen;
+export default withApollo(
+  compose(
+    connect(state => ({apollo: state.apollo.data, _id: state.user._id}), null),
+    graphql(GET_USER_NEEDS_QUERY)
+  )(withNavigation(PostedNeedScreen))
+)
