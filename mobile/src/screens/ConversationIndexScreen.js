@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import ConversationIndex from '../components/ConversationIndex/ConversationIndex'
 
 import GET_USER_CONVERSATIONS from '../graphql/queries/getUserConversations';
+import CONVERSATION_ADDED_SUBSCRIPTION from '../graphql/subscriptions/conversationAdded';
 
 const Root = styled.View`
 
@@ -15,7 +16,28 @@ const Root = styled.View`
 
 class ConversationIndexScreen extends Component {
 
+  componentWillMount(){
+    this.props.data.subscribeToMore({
+      document: CONVERSATION_ADDED_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) {
+          return prev;
+        }
 
+        const newConversation = subscriptionData.data.conversationAdded;
+
+        // prevent double messages
+        if (!prev.getUserConversations.find(c => c._id === newConversation._id)) {
+          return {
+            ...prev,
+            getUserConversations: [{ ...newConversation }, ...prev.getUserConversations]
+          }
+        }
+
+        return prev;
+      }
+    })
+  }
 
   componentDidMount() {
     console.log('conversationidx =========', this.props);

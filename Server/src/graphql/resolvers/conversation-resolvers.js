@@ -1,7 +1,10 @@
 import Conversation from "../../models/Conversation";
 import { requireAuth } from "../../services/auth";
+import { pubsub } from '../../config/pubsub';
 
 import User from "../../models/User";
+
+const CONVERSATION_ADDED = 'conversationAdded';
 
 export default {
   getConversation: async (_, { _id }, { user }) => {
@@ -61,6 +64,8 @@ export default {
       author.save();
       recipient.save();
 
+      pubsub.publish(CONVERSATION_ADDED, { [CONVERSATION_ADDED]: conversation });
+
       return conversation;
     } catch (error) {
       throw error;
@@ -83,5 +88,9 @@ export default {
       throw error;
     }
   },
+
+  conversationAdded: {
+    subscribe: () => pubsub.asyncIterator(CONVERSATION_ADDED)
+  }
 
 };

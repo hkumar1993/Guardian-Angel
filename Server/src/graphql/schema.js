@@ -133,6 +133,7 @@ export default `
   type Subscription {
     needAdded: Need
     messageAdded: Message
+    conversationAdded: Conversation
   }
 
   schema {

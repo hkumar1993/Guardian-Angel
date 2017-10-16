@@ -81,6 +81,7 @@ export default {
 
   Subscription: {
     needAdded: NeedResolvers.needAdded,
-    messageAdded: MessageResolvers.messageAdded
+    messageAdded: MessageResolvers.messageAdded,
+    conversationAdded: ConversationResolvers.conversationAdded
   }
 };

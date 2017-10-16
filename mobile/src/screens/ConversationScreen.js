@@ -27,52 +27,54 @@ class ConversationScreen extends Component {
     super(props)
   }
 
-  // componentWillMount() {
-  //   console.log("PROPS Conversation Screen: ", this.props);
-  //   this._getConversationMessages(this.props.conversation._id)
-  // }
+  componentWillMount(){
+    console.log("PROPS ConversationScreen: ", this.props);
+    this.props.data.subscribeToMore({
+      document: MESSAGE_ADDED_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log("PREV stuff: ", prev);
+        console.log("SUBSCRIPTIONDATA stuff: ", subscriptionData);
+        if (!subscriptionData.data) {
+          console.log("PREV stuff inside check: ", prev);
+          return prev;
+        }
 
-  // _getConversationMessages = async (id) => {
-  //   try {
-  //     const { data } = await this.props.client.query({
-  //       query: GET_MESSAGES_QUERY,
-  //       variables: {
-  //         _id: id
-  //       }
-  //     })
-  //     console.log(data);
-  //     return data;
-  //   } catch (e){
-  //     throw e
-  //   }
-  // }
+        const newMessage = subscriptionData.data.messageAdded;
 
-  // componentWillMount(){
-  //   console.log("PROPS ConversationScreen: ", this.props);
-  //   this.props.data.subscribeToMore({
-  //     document: MESSAGE_ADDED_SUBSCRIPTION,
-  //     updateQuery: (prev, { subscriptionData }) => {
-  //       console.log("PREV stuff: ", prev);
-  //       console.log("SUBSCRIPTIONDATA stuff: ", subscriptionData);
-  //       if (!subscriptionData.data) {
-  //         console.log("PREV stuff inside check: ", prev);
-  //         return prev;
-  //       }
-  //
-  //       const newMessage = subscriptionData.data.messageAdded;
-  //
-  //       // prevent double messages
-  //       if (!prev.getConversationMessages.find(c => c._id === newMessage._id)) {
-  //         return {
-  //           ...prev,
-  //           getConversationMessages: [{ ...newMessage }, ...prev.getConversationMessages]
-  //         }
-  //       }
-  //
-  //       return prev;
-  //     }
-  //   })
-  // }
+        // prevent double messages
+        if (!prev.getConversationMessages.find(c => c._id === newMessage._id)) {
+          return {
+            ...prev,
+            getConversationMessages: [{ ...newMessage }, ...prev.getConversationMessages]
+          }
+        }
+
+        return prev;
+      }
+    })
+  }
+
+  componentWillReceiveProps() {
+    console.log("PROPS Conversation Screen: ", this.props);
+    this._getConversationMessages(this.props._id)
+  }
+
+  _getConversationMessages = async (id) => {
+    try {
+      const { data } = await this.props.client.query({
+        query: GET_MESSAGES_QUERY,
+        variables: {
+          _id: id
+        }
+      })
+      console.log(data);
+      return data;
+    } catch (e){
+      throw e
+    }
+  }
+
+
 
   render() {
     console.log("PROPS: ConversationScreen", this.props);
@@ -85,7 +87,7 @@ class ConversationScreen extends Component {
     }
 
     return (
-      <Conversation messages={messages}/>
+      <Conversation messages={messages} conversationId={this.props._id}/>
     )
   }
 }

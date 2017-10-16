@@ -4,6 +4,9 @@ import { withNavigation } from 'react-navigation';
 import { graphql, withApollo, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 
+import CREATE_MESSAGE_MUTATION from '../../graphql/mutations/createMessage';
+// import GET_CONVERSATION_MESSAGES_QUERY from '../../graphql/queries/getConversationMessages';
+
 import {
   View,
   AsyncStorage,
@@ -19,7 +22,8 @@ class Conversation extends Component {
     super(props);
     this.state = {
       messages: this.props.messages,
-      user: this.props.user
+      user: this.props.user,
+      conversationId: this.props.conversationId
     }
     this.giftUser = this.giftUser.bind(this)
   }
@@ -27,25 +31,63 @@ class Conversation extends Component {
   componentWillReceiveProps(ownProps) {
     console.log("Hello?", ownProps);
     console.log("PROPS=======", this.props);
-    const { messages, user } = ownProps
+    const { messages, user, conversationId } = ownProps
     this.setState({
       messages,
-      user
+      user,
+      conversationId
     })
   }
 
-  componentDidMount() {
-    // load messages
-  }
-
-  componentWillUnmount() {
-    // close IO connection
-  }
-
-  onSend(messages = []) {
+  async onSend(messages = []) {
     this.setState((previousState) => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }));
+
+    const { conversationId } = this.state;
+    const userId = messages[0].user._id;
+    const user = messages[0].user;
+    const newText = messages[0].text;
+    const createdAt = messages[0].createdAt;
+    const _id = messages[0]._id;
+    console.log("new message is========", messages);
+    console.log("userid========", userId);
+    console.log("newtext========", newText);
+    console.log("createdAt========", createdAt);
+
+    await this.props.mutate({
+      variables: {
+        conversation: conversationId,
+        text: newText,
+        user: userId
+      },
+
+      optimisticResponse: {
+        __typename: 'Mutation',
+        createMessage: {
+          __typename: 'Message',
+          text: newText,
+          _id: _id,
+          createdAt: createdAt,
+          conversation: {
+            __typename: 'Conversation',
+            _id: conversationId
+          },
+          user: {
+            __typename: 'User',
+            _id: userId,
+            username: this.props.user.username,
+            firstName: this.props.user.firstName,
+            lastName: this.props.user.lastName,
+            avatar: this.props.user.avatar,
+            email: this.props.user.email,
+          },
+
+        }
+      },
+
+
+    })
   }
 
   giftUser(){
@@ -56,11 +98,6 @@ class Conversation extends Component {
       avatar: this.props.user.avatar
     };
   }
-
-  _setupMessageObjects() {
-
-  }
-
 
   render() {
     console.log("PROPS Conversation: ", this.props);
@@ -98,6 +135,7 @@ export default withApollo(
       return {
         user: state.user.info
       }
-    }, null)
+    }, null),
+    graphql(CREATE_MESSAGE_MUTATION)
   )(withNavigation(Conversation))
 );

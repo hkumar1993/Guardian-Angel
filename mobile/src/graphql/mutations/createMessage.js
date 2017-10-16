@@ -1,20 +1,20 @@
 import { gql } from 'react-apollo';
 
 export default gql`
-  subscription {
-    messageAdded {
+  mutation createMessage( $conversation: ID!, $user: ID!, $text: String!) {
+    createMessage( conversation: $conversation, user: $user, text: $text) {
       _id
+      text
       conversation {
         _id
       }
-      text
       user {
         _id
         username
-        email
         firstName
         lastName
         avatar
+        email
       }
       createdAt
     }
