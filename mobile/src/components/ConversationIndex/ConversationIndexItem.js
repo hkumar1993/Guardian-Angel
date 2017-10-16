@@ -55,12 +55,15 @@ class ConversationIndexItem extends React.Component {
 
   render() {
     const name = this.nameToDisplay();
+    const navigate = this.props.navigation.navigate;
+    const conversation = this.props.item;
+    console.log("CONVERSATION", conversation);
+    console.log("PROPS ConversationIndexItem: ", this.props);
 
     console.log('Name to display: ', name);
     console.log("THIS ConversationIndexItem", this);
-    console.log('PROPS ConversationIndexItem', this.props);
     return (
-      <Root onPress={() => navigate('Conversation')} >
+      <Root onPress={() => navigate('Conversation', { _id: conversation._id})} >
         <ConversationContentContainer>
           <AvatarContainer>
             <ConversationIndexLeft />
