@@ -81,25 +81,9 @@ function NeedCardBottom({area}) {
             </ButtonText>
           </Button>
         </ZipCode>
-        <TagsContainer>
-          <Ionicons
-            name="md-pricetags"
-            size={ICON_SIZE}
-            color={colors.LIGHT_GREY}
-            style={{marginRight: '2%'}}
-            />
-          <Tag>
-            <TagText>
-              { tag }
-            </TagText>
-          </Tag>
-        </TagsContainer>
+
       </InfoContainer>
-      <Tag>
-        <TagText>
-          Follow
-        </TagText>
-      </Tag>
+
     </Root>
   )
 }

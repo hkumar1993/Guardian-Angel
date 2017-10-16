@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Root = styled.View`
-  flex: 0.6;
+  flex: 1;
 `;
 
 const T = styled.Text`
@@ -15,7 +15,6 @@ const text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do e
 function ConversationIndexContent() {
   return (
     <Root>
-      <T>{text}</T>
     </Root>
   )
 }
