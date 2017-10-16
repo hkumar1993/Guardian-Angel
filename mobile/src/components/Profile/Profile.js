@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { ActivityIndicator, FlatList } from 'react-native';
 
 import GET_USER_NEEDS_QUERY from '../../graphql/queries/getUserNeeds';
+import NEED_ADDED_SUBSCRIPTION from '../../graphql/subscriptions/needAdded';
 
 const Root = styled.View`
 `;
@@ -21,6 +22,33 @@ class Profile extends Component {
     this._getUserNeeds(this.props._id);
     console.log('GOT PROPS',this.props);
     // this._getUserNeeds(this.props.user._id);
+  }
+
+  componentWillMount(){
+    this.props.data.subscribeToMore({
+      document: NEED_ADDED_SUBSCRIPTION,
+      updateQuery: ( prev, { subscriptionData }) => {
+        console.log("prev===", prev);
+        console.log("subscriptionData===", subscriptionData);
+        console.log("subscriptionData data===", subscriptionData.data);
+        if(!subscriptionData.data) {
+          console.log("prev inside", prev);
+          return prev;
+        }
+
+        const newNeed = subscriptionData.data.needAdded;
+        console.log("newNeed====", newNeed);
+
+        if(!prev.getUserNeeds.find(need => need._id === newNeed._id)) {
+
+          return {
+            getUserNeeds: [{ ...newNeed }, ...prev.getUserNeeds ]
+          }
+        }
+
+        return prev;
+      }
+    });
   }
 
   _getUserNeeds = async (id) => {

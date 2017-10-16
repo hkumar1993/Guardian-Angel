@@ -19,21 +19,6 @@ const Root = styled.View`
   borderColor: rgba(0,0,0,0.5);
 `;
 
-// const AvatarContainer = styled.View`
-//   flex: 0.2;
-//   alignItems: center;
-//   justifyContent: center;
-// `;
-//
-//   const Avatar = styled.Image`
-//   height: ${ AVATAR_SIZE } ;
-//   width: ${ AVATAR_SIZE } ;
-//   borderWidth: 2px;
-//   borderColor: ${props => props.theme.LIGHT_BLUE};
-//   borderRadius: ${ AVATAR_RADIUS };
-// `;
-
-//
 const MetaContainer = styled.View`
   flex: 1;
   alignSelf: stretch;

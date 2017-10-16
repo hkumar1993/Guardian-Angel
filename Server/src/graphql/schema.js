@@ -134,6 +134,8 @@ export default `
     needAdded: Need
     messageAdded: Message
     conversationAdded: Conversation
+    needRequestAdded: NeedRequest
+    needRequestDeleted: NeedRequest
   }
 
   schema {
