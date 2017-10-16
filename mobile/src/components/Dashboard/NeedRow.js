@@ -59,7 +59,7 @@ class NeedRow extends Component {
   render(){
     const need = this.props.need
     const data = this.props.data
-    console.log("PROPS===",this.props);
+
     if(data.loading){
       return (
         <CellText>Fetching Data...</CellText>
