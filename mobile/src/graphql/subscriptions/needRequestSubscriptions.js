@@ -5,6 +5,7 @@ export const NEED_REQUEST_ADDED = gql`
     needRequestAdded {
       _id
       need{
+        _id
         title
         description
         completed

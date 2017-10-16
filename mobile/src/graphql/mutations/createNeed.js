@@ -10,6 +10,7 @@ export default gql`
       area {
         _id
         zipcode
+        name
       }
       completed
       createdAt
