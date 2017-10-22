@@ -1,6 +1,6 @@
 # Guardian Angels
 
-### [Check out the Guardian Angel Live Website!](guardian-angel.herokuapp.com)
+### [Check out the Guardian Angel Live Website!](http://guardian-angel.herokuapp.com)
 
 ## Background and Overview
 
