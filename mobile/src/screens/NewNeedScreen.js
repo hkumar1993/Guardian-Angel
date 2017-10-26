@@ -13,13 +13,17 @@ import { GOOGLE_API_KEY, colors } from '../utils/constants';
 import CREATE_NEED_MUTATION from '../graphql/mutations/createNeed';
 import GET_NEEDS_QUERY from '../graphql/queries/getNeeds';
 
-const Root = styled.View`
+const Root = styled(Touchable).attrs({
+  feedback: 'none',
+})`
   backgroundColor: white;
   flex: 1;
   alignItems: center;
 `;
 
-const Wrapper = styled.View`
+const Wrapper = styled(Touchable).attrs({
+  feedback: 'none',
+})`
   height: 80%;
   width: 90%;
   paddingTop: 5;
@@ -28,11 +32,13 @@ const Wrapper = styled.View`
 
 const InputWrapper = styled.View`
   height: 50;
-  width: 70%;
-  borderBottomWidth: 1;
-  borderBottomColor: ${props => props.theme.LIGHT_GREY};
+  width: 100%;
+  borderWidth: 1;
+  borderColor: ${props => props.theme.LIGHT_GREY};
+  borderRadius: 5;
   marginVertical: 5;
-  justifyContent: flex-end;
+  justifyContent: center;
+  paddingHorizontal: 10;
 `;
 
 const InputDescription = styled.TextInput.attrs({
@@ -40,19 +46,27 @@ const InputDescription = styled.TextInput.attrs({
   placeholder: 'Write something here ...',
   maxLength: 175,
   autoFocus: true,
-  selectionColor: Platform.OS === 'ios' && colors.LIGHT_PINK
+  selectionColor: Platform.OS === 'ios' && colors.LIGHT_PINK,
+  underlineColorAndroid: 'transparent',
+  textAlignVertical: 'top'
 })`
   height: 40%;
   width: 100%;
   fontSize: 18;
-  color: ${props => props.theme.LIGHT_GREY}
+  color: ${props => props.theme.DARK_GREY};
+  borderWidth: 1;
+  borderColor: ${props => props.theme.LIGHT_GREY};
+  borderRadius: 5;
+  paddingHorizontal: 10;
+  paddingVertical: 10;
 `;
 
 const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.LIGHT_GREY,
   placeholder: 'Title ...',
   selectionColor: Platform.OS === 'ios' ? colors.TAG_BLUE : undefined,
-  autoCorrect: false
+  autoCorrect: false,
+  underlineColorAndroid: 'transparent'
 })`
   height: 30;
   color: ${props => props.theme.LIGHT_BLUE}
@@ -61,7 +75,8 @@ const ZipInput = styled.TextInput.attrs({
   placeholderTextColor: colors.LIGHT_GREY,
   placeholder: 'Zip ...',
   selectionColor: Platform.OS === 'ios' ? colors.TAG_BLUE : undefined,
-  autoCorrect: false
+  autoCorrect: false,
+  underlineColorAndroid: 'transparent'
 })`
   height: 30;
   color: ${props => props.theme.LIGHT_BLUE}
@@ -76,17 +91,14 @@ const NeedButton = styled(Touchable).attrs({
   backgroundColor: ${props => props.theme.LIGHT_BLUE};
   justifyContent: center;
   alignItems: center;
-  width: 80;
+  width: 100%;
   height: 40;
-  borderRadius: 20;
-  position: absolute;
-  top: 60%;
-  right: 0;
-
+  borderRadius: 5;
+  marginTop: 10;
 `;
 
 const NeedButtonText = styled.Text`
-  color: ${props => props.theme.LIGHT_GREY};
+  color: white;
   fontSize: 16;
 `;
 
@@ -94,9 +106,6 @@ const NeedButtonText = styled.Text`
 const TextLength = styled.Text`
   fontSize: 18;
   color: ${props => props.theme.LIGHT_BLUE};
-  position: absolute;
-  top: 45%;
-  right: 5%;
 `;
 
 
@@ -194,10 +203,14 @@ class NewNeedScreen extends Component {
     return  this.state.title.length < 3 || this.state.description.length < 5;
   }
 
+  dismissKeyboard() {
+    return () => Keyboard.dismiss();
+  }
+
   render() {
     return (
-      <Root>
-        <Wrapper>
+      <Root onPress={this.dismissKeyboard}>
+        <Wrapper onPress={this.dismissKeyboard}>
 
           <InputWrapper>
             <Input value={this.state.title} onChangeText={value => this._onChangeText(value, 'title')}/>
