@@ -1,5 +1,5 @@
 import React from 'react';
-import { UIManager, AsyncStorage } from 'react-native';
+import { UIManager, AsyncStorage, StatusBar, View } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { AppLoading } from 'expo';
 
@@ -26,7 +26,7 @@ if (UIManager.setLayoutAnimationEnabledExperimental) {
 export default class App extends React.Component {
   state = {
     appReady: false
-  }; 
+  };
 
   componentWillMount() {
     this._checkToken();
