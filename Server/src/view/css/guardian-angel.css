@@ -1,3 +1,7 @@
+ul{
+  list-style: none;
+}
+
 .logo {
   width: 100%;
 }
@@ -15,19 +19,27 @@
   margin-top: 10%;
 }
 
+.section > div {
+  height: 100vh;
+  width: 100vw;
+}
+
 .image {
   height: 100vh;
   position: relative;
   overflow: hidden;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .image > img{
   position: absolute;
-  min-width: 100vw;
-  height: 100%;
+  width: 100vw;
+  min-height: 100%;
+  height: auto;
   bottom: 0%;
   left: 0%;
 }
@@ -40,6 +52,7 @@
 
 .title{
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -61,32 +74,160 @@
   text-shadow: 2px 2px 5px rgba(0,0,0,0.8)
 }
 
-.tablet-break{
-  padding: 5px 20px;
+.main{
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
-  align-items: center;
-  margin-left: 69px;
-  margin-right: 50px;
-}
-
-.tablet-break > img {
-  width: 20%;
-}
-
-.introw{
-  position: absolute;
-  top: 0%;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(255,255,255,0.8);
-  display: flex;
   flex-direction: row;
-  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
 }
 
-.logo-container{
-  margin-left: 50px;
+.iphone{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  height: 100%;
+  width: auto;
+}
+
+.iphone > img{
+  height: 75%;
+  width: auto;
+}
+
+.iphone > img:last-child{
+  position: absolute;
+  top: 24%;
+  left: 11%;
+  height: 53.25%;
+}
+
+.intro {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 50%;
+  z-index: 100;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.38)
+}
+
+.intro > img {
+  width: auto;
+  height: 50%;
+}
+
+.cover{
+
+  z-index: 20;
+}
+
+.logo {
+  height: 30%;
+  width: auto;
+}
+
+.header{
+  padding: 30px;
+  width: 100vw;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.header > h1, .header > h3 {
+  font-size: 30;
+  font-weight: bold;
+  text-shadow: 0px 5px 5px rgba(0,0,0,0.5)
+}
+
+.placeholder {
+  z-index: 100;
+}
+
+.placeholder > img {
+}
+
+.half{
+  width: 50%;
+  height: 100%;
+}
+
+.angels, .guardians{
+  background-color: #5698FF;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.tool-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: row;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.tool-list > img {
+  height: 20px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.fp-controlArrow{
+  border: none;
+  border-color: transparent;
+}
+
+.role-info {
+  max-width: 50%;
+}
+
+.role-info h1, .role-info h2, .role-info h3, .role-info h4 {
+  color: white;
+  text-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+  font-weight: bold;
+}
+
+.role-info h4{
+  margin-bottom: 30px;
+}
+
+.slide{
+  position: relative;
+}
+
+.arrow-left, .arrow-right{
+  position: absolute;
+}
+
+.arrow-left{
+  transform: rotate(90deg);
+  height: 30px;
+  width: auto;
+  top: 50%;
+  left: 10px;
+}
+
+.arrow-right{
+  transform: rotate(-90deg);
+  height: 30px;
+  width: auto;
+  top: 50%;
+  right: 10px;
 }
