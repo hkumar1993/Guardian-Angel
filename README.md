@@ -13,17 +13,19 @@ You can be an Angel, who can scroll through the Needs Feed and provide the help 
 
 Guardian Angel aims to crowd source pro-bono services to those in need, using the technology in our hands to reach out to those who don't have access to it.
 
-## Technologies Used
+## Technologies Involved
 
 This project was built using the following technologies:
 * Frontend
   * React Native / Redux
-  * Expo
-  * Apollo
+  * <a href="https://github.com/expo/expo">Expo</a>
+  * Apollo GraphQL <a href="https://github.com/apollographql">link</a>
+  * <a href="https://github.com/FaridSafi/react-native-gifted-chat">GiftedChat</a>
 
 * Backend
   * NodeJs / Express
   * MongoDB
+  * Mongoose
   * GraphQL
 
 ## Needs Feed
@@ -44,7 +46,37 @@ The User Profile page displays all the users posted needs and a button to messag
 
 ![Message](./docs/gifs/Message.gif)
 
-Messages are sent in real-time and implemented using WebSockets. Users can message other users to get more information about needs.
+Messages are sent in real-time and implemented using WebSockets. Users can message other users to get more information about needs. In GraphQL `users` are joined with two seperate entities: `conversations` and `messages`.
+
+`conversations` involve an author and recipient and act somewhat like a SQL joins table to allow for consolidating specific message queries. `messages` house the text data and connect these messages to one specific user and conversation.
+
+an example query to fetch conversations message in GraphQL:
+```
+  getConversationMessages: async (_, { _id }, { user }) => {
+    try {
+      await requireAuth(user);
+      return Message.find({ conversation: _id }).sort({ createdAt: -1 });
+    } catch (error) {
+      throw error;
+    }
+  },
+ ```
+ These messages are then attached to a `PubSub` instance generated using the `graphql-subscription` library to allow us to hook up our frontend to the websockets. Subscriptions exist for conversations and for individual messages inside them. Some example code how our conversation joins a subscription inside our 
+`conversation-resolvers.js`
+
+In the create conversation we will publish the data and subscribe the user
+```
+ pubsub.publish(CONVERSATION_ADDED, { [CONVERSATION_ADDED]: conversation });
+```
+adding the subscribe functionality 
+```
+  conversationAdded: {
+    subscribe: () => pubsub.asyncIterator(CONVERSATION_ADDED)
+  }
+```
+
+ After the backend is open for subscriptions, the frontend will subscribe the user when they navigate to the messages button or create a new conversation and go to `ConversationIndexScreen.js`.
+ 
 
 ## Dashboard
 
