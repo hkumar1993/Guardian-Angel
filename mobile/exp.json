@@ -10,9 +10,17 @@
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app-icon.png",
     "loading": {
-      "icon": "./assets/icons/loading-icon.png",
-      "hideExponentText": false
-    },
+      "splash": {
+        "backgroundColor": "#5aa7ff",
+        "image": {
+            "ios":{
+              "backgroundImage": "./assets/icons/white_shield.jpg"
+            },
+            "android":{
+              "backgroundImage": "./assets/icons/white_shield.jpg"
+            }
+          }
+      },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
     },
