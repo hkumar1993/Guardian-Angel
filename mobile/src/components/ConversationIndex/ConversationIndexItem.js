@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import ConversationIndexLeft from './ConversationIndexLeft';
 import ConversationIndexContent from './ConversationIndexContent';
 import ConversationIndexHeader from './ConversationIndexHeader';
-
+import Avatar from '../Avatar/Avatar'
 
 const Root = styled(Touchable).attrs({
   feedback: 'opacity'
@@ -26,6 +26,8 @@ const Root = styled(Touchable).attrs({
 const ConversationContentContainer = styled.View`
   flex: 1;
   flexDirection: row;
+  paddingVertical: 10;
+  paddingHorizontal: 10;
 `;
 
 const AvatarContainer = styled.View`
@@ -33,7 +35,7 @@ const AvatarContainer = styled.View`
 `;
 
 const ConversationTextContainer = styled.View`
-  marginLeft: 5;
+  marginLeft: 10;
   alignItems: center;
   justifyContent: center;
 `;
@@ -46,13 +48,25 @@ class ConversationIndexItem extends React.Component {
   }
 
   nameToDisplay() {
+    // const currentUser = this.props.user.info
+    // const recipient = this.props.item.recipient
+    // const author = this.props.item.author
+    // if (currentUser.username === author.username) {
+    //   return recipient.firstName + ' ' + recipient.lastName
+    // }
+    // return author.firstName + ' ' + author.lastName
+    const user = this.userToDisplay()
+    return user.firstName + ' ' + user.lastName
+  }
+
+  userToDisplay(){
     const currentUser = this.props.user.info
     const recipient = this.props.item.recipient
     const author = this.props.item.author
     if (currentUser.username === author.username) {
-      return recipient.firstName + ' ' + recipient.lastName
+      return recipient
     }
-    return author.firstName + ' ' + author.lastName
+    return author
   }
 
   render() {
@@ -67,9 +81,7 @@ class ConversationIndexItem extends React.Component {
     return (
       <Root onPress={() => navigate('Conversation', { _id: conversation._id})} >
         <ConversationContentContainer>
-          <AvatarContainer>
-            <ConversationIndexLeft />
-          </AvatarContainer>
+          <Avatar user={this.userToDisplay()} size={50} />
           <ConversationTextContainer >
             <ConversationIndexHeader name={name} style={{ width: 20 }}/>
           </ConversationTextContainer>

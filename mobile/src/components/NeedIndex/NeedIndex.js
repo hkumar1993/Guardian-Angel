@@ -4,6 +4,12 @@ import styled from 'styled-components/native';
 import NeedCard from '../NeedCard/NeedCard';
 import { ActivityIndicator, FlatList } from 'react-native';
 
+const Root = styled.View`
+  flex: 1;
+  justifyContent: center;
+  paddingTop: 5;
+ `;
+
 class NeedIndex extends React.Component {
 
   constructor(props) {
@@ -32,14 +38,16 @@ class NeedIndex extends React.Component {
       )
     }
     return (
-      <FlatList
-        contentContainerStyle={{
-          alignSelf: 'stretch'
-        }}
-        data={data}
-        keyExtractor={item => item._id}
-        renderItem={this._renderItem}
-        />
+      <Root>
+        <FlatList
+          contentContainerStyle={{
+            alignSelf: 'stretch'
+          }}
+          data={data}
+          keyExtractor={item => item._id}
+          renderItem={this._renderItem}
+          />
+      </Root>
     )
   }
 }

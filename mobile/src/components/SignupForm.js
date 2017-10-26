@@ -22,9 +22,9 @@ import { login } from '../actions/user';
 const Root = styled(Touchable).attrs({
   feedback: 'none'
 })`
-  flex: 1;
+  width: 100%;
   position: relative;
-  justifyContent: center;
+  justifyContent: flex-start;
   alignItems: center;
 `;
 
@@ -39,11 +39,9 @@ const Wrapper = styled.View`
 const ButtonConfirm = styled(Touchable).attrs({
   feedback: 'opacity'
 })`
-  position: absolute;
-  bottom: 15%;
-  width: 70%;
+  width: 85%;
   height: 50;
-  backgroundColor: ${props => props.theme.LIGHT_PINK}
+  backgroundColor: ${props => props.theme.LIGHT_BLUE}
   borderRadius: 10;
   justifyContent: center;
   alignItems: center;
@@ -53,7 +51,6 @@ const ButtonConfirm = styled(Touchable).attrs({
   shadowOffset: 0px 2px;
   elevation: 2;
 `;
-
 
 
 
@@ -70,28 +67,32 @@ const BackButton = styled(Touchable).attrs({
 `;
 
 const ButtonConfirmText = styled.Text`
-  color: ${props => props.theme.TAG_BLUE};
+  color: white;
   fontWeight: 600;
 `;
 
 
 const InputWrapper = styled.View`
   height: 50;
-  width: 70%;
-  borderBottomWidth: 1;
-  borderBottomColor: ${props => props.theme.LIGHT_GREY};
+  width: 85%;
+  borderWidth: 1;
+  borderColor: ${props => props.theme.LIGHT_GREY};
+  paddingVertical: 10;
+  paddingHorizontal: 10;
   marginVertical: 5;
-  justifyContent: flex-end;
+  justifyContent: center;
+  borderRadius: 5;
 `;
 
 
 const Input = styled.TextInput.attrs({
   placeholderTextColor: colors.LIGHT_GREY,
   selectionColor: Platform.OS === 'ios' ? colors.TAG_BLUE : undefined,
-  autoCorrect: false
+  autoCorrect: false,
+  underlineColorAndroid: 'transparent'
 })`
   height: 30;
-  color: ${props => props.theme.LIGHT_PINK}
+  color: ${props => props.theme.DARK_GREY}
 `;
 
 const ErrorText = styled.Text`
@@ -156,15 +157,13 @@ class SignupForm extends Component {
     if(this.state.loading) {
       return <Loading />;
     }
+    // {this.state.errors.length > 0 ? this.state.errors.map((e,i) => <ErrorText key={i}>{e}</ErrorText>) : null}
 
     return (
       <Root onPress={this._keyBoardDismiss}>
-        <BackButton onPress={this.props.onBackPress}>
-          <MaterialIcons color={colors.TAG_BLUE} size={30} name="arrow-back" />
-        </BackButton>
-
-        <Wrapper>
-          {this.state.errors.length > 0 ? this.state.errors.map((e,i) => <ErrorText key={i}>{e}</ErrorText>) : null}
+          {this.state.errors.length > 0 ? (
+            Alert.alert('Something Went Wrong', this.state.errors.map((e,i) => e)[0])
+          ): null}
 
           <InputWrapper>
             <Input
@@ -198,18 +197,20 @@ class SignupForm extends Component {
               onChangeText={value => this._onChangeForm(value, 'username')}
               />
           </InputWrapper>
+          {
+            this.state.loading ? (
+              <Loading size={1}/>
+            ) : (
+              <ButtonConfirm
+              onPress={this._onSignupPress}
+              >
+              <ButtonConfirmText>
+                Sign Up
+              </ButtonConfirmText>
+            </ButtonConfirm>
+          )
+          }
 
-
-        </Wrapper>
-
-        <ButtonConfirm
-          onPress={this._onSignupPress}
-          disabled={this._disabledButton()}
-          >
-          <ButtonConfirmText>
-            Sign Up
-          </ButtonConfirmText>
-        </ButtonConfirm>
       </Root>
     );
   }
