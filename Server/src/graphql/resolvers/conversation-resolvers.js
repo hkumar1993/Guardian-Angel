@@ -63,36 +63,22 @@ export default {
 
       const conversationExist1 = await Conversation.findOne({ author: args['recipient'], recipient: user._id })
 
-      // console.log("conversationExist1 ==== ", conversationExist1);
       if(conversationExist1) {
-        console.log("conversationExist1 INside ==== ", conversationExist1);
         return conversationExist1;
       }
 
       const conversationExist2 = await Conversation.findOne({ author: user._id, recipient: args['recipient'] })
 
-      // console.log("conversationExist1 ==== ", conversationExist1);
       if(conversationExist2) {
-        console.log("conversationExist2 INside ==== ", conversationExist2);
         return conversationExist2;
       }
-
 
       const conversation = await Conversation.create(
         {author: user._id, recipient: args["recipient"]}
       )
-      console.log(conversation);
-
-      // const conversation = await Conversation.create(args);
-
-      console.log("heloo");
 
       const author = await User.findOne({ _id: user._id })
       const recipient = await User.findOne({ _id: args["recipient"] });
-
-      // console.log("author is ", author);
-      // console.log("recipient is ", recipient);
-      // console.log("conversation is ", conversation._id);
 
       author["conversations"].push(conversation._id);
       recipient["conversations"].push(conversation._id);
@@ -101,8 +87,6 @@ export default {
       recipient.save();
 
       pubsub.publish(CONVERSATION_ADDED, { [CONVERSATION_ADDED]: conversation });
-
-      console.log("Coversion ending===", conversation);
 
       return conversation;
     } catch (error) {
