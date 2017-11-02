@@ -17,9 +17,11 @@ import ME_QUERY from '../graphql/queries/me';
 import NEED_ADDED_SUBSCRIPTION from '../graphql/subscriptions/needAdded';
 
 const Root = styled.View`
+  height: 100%;
+  width: 100%;
   flex: 1;
   justifyContent: center;
-  paddingTop: 5;
+  paddingTop: 15;
  `;
 
 

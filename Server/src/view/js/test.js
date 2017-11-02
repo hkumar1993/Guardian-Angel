@@ -1,7 +1,7 @@
 $(document).ready(() => {
   var scrollTimerHandle = "";
   var positionTimerHandle = "";
-
+	$('#fullpage').fullpage();
   $("#container").scroll(function() {
       var boxSize = 84;
       var newScrollPosition = parseInt(this.scrollTop / boxSize) * boxSize,

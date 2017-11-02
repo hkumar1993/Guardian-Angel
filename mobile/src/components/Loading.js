@@ -5,9 +5,9 @@ import styled from 'styled-components/native';
 import { colors } from '../utils/constants';
 
 const Root = styled.View`
-  flex: 1;
   justifyContent: center;
   alignItems: center;
+  marginVertical: 10;
 `;
 
 export default function Loading({ color=colors.LIGHT_BLUE, size } = {}) {

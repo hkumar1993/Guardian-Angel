@@ -38,7 +38,7 @@ The Home Feed displays all the current needs that are in the area. Users can vie
 
 ## Profile
 
-![Profile](./docs/gifs/Profile.gif)
+![Profile](./docs/gifs/gif.gif)
 
 The User Profile page displays all the users posted needs and a button to message them directly.
 

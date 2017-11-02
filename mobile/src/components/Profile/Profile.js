@@ -75,6 +75,9 @@ class Profile extends Component {
 
   render() {
     const { data } = this.props;
+    const user = this.props.user;
+    const currentUser = this.props.currentUser;
+    const isCurrentUser = user.username === currentUser.username
     console.log(this.props);
     window.userNeeds = data.userNeeds
     console.log(data);
@@ -86,7 +89,7 @@ class Profile extends Component {
       )
     }
     return (
-      <Root>
+      <Root style={ this.props.index === 0 ? { height: '85%' } : { height: '100%' } }>
         <ProfileHeader user={this.props.user} />
         <NeedIndex data={data.getUserNeeds} />
       </Root>
@@ -95,7 +98,7 @@ class Profile extends Component {
 }
 
 export default withApollo(compose(
-    connect(state => { return { data: state.apollo.data, index: state.nav.routes.index} }, null ),
+    connect(state => { return { data: state.apollo.data, index: state.nav.routes.index, currentUser: state.user.info} }, null ),
     graphql(GET_USER_NEEDS_QUERY)
   )(withNavigation(Profile))
 );

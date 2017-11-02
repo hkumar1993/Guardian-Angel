@@ -4,7 +4,7 @@ import {
   StackNavigator,
   TabNavigator
 } from 'react-navigation';
-import { Keyboard } from 'react-native';
+import { Keyboard, StatusBar, View, Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 import { FontAwesome, SimpleLineIcons, EvilIcons } from '@expo/vector-icons';
@@ -176,6 +176,7 @@ const AppMainNav = StackNavigator(
 
 class AppNavigator extends Component {
   render() {
+    console.log(Platform);
     const nav = addNavigationHelpers({
       dispatch: this.props.dispatch,
       state: this.props.nav
@@ -184,7 +185,12 @@ class AppNavigator extends Component {
     if (!this.props.user.isAuthenticated) {
       return <AuthenticationScreen />;
     }
-    return <AppMainNav navigation={nav} />;
+    return (
+      <View style={{height: '100%', width: '100%'}}>
+        <StatusBar hidden={ Platform.OS === 'android' ? true : false } />
+        <AppMainNav navigation={nav} />
+      </View>
+    );
   }
 }
 

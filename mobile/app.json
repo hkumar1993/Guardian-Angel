@@ -7,28 +7,22 @@
     "sdkVersion": "19.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "primaryColor": "#cccccc",
-    "icon": "./assets/icons/app-icon.png",
+    "primaryColor": "#5AA7FF",
+    "icon": "assets/icons/app-icon.png",
     "loading": {
-      "splash": {
-        "backgroundColor": "#5aa7ff",
-        "image": {
-            "ios":{
-              "backgroundImage": "./assets/icons/white_shield.jpg"
-            },
-            "android":{
-              "backgroundImage": "./assets/icons/white_shield.jpg"
-            }
-          }
-      },
-      "hideExponentText": false
+      "icon": "assets/icons/white_shield.png",
+      "backgroundColor": "#5AA7FF",
+      "hideExponentText": true
     },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.belleandstone.foundz"
+      "bundleIdentifier": "com.guardian.angel"
+    },
+    "android":{
+      "package": "com.guardian.angel"
     }
   }
 }
