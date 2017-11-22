@@ -51,7 +51,7 @@ Messages are sent in real-time and implemented using WebSockets. Users can messa
 `conversations` involve an author and recipient and act somewhat like a SQL joins table to allow for consolidating specific message queries. `messages` house the text data and connect these messages to one specific user and conversation.
 
 an example query to fetch conversations message in GraphQL:
-```
+```js
   getConversationMessages: async (_, { _id }, { user }) => {
     try {
       await requireAuth(user);
@@ -65,11 +65,11 @@ an example query to fetch conversations message in GraphQL:
 `conversation-resolvers.js`
 
 In the create conversation we will publish the data and subscribe the user
-```
+```js
  pubsub.publish(CONVERSATION_ADDED, { [CONVERSATION_ADDED]: conversation });
 ```
 adding the subscribe functionality
-```
+```js
   conversationAdded: {
     subscribe: () => pubsub.asyncIterator(CONVERSATION_ADDED)
   }
