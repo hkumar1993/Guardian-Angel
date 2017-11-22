@@ -40,8 +40,8 @@ const ButtonLoginText = styled.Text`
 `;
 
 const LogoImage = styled.Image`
-  height: 250;
-  width: 250;
+  height: 30%;
+  width: 30%;
 `;
 
 const initialState = {
