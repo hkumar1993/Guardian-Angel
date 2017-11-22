@@ -1,6 +1,6 @@
 # Guardian Angel
 
-### [Check out the Guardian Angel Live Website!](http://guardian-angel.herokuapp.com)
+### [Check out the Guardian Angel Live Website!](http://guardianangel.website)
 
 ## Background and Overview
 
@@ -61,14 +61,14 @@ an example query to fetch conversations message in GraphQL:
     }
   },
  ```
- These messages are then attached to a `PubSub` instance generated using the `graphql-subscription` library to allow us to hook up our frontend to the websockets. Subscriptions exist for conversations and for individual messages inside them. Some example code how our conversation joins a subscription inside our 
+ These messages are then attached to a `PubSub` instance generated using the `graphql-subscription` library to allow us to hook up our frontend to the websockets. Subscriptions exist for conversations and for individual messages inside them. Some example code how our conversation joins a subscription inside our
 `conversation-resolvers.js`
 
 In the create conversation we will publish the data and subscribe the user
 ```
  pubsub.publish(CONVERSATION_ADDED, { [CONVERSATION_ADDED]: conversation });
 ```
-adding the subscribe functionality 
+adding the subscribe functionality
 ```
   conversationAdded: {
     subscribe: () => pubsub.asyncIterator(CONVERSATION_ADDED)
@@ -76,7 +76,7 @@ adding the subscribe functionality
 ```
 
  After the backend is open for subscriptions, the frontend will subscribe the user when they navigate to the messages button or create a new conversation and go to `ConversationIndexScreen.js`.
- 
+
 
 ## Dashboard
 
